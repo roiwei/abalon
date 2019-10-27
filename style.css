@@ -1,0 +1,40 @@
+.img-circle {
+	width:33.5;
+    border-radius: 100%;
+	position:absolute;
+
+}
+.img-empty {
+	position:absolute;
+	width:33.5;
+    border-radius: 100%;
+
+}
+.img-Bowl {
+	width:150;
+    border-radius: 100%;
+	position:absolute;
+
+}
+.outBall{
+	position:absolute;
+	width:33.5;
+    border-radius: 100%;
+	z-index: 3;
+}
+.num{
+	position:absolute;
+	width:45;
+    border-radius: 100%;
+	z-index: 3;
+}
+.w3-myfont {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  position:absolute;
+  top:7%;
+}
+div {
+  max-width: 800px;
+  height: 800px;
+  position:relative;
+}
