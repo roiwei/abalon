@@ -1,4 +1,7 @@
-var firebaseConfig = {
+
+ 
+firebase.auth().onAuthStateChanged(function(user) {
+	var firebaseConfig = {
     apiKey: "AIzaSyDYFvTJAzB5PWCcVLqJz-ImVcLU8r1uj7Q",
     authDomain: "abalonfb1.firebaseapp.com",
     databaseURL: "https://abalonfb1.firebaseio.com",
@@ -10,8 +13,8 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
- 
-firebase.auth().onAuthStateChanged(function(user) {
+	
+	
   if (user) {
     // User is signed in.
 	
