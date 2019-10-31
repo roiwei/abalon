@@ -1,9 +1,7 @@
 <html>
 <head>
-<title>abalon Login</title>
+<title>Firebase Login</title>
 <link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
-<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-<script src="loginScript.js"></script>	
 <link rel="stylesheet" type="text/css" href="styleLogIn.css"/>
 
 </head>
@@ -25,7 +23,7 @@
 	
 	
 
-
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
@@ -40,10 +38,10 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-
+  firebase.analytics();
 </script>
 
-
+<script src="loginScript.js"></script>
 
 
 </body>
