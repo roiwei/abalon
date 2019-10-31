@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Firebase Login</title>
+<link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="styleLogIn.css"/>
+
+</head>
+<body>
+ <div id="lodin_div" class ="main-div">
+  <h3>Firebase Web login Example</h3>
+  <input type="email" placeholder="Email..." id="email_field"/> 
+  <input type="password" placeholder="Password..." id="password_field"/>
+
+  <button onclick="login()">Login to Account</button>
+ </div>
+
+ <div id="user_div" class="loggedin-div">
+	<h3>Welcom User</h3>
+	<p>Welcom to Firebase web login. you are currently logged in.</p>
+	<button>Logout</button>
+	
+	
+	
+	
+
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDYFvTJAzB5PWCcVLqJz-ImVcLU8r1uj7Q",
+    authDomain: "abalonfb1.firebaseapp.com",
+    databaseURL: "https://abalonfb1.firebaseio.com",
+    projectId: "abalonfb1",
+    storageBucket: "abalonfb1.appspot.com",
+    messagingSenderId: "296930691996",
+    appId: "1:296930691996:web:3935ed42de1b94e5a19659",
+    measurementId: "G-D71N1EYXSV"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+<script src="loginScript.js"></script>
+
+
+</body>
+</html>
+
+
+
+
+
+location.href = "index.html";
