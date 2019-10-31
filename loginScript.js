@@ -1,20 +1,6 @@
 
  
-firebase.auth().onAuthStateChanged(function(user) {
-	var firebaseConfig = {
-    apiKey: "AIzaSyDYFvTJAzB5PWCcVLqJz-ImVcLU8r1uj7Q",
-    authDomain: "abalonfb1.firebaseapp.com",
-    databaseURL: "https://abalonfb1.firebaseio.com",
-    projectId: "abalonfb1",
-    storageBucket: "abalonfb1.appspot.com",
-    messagingSenderId: "296930691996",
-    appId: "1:296930691996:web:3935ed42de1b94e5a19659",
-    measurementId: "G-D71N1EYXSV"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-	
-	
+firebase.auth().onAuthStateChanged(function(user) {	
   if (user) {
     // User is signed in.
 	
