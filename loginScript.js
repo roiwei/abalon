@@ -44,5 +44,31 @@ function logout(){
 	firebase.auth().signOut();
 	
 }
+
+function create_acc()
+{
+	var signup_userEmail = document.getElementById("signup_email_field").value;
+	var signup_userPass = document.getElementById("signup_password_field").value;	
+	
+	firebase.auth().createUserWithEmailAndPassword(signup_userEmail,signup_userPass).catch(function(error){
+	 // Handle Errors here.
+ 	 var errorCode = error.code;
+	 var errorMessage = error.message;
+         window.alert("Error : "+ errorMessage);
+	  // ...
+	})
+
+}
+
+
+
+
+
+
+
+
+
+
+
 	
 	
