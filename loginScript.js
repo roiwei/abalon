@@ -4,6 +4,14 @@ firebase.auth().onAuthStateChanged(function(user) {
 	
 	document.getElementById("user_div").style.display= "block";
 	document.getElementById("lodin_div").style.display= "none";
+	  
+	var user = firebase.auth().currentUser;
+	if(user != null){
+		var email_id = user.email;
+		document.getElementById("")
+	
+	}
+	  
   } else {
     // No user is signed in.
 	
