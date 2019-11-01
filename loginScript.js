@@ -6,9 +6,12 @@ firebase.auth().onAuthStateChanged(function(user) {
 	document.getElementById("lodin_div").style.display= "none";
 	  
 	var user = firebase.auth().currentUser;
+	
 	if(user != null){
+		
 		var email_id = user.email;
-		document.getElementById("")
+		
+		document.getElementById("user_para").innerHTML = "Welcome User : " + email_id;
 	
 	}
 	  
