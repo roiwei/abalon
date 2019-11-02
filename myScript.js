@@ -5,8 +5,8 @@ function logout(){
 }
 //var db = firebase.firestore();
 
-function storeData(userNum){
-	firebase.database().ref("user"+userNum).set({
+function storeData(){
+	firebase.database().ref("user").set({
 	name: document.getElementById("data_text_field").value,
 	age: "18",
 	county: "usa"
@@ -20,24 +20,14 @@ function storeData(userNum){
 	getData();
 }
 
-function getData(userNum){
-	firebase.database().ref("/user"+userNum).once('value',function(snapshot){
+function getData(){
+	firebase.database().ref("/").once('value',function(snapshot){
 		snapshot.forEach(function(childSnapshot)
 		{
 		   var childKey = childSnapshot.key;
 		   var childData = childSnapshot.val();	
 		   document.getElementById("datah1").innerHTML = childData["name"] + ", "+ childData["age"] 
 		})
-	})
-	
-}
-function getQueue(){
-	firebase.database().ref("queue").once('value',function(snapshot){
-		snapshot.forEach(function(childSnapshot)
-		{
-		   var childKey = childSnapshot.key;
-		   var childData = childSnapshot.val();	
-		   
 	})
 	
 }
