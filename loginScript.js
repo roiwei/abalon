@@ -13,7 +13,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 		
 		document.getElementById("user_para").innerHTML = "Welcome User : " + email_id;
 	
-		href="first.html";
 	}
 	  
   } else {
