@@ -5,8 +5,8 @@ function logout(){
 }
 //var db = firebase.firestore();
 
-function storeData(){
-	firebase.database().ref("user").set({
+function storeData(userNum){
+	firebase.database().ref("user"+userNum).set({
 	name: document.getElementById("data_text_field").value,
 	age: "18",
 	county: "usa"
