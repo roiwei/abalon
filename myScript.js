@@ -17,6 +17,19 @@ function storeData(){
 	.catch(function(error){
 		console.error("Error writing document: ", error);
 	});
+	getData();
+}
+
+function getData(){
+	firebase.database().ref("/").once('value',function(snapshot){
+		snapshot.forEach(function(childSnapshot)
+		{
+		   var childKey = childSnapshot.key();
+		   var childData = childSnapshot.val();	
+		   document.getElementById("datah1").innerHTML = childData["name"] + ", "+ childData["age"] 
+		})
+	})
+	
 }
 
 		function init()
