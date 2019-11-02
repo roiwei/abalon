@@ -13,7 +13,7 @@
 	
 	<h1 id="the_h1">what </h1>
 	<input type="text" id="the_input">
-	<body onload="init()">
+   <body onload="init()">
 	
 	<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"></script>
 <!--<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>-->
@@ -36,18 +36,84 @@
 
 <script src="myScript.js"></script>
 		
+<table>
+        <tr>
+	      <tr>Id: </td>
+	      <td><input type="text" name="id" id="user_id" /></td>
+        </tr>
+	<tr>
+		<td>User Name: </td>
+		<td><input type="text" name="user_name" id="user_name" /></td>
+	 </tr>
+	 <tr>
+		 <td colspan="2">
+			 <input type="button" value="Save" onclick="save_user();" />
+			 <input type="button" value="Update" onclick="update_user();" />
+			 <input type="button" value="Delete" onclick="delete_user();" />
+		 </td>
+	 </tr>
+ </table>
+
+<h3>Users List</h3>
+
+<table id="tb1_users_list">
+	<tr>
+		<td>#ID</td>
+		<td>NAME</td>
+	</tr>
+</table>
+
+<script>
+	
+	var tblUsers = document.getElementById('tb1_users_list');
+	var databaseRef = firebase.databaseRef().ref('users/');
+	var user_name = document.getElementById('user_name').value; 
+	var user_id = document.getElementById('user_id').value; 
 		
+	function save_user(){
+		var uid = firebase.databaseRef().ref().child('users').push().key;
+		var data = {
+			user_id: uid,
+			user_name: user_name
+		}
+		var update = {};
+		update['/users/' + uid] = data;
+		firebase.database().ref().update(updates);
+		
+		alert('the user is created successfuliy!');
+		reload_page();
 			
+	}
+	function update_user(){
+		var data = {
+			user_id: user_id,
+			user_name: user_name
+		}
+		var updates = {};
+		updates['/users/' + user_id] = data;
+		firebase.database().ref().update(updates);
 		
-	<button id="id_namebtn">check name</button>
-	<br>
-	<h1 id="id_name"></h1>
-	<br>
-	<h1 id="data_input_text">enter data </h1>
-	<input type="text" placeholder="enter data" id="data_text_field">
-	<button id="submit_btn" onclick="storeData()">send data</button>
-	<br>	
-	<h1 id="datah1"></h1>
+		alert('the user is updated successfuliy!');
+		reload_page();
+	}
+	function delete_user(){
+		firebase.database().ref().child('/users/' + user_id).remove();
+		alert('the user is deleted successfuliy!');
+		reload_page();
+	}
+	function reload_page(){
+		window.location.reload();
+	}
+	
+	
+	
+	
+</script>
+
+
+		 
+	
+	 
 		
 	
 		<!-- comment <div>hiiii</div>
