@@ -34,6 +34,7 @@ function getData(){
 
 		function init()
 		{
+		getData();
 		onBtnName();
 		the_input.value= "enter your name";
 		the_h1.innerHTML= "shalom";
