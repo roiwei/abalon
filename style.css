@@ -33,6 +33,12 @@
   position:absolute;
   top:7%;
 }
+.main-div button:hover, .loggedin-div button:hover{
+	background: #fff;
+	color: #5d8ffc;
+	border: 1px solic #5d8ffc;
+	cursor: pointer;
+}
 div {
   max-width: 800px;
   height: 800px;
