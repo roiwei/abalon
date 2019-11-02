@@ -3,7 +3,22 @@ function logout(){
 	firebase.auth().signOut();
 	
 }
-		
+var db = firebase.firestore();
+
+function storeData(){
+	db.collection("cities").doc("LA").set({
+	name: "Los Angeles",
+	state: "ca",
+	county: "usa"
+	})
+	.then(function() {
+		console.log("document successfull written");
+	})
+	.catch(function(error){
+		console.erroe("Error writing document: ", error);
+	});
+}
+
 		function init()
 		{
 		onBtnName();
