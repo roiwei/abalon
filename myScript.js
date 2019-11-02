@@ -15,7 +15,7 @@ function storeData(){
 		console.log("document successfull written");
 	})
 	.catch(function(error){
-		console.erroe("Error writing document: ", error);
+		console.error("Error writing document: ", error);
 	});
 }
 
