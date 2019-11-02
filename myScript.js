@@ -3,12 +3,12 @@ function logout(){
 	firebase.auth().signOut();
 	
 }
-var db = firebase.firestore();
+//var db = firebase.firestore();
 
 function storeData(){
-	db.collection("cities").doc("LA").set({
-	name: "Los Angeles",
-	state: "ca",
+	firebase.database().ref("user").set({
+	name: document.getElementById("data_text_field").value,
+	age: "18",
 	county: "usa"
 	})
 	.then(function() {
