@@ -17,9 +17,10 @@
 	
 	<button id="id_namebtn">check name</button>
 	<br>
+	
 	<h1 id="the_h1">enter data </h1>
-	<input type="text" id="data_text_field">
-	<button id="submit_btn">send data</button>
+	<input type="text" placeholder="enter data" id="data_text_field">
+	<button id="submit_btn" onclick="storeData()">send data</button>
 		
 	<h1 id="id_name"></h1>
 		<!-- comment <div>hiiii</div>
@@ -346,6 +347,7 @@
 <!--<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-analytics.js"></script>-->
 
 <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
 <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
