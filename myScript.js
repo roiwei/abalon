@@ -1,4 +1,8 @@
-
+function logout(){
+	window.location = 'index.html';
+	firebase.auth().signOut();
+	
+}
 		
 		function init()
 		{
