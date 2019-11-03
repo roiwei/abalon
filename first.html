@@ -78,7 +78,7 @@
 			user_name: user_name
 		}
 		var updates = {};
-		update['/users/' + uid] = data;
+		updates['/users/' + uid] = data;
 		firebase.database().ref().update(updates);
 		
 		alert('the user is created successfuliy!');
