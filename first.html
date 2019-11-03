@@ -57,7 +57,7 @@
 
 <h3>Users List</h3>
 
-<table id="tb1_users_list">
+<table id="tb1_users_list border = "1">
 	<tr>
 		<td>#ID</td>
 		<td>NAME</td>
@@ -68,7 +68,24 @@
 	
 	var tblUsers = document.getElementById('tb1_users_list');
 	var databaseRef = firebase.database().ref('users/');
+	var rowIndex = 1;
 
+	databaseRef.once('value', function(snapshot) {
+	  snapshot.forEach(function(childSnapshot) {
+	    var childKey = childSnapshot.key;
+	    var childData = childSnapshot.val();
+	    
+	    var row = tblUsers.insertRow(rowIndex);
+	    var cellId = row.insertCell(0);
+	    var cellName = row.insertCell(1);
+            cellId.appendChild(document.createTextNode(childKey));
+	    cellName.appendChild(document.createTextNode(childData.user_name));
+		  
+	    rowIndex = rowIndex + 1;
+		  
+		
+	  });
+	});
 		
 	function save_user(){
 		var user_name = document.getElementById('user_name').value; 
