@@ -65,7 +65,14 @@
 </table>
 
 <script>
-	
+function clearTable()
+{
+ var tableRef = document.getElementById('tb1_users_list');
+ while ( tableRef.rows.length > 0 )
+ {
+  tableRef.deleteRow(0);
+ }
+}	
 	
 	var tblUsers = document.getElementById('tb1_users_list');
 	var databaseRef = firebase.database().ref('users/');
@@ -75,7 +82,7 @@ function initUser(){
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
 	    var childData = childSnapshot.val();
-	    
+	    clearTable();
 	    var row = tblUsers.insertRow(rowIndex);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
