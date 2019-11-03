@@ -82,7 +82,10 @@ function initUser(){
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
 	    var childData = childSnapshot.val();
-	    clearTable();
+	     while ( tableRef.rows.length > 0 )
+		 {
+		  tblUsers.deleteRow(1);
+		 }
 	    var row = tblUsers.insertRow(rowIndex);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
