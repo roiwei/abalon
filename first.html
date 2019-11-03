@@ -39,12 +39,12 @@
 <script>
 	
 	var tblUsers = document.getElementById('tb1_users_list');
-	var databaseRef = firebase.databaseRef().ref('users/');
+	var databaseRef = firebase.database().ref('users/');
 	var user_name = document.getElementById('user_name').value; 
 	var user_id = document.getElementById('user_id').value; 
 		
 	function save_user(){
-		var uid = firebase.databaseRef().ref().child('users').push().key;
+		var uid = firebase.database().ref().child('users').push().key;
 		var data = {
 			user_id: uid,
 			user_name: user_name
