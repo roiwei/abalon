@@ -66,6 +66,7 @@
 
 <script>
 	
+function initUser(){	
 	var tblUsers = document.getElementById('tb1_users_list');
 	var databaseRef = firebase.database().ref('users/');
 	var rowIndex = 1;
@@ -86,7 +87,7 @@
 		
 	  });
 	});
-		
+}	
 	function save_user(){
 		var user_name = document.getElementById('user_name').value; 
 		 
@@ -100,7 +101,7 @@
 		firebase.database().ref().update(updates);
 		
 		alert('the user is created successfuliy!');
-		reload_page();
+		initUser();
 			
 	}
 	function update_user(){
@@ -116,13 +117,13 @@
 		firebase.database().ref().update(updates);
 		
 		alert('the user is updated successfuliy!');
-		reload_page();
+		initUser();
 	}
 	function delete_user(){
 		var user_id = document.getElementById('user_id').value; 
 		firebase.database().ref().child('/users/' + user_id).remove();
 		alert('the user is deleted successfuliy!');
-		reload_page();
+		initUser();
 	}
 	function reload_page(){
 		window.location.reload();
