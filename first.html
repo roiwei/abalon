@@ -73,7 +73,7 @@ function clearTable()
   tableRef.deleteRow(1);
  }
 }	
-var IDarrey = new Array(200);
+var IDarrey = new Array();//just a rundom number of the lenth of the tablr because i didnt have a time to do dinmic arrey
 	var tblUsers = document.getElementById('tb1_users_list');
 	var databaseRef = firebase.database().ref('users/');
 	var rowIndex = 1;
@@ -95,18 +95,26 @@ var IDarrey = new Array(200);
 	  });
 	});
 function initUser(){
+	var flag =0;
 	databaseRef.once('value', function(snapshot) {
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
 	    var childData = childSnapshot.val();
+	    for (var i = 0; i < IDarrey.length; i++) 
+		{
+			if(IDarrey[i]==childKey)
+			{flag = 1;}
+		}
+	    if(flag==0)
+	    {
 	    var row = tblUsers.insertRow(rowIndex);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
             cellId.appendChild(document.createTextNode(childKey));
 	    cellName.appendChild(document.createTextNode(childData.user_name));
-		  
+	    }  
 	    rowIndex = rowIndex + 1;
-		  
+		flag=0;  
 		
 	  });
 	});
