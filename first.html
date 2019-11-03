@@ -77,7 +77,7 @@
 			user_id: uid,
 			user_name: user_name
 		}
-		var update = {};
+		var updates = {};
 		update['/users/' + uid] = data;
 		firebase.database().ref().update(updates);
 		
