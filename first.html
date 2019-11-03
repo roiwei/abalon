@@ -77,15 +77,10 @@ function clearTable()
 	var tblUsers = document.getElementById('tb1_users_list');
 	var databaseRef = firebase.database().ref('users/');
 	var rowIndex = 1;
-function initUser(){
 	databaseRef.once('value', function(snapshot) {
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
 	    var childData = childSnapshot.val();
-	     while ( tableRef.rows.length > 0 )
-		 {
-		  tblUsers.deleteRow(1);
-		 }
 	    var row = tblUsers.insertRow(rowIndex);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
@@ -96,6 +91,20 @@ function initUser(){
 		  
 		
 	  });
+	});
+function initUser(){
+	databaseRef.once('value', function(snapshot) {
+	
+	    var childKey = childSnapshot.key;
+	    var childData = childSnapshot.val();
+	    var row = tblUsers.insertRow(rowIndex);
+	    var cellId = row.insertCell(0);
+	    var cellName = row.insertCell(1);
+            cellId.appendChild(document.createTextNode(childKey));
+	    cellName.appendChild(document.createTextNode(childData.user_name));
+		  
+	    rowIndex = rowIndex + 1;
+		  
 	});
 }	
 	function save_user(){
