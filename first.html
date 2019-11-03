@@ -102,6 +102,7 @@
 		reload_page();
 	}
 	function delete_user(){
+		var user_id = document.getElementById('user_id').value; 
 		firebase.database().ref().child('/users/' + user_id).remove();
 		alert('the user is deleted successfuliy!');
 		reload_page();
