@@ -96,6 +96,7 @@ var IDarrey = new Array();//just a rundom number of the lenth of the tablr becau
 	});
 function initUser(){
 	var flag =0;
+	var initrowIndex=1;
 	databaseRef.once('value', function(snapshot) {
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
@@ -107,17 +108,18 @@ function initUser(){
 		}
 	    if(flag==0)
 	    {
-	    var row = tblUsers.insertRow(rowIndex);
+	    var row = tblUsers.insertRow(initrowIndex);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
             cellId.appendChild(document.createTextNode(childKey));
 	    cellName.appendChild(document.createTextNode(childData.user_name));
 	    }  
-	    rowIndex = rowIndex + 1;
+	    initrowIndex = initrowIndex + 1;
 		flag=0;  
 		
 	  });
 	});
+
 }	
 	function save_user(){
 		var user_name = document.getElementById('user_name').value; 
