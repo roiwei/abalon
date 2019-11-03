@@ -68,9 +68,9 @@
 function clearTable()
 {
  var tableRef = document.getElementById('tb1_users_list');
- while ( tableRef.rows.length > 1 )
+ while ( tableRef.rows.length > 0 )
  {
-  tableRef.deleteRow(0);
+  tableRef.deleteRow(1);
  }
 }	
 	
