@@ -68,10 +68,11 @@
 	
 	var tblUsers = document.getElementById('tb1_users_list');
 	var databaseRef = firebase.database().ref('users/');
-	var user_name = document.getElementById('user_name').value; 
-	var user_id = document.getElementById('user_id').value; 
+
 		
 	function save_user(){
+		var user_name = document.getElementById('user_name').value; 
+		 
 		var uid = firebase.database().ref().child('users').push().key;
 		var data = {
 			user_id: uid,
@@ -86,6 +87,9 @@
 			
 	}
 	function update_user(){
+		var user_name = document.getElementById('user_name').value; 
+		var user_id = document.getElementById('user_id').value; 
+		
 		var data = {
 			user_id: user_id,
 			user_name: user_name
