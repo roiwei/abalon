@@ -118,10 +118,12 @@ function craeteRival(){
 	}
 	if(flag){
 		console.log(rival_name + "id: " + myRivalId);
-		rivalRef = firebase.database().ref("users/"+myRivalId);
-		userData = rivalRef.status;  // key === "ada"
-		//userData = rivalRef.child("name/last").key;
+		var userRef = firebase.database().ref('/users/' + myRivalId);
+		userRef.once('value').then(function(snapshot) {
+		 userData = snapshot.val().status;
 		    console.log("THE USER STATAUS IS " + userData);
+			   });
+		});
 		//});
 	//	firebase.database().ref('/users/' + myRivalId).once('value').then(function(snapshot) {
 	//	 rivalRef = (snapshot.val() && snapshot.val().username) || 'Anonymous';
