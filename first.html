@@ -83,7 +83,7 @@ var nameArray = new Array();
 	    var childKey = childSnapshot.key;
             IDarray[rowIndex]=childKey;  
 	    var childData = childSnapshot.val();
-	    nameArray[rowIndex]=childData;
+	    nameArray[rowIndex]=childData.user_name;
 		  console.log(nameArray[rowIndex]);
 	    var row = tblUsers.insertRow(rowIndex);
 	    var cellId = row.insertCell(0);
