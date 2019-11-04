@@ -126,6 +126,7 @@ function initUser(){
 	function save_user(){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
+		console.log(user_name);
 		for (var i = 0; i < nameArray.length; i++) 
 		{
 			if(nameArray[i]===user_name)
@@ -145,7 +146,10 @@ function initUser(){
 		initUser();
 		//alert('the user is created successfuliy!');	
 		}
-		alert('the user name allredy exist! please put diferent name');
+		if(flag == 1){
+			     alert('the user name allredy exist! please put diferent name');
+			     flag=0;
+			     }
 	}
 	function update_user(){
 		var user_name = document.getElementById('user_name').value; 
