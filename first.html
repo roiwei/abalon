@@ -131,10 +131,10 @@ function craeteRival(){
 	//	});
 	
 		//var r = firebase.database().ref().child('/users/' + rival_name);
-		console.log("the rival name is " + rivalRef.user_name +"and the status is " +rivalRef.status);
-		if(rivalRef.status)
+		console.log("the rival name is " + userData.user_name +"and the status is " +userData.status);
+		if(userData.status)
 			{
-			myRivalId = rivalRef.user_id;
+			myRivalId = userData.user_id;
 			console.log("my rival_id is " + myRivalId);
 			firebase.database().ref().child('/users/' + rival_name).set({rivai_id: myId});
 			match_id.innerHTML= "You have mach! start play:)";
