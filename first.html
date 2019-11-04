@@ -121,7 +121,7 @@ function craeteRival(){
 		rivalRef = firebase.database().ref("users/"+myRivalId);
 		userData = rivalRef.status;  // key === "ada"
 		//userData = rivalRef.child("name/last").key;
-		    console.log("THE USER STATAUS IS " + userDat.status);
+		    console.log("THE USER STATAUS IS " + userData);
 		//});
 	//	firebase.database().ref('/users/' + myRivalId).once('value').then(function(snapshot) {
 	//	 rivalRef = (snapshot.val() && snapshot.val().username) || 'Anonymous';
