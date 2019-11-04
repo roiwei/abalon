@@ -105,19 +105,21 @@ var rowIndex = 1;
 var myRivalId = "";
 var myId="";
 function craeteRival(){
+	var flag = 0;
 	var rival_name = document.getElementById('rival_name').value;
 	for(var i = 0; i<nameArray.length; i++){
 	    if(rival_name===nameArray[i])
 	    {
 	    	myRivalId=IDarray[i];
+		flag = 1;    
 	    }
-		else{alert('the name you chose dont existing');}
 	}
+	if(flag){
 		console.log(rival_name + "id: " + myRivalId);
-	firebase.database().ref('/users/' + myRivalId).once('value').then(function(snapshot) {
-  var r = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-  // ...
-});
+		firebase.database().ref('/users/' + myRivalId).once('value').then(function(snapshot) {
+		  var r = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+		  // ...
+		});
 	
 	//var r = firebase.database().ref().child('/users/' + rival_name);
 	console.log("the rival name is " + r.user_name +"and the status is " +r.status);
@@ -130,6 +132,8 @@ function craeteRival(){
 		alert('You have mach! start play!');
 	}
 	else {alert('the user is busy :( try anthr one');}
+	}
+	else{alert('the name you chose dont existing');}
 	
 }
 function initUser(){
