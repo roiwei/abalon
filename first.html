@@ -104,6 +104,7 @@ var rowIndex = 1;
 	});
 var myRivalId = "";
 var myId="";
+var rivalRef;
 function craeteRival(){
 	var flag = 0;
 	var rival_name = document.getElementById('rival_name').value;
@@ -117,22 +118,22 @@ function craeteRival(){
 	if(flag){
 		console.log(rival_name + "id: " + myRivalId);
 		firebase.database().ref('/users/' + myRivalId).once('value').then(function(snapshot) {
-		  var r = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+		 rivalRef = (snapshot.val() && snapshot.val().username) || 'Anonymous';
 		  // ...
 		});
 	
-	//var r = firebase.database().ref().child('/users/' + rival_name);
-	console.log("the rival name is " + r.user_name +"and the status is " +r.status);
-	if(r.status)
-	{
-		myRivalId = r.user_id;
-		console.log("my rival_id is " + myRivalId);
-		firebase.database().ref().child('/users/' + rival_name).set({rivai_id: myId});
-		match_id.innerHTML= "You have mach! start play:)";
-		alert('You have mach! start play!');
-	}
-	else {alert('the user is busy :( try anthr one');}
-	}
+		//var r = firebase.database().ref().child('/users/' + rival_name);
+		console.log("the rival name is " + rivalRef.user_name +"and the status is " +rivalRef.status);
+		if(rivalRef.status)
+			{
+			myRivalId = rivalRef.user_id;
+			console.log("my rival_id is " + myRivalId);
+			firebase.database().ref().child('/users/' + rival_name).set({rivai_id: myId});
+			match_id.innerHTML= "You have mach! start play:)";
+			alert('You have mach! start play!');
+			}
+			else {alert('the user is busy :( try anthr one');}
+		}
 	else{alert('the name you chose dont existing');}
 	
 }
