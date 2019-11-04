@@ -108,6 +108,7 @@ function craeteRival(){
 	var rival_name = document.getElementById('rival_name').value; 
 		console.log(rival_name);
 	var r = firebase.database().ref().child('/users/' + rival_name);
+	console.log("the rival name is " + r.user_name +"and the status is " +r.status);
 	if(r.status)
 	{
 		myRivalId = r.user_id;
