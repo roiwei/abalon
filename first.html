@@ -118,7 +118,7 @@ function craeteRival(){
 	}
 	if(flag){
 		console.log(rival_name + "id: " + myRivalId);
-		rivalRef = database.ref('/users/' + myRivalId).once('value').then(function(snapshot) {
+		rivalRef = firebase.database.ref('/users/' + myRivalId).once('value').then(function(snapshot) {
    		 userData = snapshot.val();
 		    console.log("THE USER STATAUS IS " + userData.status);
 		});
