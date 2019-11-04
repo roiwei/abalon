@@ -120,8 +120,8 @@ function craeteRival(){
 		console.log(rival_name + "id: " + myRivalId);
 		var userRef = firebase.database().ref('/users/' + myRivalId);
 		userRef.once('value').then(function(snapshot) {
-		 userData = snapshot.val().status;
-		    console.log("THE USER STATAUS IS " + userData);
+		 userData = snapshot.val();
+		    console.log("THE USER STATAUS IS " + userData.status);
 			   });
 	
 		//});
