@@ -36,7 +36,7 @@
 </script>
 	<button id="id_namebtn">check name</button>
 <br>
-
+<h1 id="match_id"></h1>
 <table>
         <tr>
 	      <td>Id: </td>
@@ -50,19 +50,24 @@
 		 <td colspan="2">
 			 <input type="button" value="Save" onclick="save_user();" />
 			 <input type="button" value="Update" onclick="update_user();" />
-			 <input type="button" value="Delete" onclick="delete_user();" />
+			 
 		 </td>
 	 </tr>
  </table>
-
-<h3>Users List</h3>
-
-<table id="tb1_users_list" border = "1">
+	   
+<table>
 	<tr>
-		<td>#ID</td>
-		<td>NAME</td>
-	</tr>
-</table>
+		<td>Choose user name to play with: </td>
+		<td><input type="text" name="rival" id="rival_name" /></td>
+	 </tr>
+	 <tr>
+		 <td colspan="2">
+			 <input type="button" value="Choose" onclick="craeteRival();" />
+			 <input type="button" value="Update" onclick="update_user();" />
+	
+		 </td>
+	 </tr>
+ </table>
 
 <script>
 	
@@ -89,6 +94,23 @@ var nameArray = new Array();
 		
 	  });
 	});
+var myRivalId = "";
+var myId="";
+function craeteRival(){
+	var rival_name = document.getElementById('rival_name').value; 
+		console.log(rival_name);
+	var r = firebase.database().ref().child('/users/' + rival_name);
+	if(r.status)
+	{
+		myRivalId = r.user_id;
+		console.log("my rival_id is " + myRivalId);
+		firebase.database().ref().child('/users/' + rival_name).set(rivai_id: myId);
+		match_id.innerHTML= "You have mach! start play:)";
+		alert('You have mach! start play!');
+	}
+	else {alert('the user is busy :( try anthr one');}
+	
+}
 function initUser(){
 	var flag =0;
 	var initrowIndex=1;
@@ -116,6 +138,7 @@ function initUser(){
 	});
 
 }	
+
 	function save_user(){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
@@ -128,9 +151,12 @@ function initUser(){
 		if(flag == 0)
 		{
 		var uid = firebase.database().ref().child('users').push().key;
+		myId = uid;
 		var data = {
 			user_id: uid,
 			user_name: user_name,
+			status: 1, //1 is avilable, 0 meen he olrady play with somone
+			rivai_id: "",
 			my_color: 'whith',
 			turn_color: 'black',
 			direction: "",
