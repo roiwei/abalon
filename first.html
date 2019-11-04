@@ -120,17 +120,9 @@ function craeteRival(){
 		console.log(rival_name + "id: " + myRivalId);
 		var userRef = firebase.database().ref('/users/' + myRivalId);
 		userRef.once('value').then(function(snapshot) {
-		 userData = snapshot.val();
-		    console.log("THE USER STATAUS IS " + userData.status);
-			   
-	
-		//});
-	//	firebase.database().ref('/users/' + myRivalId).once('value').then(function(snapshot) {
-	//	 rivalRef = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-		  // ...
-	//	});
-	
-		//var r = firebase.database().ref().child('/users/' + rival_name);
+		userData = snapshot.val();
+	        console.log("THE USER STATAUS IS " + userData.status);
+
 		console.log("the rival name is " + userData.user_name +"and the status is " +userData.status);
 		if(userData.status)
 			{
@@ -141,9 +133,11 @@ function craeteRival(){
 			alert('You have mach! start play!');
 			}
 			else {alert('the user is busy :( try anthr one');}
-		}
+		  });
+		  }
 	else{alert('the name you chose dont existing');}
-	});
+	
+	
 }
 function initUser(){
 	var flag =0;
