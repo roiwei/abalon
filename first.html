@@ -65,14 +65,7 @@
 </table>
 
 <script>
-function clearTable()
-{
- var tableRef = document.getElementById('tb1_users_list');
- while ( tableRef.rows.length > 0 )
- {
-  tableRef.deleteRow(1);
- }
-}	
+	
 var IDarray = new Array();
 var nameArray = new Array();
 	var tblUsers = document.getElementById('tb1_users_list');
@@ -137,7 +130,12 @@ function initUser(){
 		var uid = firebase.database().ref().child('users').push().key;
 		var data = {
 			user_id: uid,
-			user_name: user_name
+			user_name: user_name,
+			my_color: 'whith',
+			turn_color: 'black',
+			direction: "",
+			row: "",
+			column: ""
 		}
 		var updates = {};
 		updates['/users/' + uid] = data;
