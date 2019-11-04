@@ -73,16 +73,18 @@ function clearTable()
   tableRef.deleteRow(1);
  }
 }	
-var IDarrey = new Array();//just a rundom number of the lenth of the tablr because i didnt have a time to do dinmic arrey
+var IDarray = new Array();
+var nameArray = new Array();
 	var tblUsers = document.getElementById('tb1_users_list');
 	var databaseRef = firebase.database().ref('users/');
 	var rowIndex = 1;
 	databaseRef.once('value', function(snapshot) {
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
-            IDarrey[rowIndex]=childKey;
-	    console.log(IDarrey[rowIndex]);
+            IDarray[rowIndex]=childKey;  
 	    var childData = childSnapshot.val();
+	    nameArray[rowIndex]=childData;
+		  console.log(nameArray[rowIndex]);
 	    var row = tblUsers.insertRow(rowIndex);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
@@ -101,9 +103,9 @@ function initUser(){
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
 	    var childData = childSnapshot.val();
-	    for (var i = 0; i < IDarrey.length; i++) 
+	    for (var i = 0; i < IDarray.length; i++) 
 		{
-			if(IDarrey[i]==childKey)
+			if(IDarray[i]==childKey)
 			{flag = 1;}
 		}
 	    if(flag==0)
@@ -122,8 +124,15 @@ function initUser(){
 
 }	
 	function save_user(){
+		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
-		 
+		for (var i = 0; i < nameArray.length; i++) 
+		{
+			if(nameArray[i]==user_name)
+			{flag = 1;}
+		} 
+		if(flag == 0)
+		{
 		var uid = firebase.database().ref().child('users').push().key;
 		var data = {
 			user_id: uid,
@@ -134,7 +143,9 @@ function initUser(){
 		firebase.database().ref().update(updates);
 	
 		initUser();
-		//alert('the user is created successfuliy!');		
+		//alert('the user is created successfuliy!');	
+		}
+		alert('the user name allredy exist! please put diferent name');
 	}
 	function update_user(){
 		var user_name = document.getElementById('user_name').value; 
