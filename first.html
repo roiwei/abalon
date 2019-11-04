@@ -105,7 +105,7 @@ function initUser(){
 	    var childData = childSnapshot.val();
 	    for (var i = 0; i < IDarray.length; i++) 
 		{
-			if(IDarray[i]==childKey)
+			if(IDarray[i]===childKey)
 			{flag = 1;}
 		}
 	    if(flag==0)
@@ -128,7 +128,7 @@ function initUser(){
 		var user_name = document.getElementById('user_name').value; 
 		for (var i = 0; i < nameArray.length; i++) 
 		{
-			if(nameArray[i]==user_name)
+			if(nameArray[i]===user_name)
 			{flag = 1;}
 		} 
 		if(flag == 0)
