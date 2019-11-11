@@ -128,7 +128,11 @@ function craeteRival(){
 			{
 			myRivalId = userData.user_id;
 			console.log("my rival_id is " + myRivalId);
-			firebase.database().ref().child('/users/' + rival_name).set({rivai_id: myId});
+			//firebase.database().ref().child('/users/' + rival_name).set({rivai_id: myId});
+			var rivalRef = firebase.database().ref('/users/' + myRivalId);
+			rivalRef.set({rivalId: myId});
+			var myRef = firebase.database().ref('/users/' + myId);
+			myRef.set({rivalId: myRivalId});
 			match_id.innerHTML= "You have mach! start play:)";
 			alert('You have mach! start play!');
 			}
