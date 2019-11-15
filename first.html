@@ -102,6 +102,27 @@ var rowIndex = 1;
 		
 	  });
 	});
+	function update_table()
+	{
+		databaseRef.once('value', function(snapshot) {
+	  snapshot.forEach(function(childSnapshot) {
+	    var childKey = childSnapshot.key;
+            IDarray[rowIndex]=childKey;  
+	    var childData = childSnapshot.val();
+	    nameArray[rowIndex]=childData.user_name;
+		  console.log(nameArray[rowIndex]);
+	    var row = tblUsers.insertRow(rowIndex);
+	    var cellId = row.insertCell(0);
+	    var cellName = row.insertCell(1);
+            cellId.appendChild(document.createTextNode(childKey));
+	    cellName.appendChild(document.createTextNode(childData.user_name));
+		  
+	    rowIndex = rowIndex + 1;
+		  
+		
+	  });
+	});
+	}
 var myRivalId = "";
 var myId="";
 var rivalRef;
@@ -157,13 +178,8 @@ function initUser(){
 		}
 	    if(flag==0)
 	    {
-	    var row = tblUsers.insertRow(initrowIndex);
-	    var cellId = row.insertCell(0);
-	    var cellName = row.insertCell(1);
-            cellId.appendChild(document.createTextNode(childKey));
-	    cellName.appendChild(document.createTextNode(childData.user_name));
-	    }  
-	    initrowIndex = initrowIndex + 1;
+	   	 update_table();
+	    }
 		flag=0;  
 		
 	  });
