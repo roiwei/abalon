@@ -188,9 +188,10 @@ function initUser(){
 	    if(childData.user_name === user_name){
             cellId.appendChild(document.createTextNode(childKey));
 	    cellName.appendChild(document.createTextNode(childData.user_name));
+		    rowIndex = rowIndex+1;
 	    }
 	    }  
-	    rowIndex = rowIndex+1;
+	    
 	    //initrowIndex = initrowIndex + 1;
 	console.log("rowIndex after if is: " + rowIndex);
 		  flag=0;  
