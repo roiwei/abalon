@@ -167,7 +167,7 @@ function craeteRival(){
 }
 function initUser(){
 	var flag =0;
-	var initrowIndex=1;
+	//var initrowIndex=1;
 	databaseRef.once('value', function(snapshot) {
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
@@ -179,13 +179,16 @@ function initUser(){
 		}
 	    if(flag==0)
 	    {
-	    var row = tblUsers.insertRow(initrowIndex);
+	    var row = tblUsers.insertRow(rowIndex+1);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
+	    if(childData.user_name == document.getElementById('user_name').value){
             cellId.appendChild(document.createTextNode(childKey));
 	    cellName.appendChild(document.createTextNode(childData.user_name));
+	    }
 	    }  
-	    initrowIndex = initrowIndex + 1;
+	    rowIndex = rowIndex+1;
+	    //initrowIndex = initrowIndex + 1;
 		flag=0;  
 		
 	  });
