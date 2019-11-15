@@ -182,7 +182,8 @@ function initUser(){
 	    var row = tblUsers.insertRow(rowIndex+1);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
-	    if(childData.user_name == document.getElementById('user_name').value){
+	    var user_name = document.getElementById('user_name').value; 
+	    if(childData.user_name === user_name){
             cellId.appendChild(document.createTextNode(childKey));
 	    cellName.appendChild(document.createTextNode(childData.user_name));
 	    }
