@@ -167,7 +167,7 @@ function craeteRival(){
 }
 function initUser(){
 	var flag =0;
-	//var initrowIndex=1;
+	var initrowIndex=rowIndex;
 	databaseRef.once('value', function(snapshot) {
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
@@ -179,8 +179,8 @@ function initUser(){
 		}
 	    if(flag==0)
 	    {
-	    console.log("rowIndex is: " + rowIndex);    
-	    var row = tblUsers.insertRow(rowIndex);
+	    console.log("rowIndex is: " + initrowIndex);    
+	    var row = tblUsers.insertRow(initrowIndex);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
 	    var user_name = document.getElementById('user_name').value; 
