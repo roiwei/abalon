@@ -162,7 +162,7 @@ function craeteRival(){
 			alert('You have mach! start play!');
 			}
 			else {alert('the user is busy :( try anthr one');}
-		  userData.child(status).setValue(0);
+		  firebase.database().ref('/users/').child(myRivalId).child(status).setValue(0);
 		  firebase.database().ref('/users/').child(myId).child(status).setValue(0);
 		  });
 		  }
