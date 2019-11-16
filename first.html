@@ -157,7 +157,8 @@ function craeteRival(){
 			console.log("userData.rivai_id is " + userData.rivai_id);
 			//var rivalid firebase.database().ref('/users/' + myRivalId).child('/rivai_id/')
 			//	rivalid.update(rivalid,myId);
-			firebase.database().ref('users/' + myId).update({rivai_id: myRivalId});
+			console.log("my id is: " + myId);
+			firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
 			match_id.innerHTML= "You have mach! start play:)";
 			alert('You have mach! start play!');
 			}
