@@ -153,7 +153,7 @@ function craeteRival(){
 			console.log("my rival_id is " + myRivalId);
 			//firebase.database().ref().child('/users/' + rival_name).set({rivai_id: myId});
 			//var rivalRef = firebase.database().ref().child('/users/' + myRivalId);
-			userRef.set(rivalId: myId);
+			userRef.set({rivalId: myId});
 			//var myRef = firebase.database().ref().child('/users/' + myId);
 			myRef.set(rivalId: myRivalId);
 			match_id.innerHTML= "You have mach! start play:)";
