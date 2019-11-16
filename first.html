@@ -155,11 +155,9 @@ function craeteRival(){
 			//var rivalRef = firebase.database().ref().child('/users/' + myRivalId);
 			//var userRef1 = firebase.database().ref('/users/' + myRivalId +'/rivai_id/');
 			console.log("userData.rivai_id is " + userData.rivai_id);
-			var rivalid firebase.database().ref('/users/' + myRivalId).child('/rivai_id/')
-				rivalid.update(rivalid,myId);
-			//console.log("my userRef1 rivai_id is " + userRef1);
-			//var myRef = firebase.database().ref().child('/users/' + myId);
-			//myRef.set({RivalId:myRivalId});
+			//var rivalid firebase.database().ref('/users/' + myRivalId).child('/rivai_id/')
+			//	rivalid.update(rivalid,myId);
+			firebase.database().ref('users/' + myId).update({rivai_id: myRivalId});
 			match_id.innerHTML= "You have mach! start play:)";
 			alert('You have mach! start play!');
 			}
