@@ -141,7 +141,7 @@ function craeteRival(){
 	if(flag){
 		console.log(rival_name + "id: " + myRivalId);
 		var userRef = firebase.database().ref('/users/' + myRivalId);
-		var myRef = firebase.database().ref('/users/' + myId + '/rivai_id');
+		var myRef = firebase.database().ref('/users/' + myId);
 		userRef.once('value').then(function(snapshot) {
 		userData = snapshot.val();
 	        console.log("THE USER STATAUS IS " + userData.status);
@@ -155,7 +155,8 @@ function craeteRival(){
 			//var rivalRef = firebase.database().ref().child('/users/' + myRivalId);
 			//var userRef1 = firebase.database().ref('/users/' + myRivalId +'/rivai_id/');
 			console.log("userData.rivai_id is " + userData.rivai_id);
-			userRef.update("rivai_id",myId);
+			var rivalid firebase.database().ref('/users/' + myRivalId).child('/rivai_id/')
+				rivalid.update(rivalid,myId);
 			//console.log("my userRef1 rivai_id is " + userRef1);
 			//var myRef = firebase.database().ref().child('/users/' + myId);
 			//myRef.set({RivalId:myRivalId});
