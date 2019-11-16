@@ -153,19 +153,17 @@ function craeteRival(){
 			console.log("my rival_id is " + myRivalId);
 			//firebase.database().ref().child('/users/' + rival_name).set({rivai_id: myId});
 			//var rivalRef = firebase.database().ref().child('/users/' + myRivalId);
-			var userRef1 = firebase.database().ref('/users/' + myRivalId +'/rivai_id/');
-			userRef1.set({RivalId:myId});
+			//var userRef1 = firebase.database().ref('/users/' + myRivalId +'/rivai_id/');
+			userData.rivai_id.set(myId);
 			console.log("my userRef1 rivai_id is " + userRef1);
 			//var myRef = firebase.database().ref().child('/users/' + myId);
-			myRef.set({RivalId:myRivalId});
+			//myRef.set({RivalId:myRivalId});
 			match_id.innerHTML= "You have mach! start play:)";
 			alert('You have mach! start play!');
 			}
 			else {alert('the user is busy :( try anthr one');}
 		//var myRefStatus = firebase.database().ref('/users/' + myId + '/status/');
-			//myRefStatus.set(0);
-			// firebase.database().ref('/users/').ref('/'+myRivalId+'/').ref('/'+status+'/').setValue(0);
-		//  firebase.database().ref('/users/').ref(myId).status.setValue(0);
+			
 		  });
 		  }
 	else{alert('the name you chose dont existing');}
