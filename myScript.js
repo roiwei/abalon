@@ -26,7 +26,7 @@ function getData(){
 		{
 		   var childKey = childSnapshot.key;
 		   var childData = childSnapshot.val();	
-		   document.getElementById("datah1").innerHTML = childData["name"] + ", "+ childData["age"] 
+		   //document.getElementById("datah1").innerHTML = childData["name"] + ", "+ childData["age"] 
 		})
 	})
 	
