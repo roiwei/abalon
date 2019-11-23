@@ -23,10 +23,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 
-
+var userEmail;
 function login(){
 	
-	var userEmail = document.getElementById("email_field").value;
+	userEmail = document.getElementById("email_field").value;
 	var userPass = document.getElementById("password_field").value;
 	
 	firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(error) {
