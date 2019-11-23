@@ -78,12 +78,12 @@
 
 	   
 <script>
+var myDataEmail = document.getElementById('datah1');
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 var user = firebase.auth().currentUser;	
 console.log("MY USER IS " + user);
-var myDataEmail = document.getElementById('datah1');
-myDataEmail.innerHTML= "Your nickname is: "+ user.email;
+myDataEmail.innerHTML= "Your Email is: "+ user.email;
     // User is signed in.
   } else {
 	  console.log("dont find user");
