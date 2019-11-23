@@ -79,6 +79,7 @@
 	   
 <script>
 var user = firebase.auth().currentUser;	
+console.log("MY USER IS " + user);
 var myDataEmail = document.getElementById('datah1');
 myDataEmail.innerHTML= "Your nickname is: "+ user.email;
 var IDarray = new Array();
