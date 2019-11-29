@@ -78,12 +78,14 @@
 
 	   
 <script>
+var userEmail="";
 var myDataEmail = document.getElementById('datah1');
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 var user = firebase.auth().currentUser;	
 console.log("MY USER IS " + user);
 myDataEmail.innerHTML= "Your Email is: "+ user.email;
+userEmail=user.email;
     // User is signed in.
   } else {
 	  console.log("dont find user");
@@ -238,6 +240,7 @@ function initUser(){
 		var data = {
 			user_id: uid,
 			user_name: user_name,
+			user_Email: userEmail,
 			status: 1, //1 is avilable, 0 meen he olrady play with somone
 			rivai_id: "",
 			my_color: 'whith',
