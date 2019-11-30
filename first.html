@@ -254,6 +254,12 @@ function initUser(){
 
 }	
 
+	
+var myplaces = new Array(11);
+for (var i = 0; i < places.length; i++) 
+	myplaces[i] = new Array(11);
+	
+	
 	function save_user(){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
@@ -277,7 +283,8 @@ function initUser(){
 			turn_color: 'black',
 			direction: "",
 			row: "",
-			column: ""
+			column: "",
+			placesAray: myplaces
 		}
 		var updates = {};
 		updates['/users/' + uid] = data;
