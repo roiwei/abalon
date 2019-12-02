@@ -1,3 +1,240 @@
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"></script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDYFvTJAzB5PWCcVLqJz-ImVcLU8r1uj7Q",
+    authDomain: "abalonfb1.firebaseapp.com",
+    databaseURL: "https://abalonfb1.firebaseio.com",
+    projectId: "abalonfb1",
+    storageBucket: "abalonfb1.appspot.com",
+    messagingSenderId: "296930691996",
+    appId: "1:296930691996:web:3935ed42de1b94e5a19659",
+    measurementId: "G-D71N1EYXSV"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  //firebase.analytics();
+
+var userEmail="";
+var myDataEmail = document.getElementById('datah1');
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+var user = firebase.auth().currentUser;	
+console.log("MY USER IS " + user);
+myDataEmail.innerHTML= "Your Email is: "+ user.email;
+userEmail=user.email;
+    // User is signed in.
+  } else {
+	  console.log("dont find user");
+    // No user is signed in.
+  }
+});
+
+var IDarray = new Array();
+var nameArray = new Array();
+var tblUsers = document.getElementById('tb1_users_list');
+var databaseRef = firebase.database().ref('users/');
+var rowIndex = 1;
+databaseRef.once('value', function(snapshot) {
+       snapshot.forEach(function(childSnapshot) {
+	    var childKey = childSnapshot.key;
+            IDarray[rowIndex]=childKey;  
+	    var childData = childSnapshot.val();
+	    nameArray[rowIndex]=childData.user_name;
+		  console.log(nameArray[rowIndex]);
+	    var row = tblUsers.insertRow(rowIndex);
+	    var cellId = row.insertCell(0);
+	    var cellName = row.insertCell(1);
+            cellId.appendChild(document.createTextNode(childKey));
+	    cellName.appendChild(document.createTextNode(childData.user_name));
+	    console.log("rowIndex after refresh is: " + rowIndex);   
+	    rowIndex = rowIndex + 1;
+		  
+		
+	  });
+	});
+	
+	
+setInterval(frame, 30);
+ function frame() {
+	databaseRef.once('value', function(snapshot) {
+       snapshot.forEach(function(childSnapshot) {
+	        var childKey = childSnapshot.key;	
+		var childData = childSnapshot.val();
+	        if(childData.user_Email==userEmail)
+		{
+			//console.log("get hear in Email: "+userEmail );  
+			//firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
+			//firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});	
+		}
+          });
+     });
+			
+ }
+
+
+var myRivalId = "";
+var myId="";
+var rivalRef;
+var userData;
+
+function craeteRival(){
+	var flag = 0;
+	var rival_name = document.getElementById('rival_name').value;
+	for(var i = 0; i<nameArray.length; i++){
+	    if(rival_name===nameArray[i])
+	    {
+	    	myRivalId=IDarray[i];
+		flag = 1;    
+	    }
+	}
+	if(flag){
+		console.log(rival_name + "id: " + myRivalId);
+		var userRef = firebase.database().ref('/users/' + myRivalId);
+		var myRef = firebase.database().ref('/users/' + myId);
+		userRef.once('value').then(function(snapshot) {
+		userData = snapshot.val();
+	        console.log("THE USER STATAUS IS " + userData.status);
+
+		console.log("the rival name is " + userData.user_name +"and the status is " +userData.status);
+		if(userData.status)
+			{
+			myRivalId = userData.user_id;
+			console.log("my rival_id is " + myRivalId);
+			
+			console.log("userData.rivai_id is " + userData.rivai_id);
+			
+			console.log("my id is: " + myId);
+			firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
+			firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});
+			match_id.innerHTML= "You have mach! start play:)";
+			alert('You have mach! start play!');
+			}
+			else {alert('the user is busy :( try anthr one');}
+		
+			
+		  });
+		  }
+	else{alert('the name you chose dont existing');}
+	
+	
+}
+function initUser(){
+	console.log("get into init!!!");
+	var flag =0;
+	var initrowIndex=rowIndex;
+	databaseRef.once('value', function(snapshot) {
+	  snapshot.forEach(function(childSnapshot) {
+	    var childKey = childSnapshot.key;
+	    var childData = childSnapshot.val();
+	    for (var i = 0; i < IDarray.length; i++) 
+		{
+			if(IDarray[i]===childKey)
+			{flag = 1;}
+		}
+	    if(flag==0)
+	    {
+	    console.log("rowIndex is: " + initrowIndex);    
+	    var row = tblUsers.insertRow(initrowIndex);
+	    var cellId = row.insertCell(0);
+	    var cellName = row.insertCell(1);
+	    var user_name = document.getElementById('user_name').value; 
+	    if(childData.user_name === user_name){
+            cellId.appendChild(document.createTextNode(childKey));
+	    cellName.appendChild(document.createTextNode(childData.user_name));
+		    rowIndex = rowIndex+1;
+	    }
+	    }  
+	    
+	    //initrowIndex = initrowIndex + 1;
+	console.log("rowIndex after if is: " + rowIndex);
+		  flag=0;  
+		
+	  });
+	});
+
+
+}	
+
+	
+var myplaces = new Array(11);
+for (var i = 0; i < myplaces.length; i++) 
+	myplaces[i] = new Array(11);
+	
+	
+	function save_user(){
+		var flag=0;
+		var user_name = document.getElementById('user_name').value; 
+		console.log(user_name);
+		for (var i = 0; i < nameArray.length; i++) 
+		{
+			if(nameArray[i]===user_name)
+			{flag = 1;}
+		} 
+		if(flag == 0)
+		{
+		var uid = firebase.database().ref().child('users').push().key;
+		myId = uid;
+		var data = {
+			user_id: uid,
+			user_name: user_name,
+			user_Email: userEmail,
+			status: 1, //1 is avilable, 0 meen he olrady play with somone
+			rivai_id: "",
+			my_color: 'whith',
+			turn_color: 'black',
+			direction: "",
+			row: "",
+			column: "",
+			placesAray: myplaces.toString()
+		}
+		var updates = {};
+		updates['/users/' + uid] = data;
+		firebase.database().ref().update(updates);
+	console.log("rowIndex befor init is: " + rowIndex);
+		initUser();
+		//alert('the user is created successfuliy!');	
+		}
+		if(flag == 1){
+			     alert('the user name allredy exist! please put diferent name');
+			     flag=0;
+			     }
+	}
+	function update_user(){
+		var user_name = document.getElementById('user_name').value; 
+		var user_id = document.getElementById('user_id').value; 
+		
+		var data = {
+			user_id: user_id,
+			user_name: user_name
+		}
+		var updates = {};
+		updates['/users/' + user_id] = data;
+		firebase.database().ref().update(updates);
+		
+		alert('the user is updated successfuliy!');
+		initUser();
+	}
+	function delete_user(){
+		var user_id = document.getElementById('user_id').value; 
+		firebase.database().ref().child('/users/' + user_id).remove();
+		alert('the user is deleted successfuliy!');
+		initUser();
+	}
+	function reload_page(){
+		window.location.reload();
+	}
+	
+	
+	
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////###############################################################################################################//////////
+///////////###############################################################################################################//////////
+///////////###############################################################################################################//////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function logout(){
 	window.location = 'index.html';
 	firebase.auth().signOut();
