@@ -1,4 +1,4 @@
- src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js";
+ src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyDYFvTJAzB5PWCcVLqJz-ImVcLU8r1uj7Q",
