@@ -1,4 +1,4 @@
- src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"
+/* src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyDYFvTJAzB5PWCcVLqJz-ImVcLU8r1uj7Q",
@@ -13,7 +13,7 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   //firebase.analytics();
-
+*/
 var userEmail="";
 var myDataEmail = document.getElementById('datah1');
 firebase.auth().onAuthStateChanged(function(user) {
