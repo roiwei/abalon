@@ -20,7 +20,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 var user = firebase.auth().currentUser;	
 console.log("MY USER IS " + user);
-myDataEmail.innerHTML= "Your Email is: "+ user.email;
+document.getElementById('datah1').innerHTML= "Your Email is: "+ user.email;
 userEmail=user.email;
     // User is signed in.
   } else {
