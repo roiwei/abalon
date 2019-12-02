@@ -134,7 +134,7 @@ function initUser(){
 	    if(flag==0)
 	    {
 	    console.log("rowIndex is: " + initrowIndex);    
-	    var row = tblUsers.insertRow(initrowIndex);
+	    var row = document.getElementById('tb1_users_list').insertRow(initrowIndex);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
 	    var user_name = document.getElementById('user_name').value; 
