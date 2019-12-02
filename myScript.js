@@ -15,7 +15,7 @@
   //firebase.analytics();
 */
 var userEmail="";
-var myDataEmail = document.getElementById('datah1');
+//var myDataEmail = document.getElementById('datah1');
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 var user = firebase.auth().currentUser;	
@@ -31,7 +31,7 @@ userEmail=user.email;
 
 var IDarray = new Array();
 var nameArray = new Array();
-var tblUsers = document.getElementById('tb1_users_list');
+//var tblUsers = document.getElementById('tb1_users_list');
 var databaseRef = firebase.database().ref('users/');
 var rowIndex = 1;
 databaseRef.once('value', function(snapshot) {
@@ -41,7 +41,7 @@ databaseRef.once('value', function(snapshot) {
 	    var childData = childSnapshot.val();
 	    nameArray[rowIndex]=childData.user_name;
 		  console.log(nameArray[rowIndex]);
-	    var row = tblUsers.insertRow(rowIndex);
+	    var row = document.getElementById('tb1_users_list').insertRow(rowIndex);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
             cellId.appendChild(document.createTextNode(childKey));
