@@ -63,7 +63,7 @@ setInterval(frame, 30);
 	        if(childData.user_Email==userEmail)
 		{
 			//console.log(childData.placesAray);
-			console.log(places);
+			//console.log(places);
 			//console.log("get hear in Email: "+userEmail );  
 			//firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
 			//firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});	
