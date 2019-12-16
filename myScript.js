@@ -64,10 +64,12 @@ setInterval(frame, 5000);
 		{
 			//console.log(childData.placesAray);
 			//console.log(places);
-			console.log("get hear in Email: "+userEmail ); 
-			console.log(childData.placesAray[0]+childData.placesAray[1]+childData.placesAray[2]+childData.placesAray[3]+childData.placesAray[4]+childData.placesAray[5]);
-			console.log(childData.placesAray[35]+childData.placesAray[36]+childData.placesAray[37]+childData.placesAray[38]+childData.placesAray[39]+childData.placesAray[40]);
-			console.log(stringToArray(childData.placesAray));
+			//console.log("get hear in Email: "+userEmail ); 
+			//console.log(stringToArray(childData.placesAray));
+			putAllBallFromUser(stringToArray(childData.placesAray))
+			firebase.database().ref('users/').child(myId).update({placesAray: myplaces});
+			if(myRivalId!="")
+				{firebase.database().ref('users/').child(myRivalId).update({placesAray: myplaces});}
 			//console.log(childData.placesAray);
 			//firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
 			//firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});	
