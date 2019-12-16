@@ -54,7 +54,7 @@ databaseRef.once('value', function(snapshot) {
 	});
 	
 	
-setInterval(frame, 30);
+setInterval(frame, 1000);
  function frame() {
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
@@ -64,7 +64,8 @@ setInterval(frame, 30);
 		{
 			//console.log(childData.placesAray);
 			//console.log(places);
-			//console.log("get hear in Email: "+userEmail );  
+			console.log("get hear in Email: "+userEmail ); 
+			console.log(stringToArray(childData.placesAray)
 			//firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
 			//firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});	
 		}
@@ -163,7 +164,7 @@ for (var i = 0; i < myplaces.length; i++)
 	myplaces[i] = new Array(11);
 	
 	
-	function save_user(){
+function save_user(){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
@@ -201,7 +202,7 @@ for (var i = 0; i < myplaces.length; i++)
 			     flag=0;
 			     }
 	}
-	function update_user(){
+function update_user(){
 		var user_name = document.getElementById('user_name').value; 
 		var user_id = document.getElementById('user_id').value; 
 		
@@ -216,13 +217,13 @@ for (var i = 0; i < myplaces.length; i++)
 		alert('the user is updated successfuliy!');
 		initUser();
 	}
-	function delete_user(){
+function delete_user(){
 		var user_id = document.getElementById('user_id').value; 
 		firebase.database().ref().child('/users/' + user_id).remove();
 		alert('the user is deleted successfuliy!');
 		initUser();
 	}
-	function reload_page(){
+function reload_page(){
 		window.location.reload();
 	}
 	
@@ -270,7 +271,58 @@ function getData(){
 	})
 	
 }
-
+function putAllBallFromUser(usrePlaces)
+{ 
+	for(i=1;i<=9;i++)
+	    {
+		for(j=1;j<=9;j++)
+		   {
+			if(usrePlaces[i][j]!=places[i][j])
+			   {
+				console.log("i isssssss: "+i+"j isssssss: "+j);
+				places[i][j]=usrePlaces[i][j];					
+				var BallId= document.getElementById(getIdBall(i,j));//////getIdBall()
+				console.log(places);
+				console.log("places"+i+" "+j+ "="+ places[i][j]);
+				if(places[i][j]==0)
+				      {BallId.src="empty.png";}
+				if(places[i][j]==1)
+				      {BallId.src="newBlackBall.jpg";}
+				if(places[i][j]==2)
+				      {BallId.src="whiteBall.jpg";}
+				putAllBallInPlace();
+			     }
+			}
+		}
+	
+	
+}
+function stringToArray(s)
+{
+     placeInArray=0;
+     for (i=0; i<11; i++)
+	{
+	     for (j=0; j<11; j++)
+		{
+		    if (s[placeInArray]=='-')
+			  {myplaces[i][j]= -1;
+			   placeInArray=placeInArray+3}
+		    else if (s[placeInArray]=='1')
+			  {myplaces[i][j]= 1;
+			   placeInArray=placeInArray+2}
+		    else if (s[placeInArray]=='2')
+			  {myplaces[i][j]= 2;
+			   placeInArray=placeInArray+2}
+		    else if (s[placeInArray]=='0')
+			  {myplaces[i][j]= 0;
+			   placeInArray=placeInArray+2}
+					
+		}
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		function init()
 		{
 		getData();
