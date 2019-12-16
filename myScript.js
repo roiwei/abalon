@@ -69,11 +69,11 @@ setInterval(frame, 5000);
 			if (hold == 0)
 			{
 			putAllBallFromUser(stringToArray(childData.placesAray))
-			firebase.database().ref('users/').child(myId).update({placesAray: myplaces});
+			firebase.database().ref('users/').child(myId).update({placesAray: myplaces.toString()});
 			//if(childData.my_color==childData.turn_color)
 			//	{firebase.database().ref('users/').child(myId).update({placesAray: myplaces});}
-			if(myRivalId!="")
-				{firebase.database().ref('users/').child(myRivalId).update({placesAray: myplaces});}
+			//if(myRivalId!="")
+			//	{firebase.database().ref('users/').child(myRivalId).update({placesAray: myplaces});}
 			}
 			//console.log(childData.placesAray);
 			//firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
