@@ -317,6 +317,7 @@ function stringToArray(s)
 		    else if (s[placeInArray]=='0')
 			  {myplaces[i][j]= 0;
 			   placeInArray=placeInArray+3}
+		    else {(console.log("problem hepned in stringToArray in place:"+placeInArray+"that the char is: "+s[placeInArray]);)}
 					
 		}
 	}
