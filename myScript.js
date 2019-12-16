@@ -53,7 +53,7 @@ databaseRef.once('value', function(snapshot) {
 	  });
 	});
 	
-	
+var hold=0;	
 setInterval(frame, 5000);
  function frame() {
 	databaseRef.once('value', function(snapshot) {
@@ -66,10 +66,15 @@ setInterval(frame, 5000);
 			//console.log(places);
 			//console.log("get hear in Email: "+userEmail ); 
 			//console.log(stringToArray(childData.placesAray));
+			if (hold == 0)
+			{
 			putAllBallFromUser(stringToArray(childData.placesAray))
 			firebase.database().ref('users/').child(myId).update({placesAray: myplaces});
+			//if(childData.my_color==childData.turn_color)
+			//	{firebase.database().ref('users/').child(myId).update({placesAray: myplaces});}
 			if(myRivalId!="")
 				{firebase.database().ref('users/').child(myRivalId).update({placesAray: myplaces});}
+			}
 			//console.log(childData.placesAray);
 			//firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
 			//firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});	
@@ -832,11 +837,12 @@ function stringToArray(s)
 			if(clickball==0)
 			{
 			putAllBallInPlace();
+			hold=0;
 			}
 	//		id.style.cursor = "pointer";
 			if(clickball==1)
 			{
-		//movballToPoint(1,1,20,20);
+			hold=1;	
 			if(topflag==0)//its down
 				{
 					if(leftflag==0)//its down right 
