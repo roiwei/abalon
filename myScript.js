@@ -66,15 +66,23 @@ setInterval(frame, 5000);
 			//console.log(places);
 			console.log("get hear in Email: "+userEmail ); 
 			console.log(stringToArray(childData.placesAray));
-			console.log(myplaces);
+			
+			//console.log(myplaces);same
 				if (hold == 0)
 				{
 				////////////////////////////////////////////////////////////
 				//console.log(myplaces.toString())
-				myplacesStr=myplaces.toString();
-				myId=childData.user_id;
-				console.log("myId is:"+myId)
-				firebase.database().ref('users/').child(myId).update({placesAray: ""});
+				    if((ifNotEqualToStart(stringToArray(childData.placesAray))) && (!(ifNotEqualToStart(stringToArray(places)))))
+					{
+					putAllBallFromUser(stringToArray(childData.placesAray));
+					}
+			 	    else
+					{
+					myplacesStr=places.toString();
+					myId=childData.user_id;
+					console.log("myId is:"+myId)
+					firebase.database().ref('users/').child(myId).update({placesAray: myplacesStr});
+					}
 				//putAllBallFromUser(stringToArray(childData.placesAray));
 				//if(childData.my_color==childData.turn_color)
 				//	{firebase.database().ref('users/').child(myId).update({placesAray: myplaces});}
@@ -449,10 +457,13 @@ function stringToArray(s)
 			else{return (num-num-num);}
 		}
 		var places = new Array(11);
+		var placesStart = new Array(11);
 
 		for (var i = 0; i < places.length; i++) 
+		{
 			places[i] = new Array(11);
-	
+			placesStart[i] = new Array(11);
+		}
 		
 		for (var i = 0; i < places.length; i++) 
 		{
@@ -500,9 +511,28 @@ function stringToArray(s)
 		for (var j =3; j < 6; j++) 
 				places[7][j] = 2;			
 				
-				
+		///////////////////////////////////////////////
+		for (var i = 0; i < places.length; i++) 
+		{
+			for (var j = 0; j < places.length; j++) 
+				placesStart[i][j]= places[i][j];
+		}	
 		console.log(places);
+		console.log(placesStart);
 		
+function ifNotEqualToStart(placesArrayToChack)
+{
+	for (var i = 0; i < places.length; i++) 
+		{
+			for (var j = 0; j < places.length; j++)
+			{
+				if(placesStart[i][j] != placesArrayToChack[i][j])
+				{return 1;}//not equal	
+				
+			}
+		}
+	return 0;
+}
 		
 		var firstIdClick;
 		var firstClickRow =-1;
