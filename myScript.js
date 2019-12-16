@@ -80,7 +80,8 @@ setInterval(frame, 5000);
 					{
 					myplacesStr=places.toString();
 					myId=childData.user_id;
-					console.log("myId is:"+myId)
+					console.log("myId is:"+myId);
+					console.log(places);
 					firebase.database().ref('users/').child(myId).update({placesAray: myplacesStr});
 					}
 				//putAllBallFromUser(stringToArray(childData.placesAray));
