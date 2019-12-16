@@ -65,7 +65,7 @@ setInterval(frame, 1000);
 			//console.log(childData.placesAray);
 			//console.log(places);
 			console.log("get hear in Email: "+userEmail ); 
-			console.log(childData.placesAray[0]+childData.placesAray[1]);
+			console.log(childData.placesAray[0]+childData.placesAray[1]+childData.placesAray[2]);
 			//console.log(stringToArray(childData.placesAray));
 			//firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
 			//firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});	
