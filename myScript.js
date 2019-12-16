@@ -61,24 +61,25 @@ setInterval(frame, 5000);
 			var childKey = childSnapshot.key;	
 			var childData = childSnapshot.val();
 	        if(childData.user_Email==userEmail)
-			{
+			{//chack if rival did anithing
 			//console.log(childData.placesAray);
 			//console.log(places);
-			//console.log("get hear in Email: "+userEmail ); 
-			//console.log(stringToArray(childData.placesAray));
+			console.log("get hear in Email: "+userEmail ); 
+			console.log(stringToArray(childData.placesAray));
 				if (hold == 0)
 				{
 				////////////////////////////////////////////////////////////
-				console.log(myplaces.toString())
-				console.log("myId is:"+myId)
+				//console.log(myplaces.toString())
+				//console.log("myId is:"+myId)
+				putAllBallFromUser(stringToArray(childData.placesAray));
 				myplacesStr=myplaces.toString();
-				putAllBallFromUser(stringToArray(childData.placesAray))
+				myId=childData.user_id;
 				firebase.database().ref('users/').child(myId).update({placesAray: myplacesStr});
 				//if(childData.my_color==childData.turn_color)
 				//	{firebase.database().ref('users/').child(myId).update({placesAray: myplaces});}
 				//if(myRivalId!="")
 				//	{firebase.database().ref('users/').child(myRivalId).update({placesAray: myplaces});}
-				}
+				//}
 		
 			}
           });
