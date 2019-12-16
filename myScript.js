@@ -187,7 +187,7 @@ for (var i = 0; i < myplaces.length; i++)
 			direction: "",
 			row: "",
 			column: "",
-			placesAray: myplaces.toString()
+			placesAray: places.toString()
 		}
 		var updates = {};
 		updates['/users/' + uid] = data;
