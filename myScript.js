@@ -58,29 +58,29 @@ setInterval(frame, 5000);
  function frame() {
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
-	        var childKey = childSnapshot.key;	
-		var childData = childSnapshot.val();
+			var childKey = childSnapshot.key;	
+			var childData = childSnapshot.val();
 	        if(childData.user_Email==userEmail)
-		{
+			{
 			//console.log(childData.placesAray);
 			//console.log(places);
 			//console.log("get hear in Email: "+userEmail ); 
 			//console.log(stringToArray(childData.placesAray));
-			if (hold == 0)
-			{
-			console.log(myplaces.toString())
-			myplacesStr=myplaces.toString();
-			putAllBallFromUser(stringToArray(childData.placesAray))
-			firebase.database().ref('users/').child(myId).update({placesAray: myplacesStr});
-			//if(childData.my_color==childData.turn_color)
-			//	{firebase.database().ref('users/').child(myId).update({placesAray: myplaces});}
-			//if(myRivalId!="")
-			//	{firebase.database().ref('users/').child(myRivalId).update({placesAray: myplaces});}
+				if (hold == 0)
+				{
+				////////////////////////////////////////////////////////////
+				console.log(myplaces.toString())
+				console.log("myId is:"+myId)
+				myplacesStr=myplaces.toString();
+				putAllBallFromUser(stringToArray(childData.placesAray))
+				firebase.database().ref('users/').child(myId).update({placesAray: myplacesStr});
+				//if(childData.my_color==childData.turn_color)
+				//	{firebase.database().ref('users/').child(myId).update({placesAray: myplaces});}
+				//if(myRivalId!="")
+				//	{firebase.database().ref('users/').child(myRivalId).update({placesAray: myplaces});}
+				}
+		
 			}
-			//console.log(childData.placesAray);
-			//firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
-			//firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});	
-		}
           });
      });
 			
