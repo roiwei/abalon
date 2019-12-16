@@ -309,16 +309,16 @@ function stringToArray(s)
 		{
 		    if (s[placeInArray]=='-')
 			  {myplaces[i][j]= -1;
-			   placeInArray=placeInArray+4}
+			   placeInArray=placeInArray+3}
 		    else if (s[placeInArray]=='1')
 			  {myplaces[i][j]= 1;
-			   placeInArray=placeInArray+3}
+			   placeInArray=placeInArray+2}
 		    else if (s[placeInArray]=='2')
 			  {myplaces[i][j]= 2;
-			   placeInArray=placeInArray+3}
+			   placeInArray=placeInArray+2}
 		    else if (s[placeInArray]=='0')
 			  {myplaces[i][j]= 0;
-			   placeInArray=placeInArray+3}
+			   placeInArray=placeInArray+2}
 		    else {console.log("problem hepned in stringToArray in place:"+placeInArray+"that the char is: "+s[placeInArray]);}
 					
 		}
