@@ -74,8 +74,8 @@ setInterval(frame, 5000);
 				myplacesStr=myplaces.toString();
 				myId=childData.user_id;
 				console.log("myId is:"+myId)
-				firebase.database().ref('users/').child(myId).update({placesAray: myplacesStr});
-				putAllBallFromUser(stringToArray(childData.placesAray));
+				firebase.database().ref('users/').child(myId).update({placesAray: ""});
+				//putAllBallFromUser(stringToArray(childData.placesAray));
 				//if(childData.my_color==childData.turn_color)
 				//	{firebase.database().ref('users/').child(myId).update({placesAray: myplaces});}
 				//if(myRivalId!="")
