@@ -66,15 +66,16 @@ setInterval(frame, 5000);
 			//console.log(places);
 			console.log("get hear in Email: "+userEmail ); 
 			console.log(stringToArray(childData.placesAray));
+			console.log(myplaces);
 				if (hold == 0)
 				{
 				////////////////////////////////////////////////////////////
 				//console.log(myplaces.toString())
-				//console.log("myId is:"+myId)
-				putAllBallFromUser(stringToArray(childData.placesAray));
 				myplacesStr=myplaces.toString();
 				myId=childData.user_id;
+				console.log("myId is:"+myId)
 				firebase.database().ref('users/').child(myId).update({placesAray: myplacesStr});
+				putAllBallFromUser(stringToArray(childData.placesAray));
 				//if(childData.my_color==childData.turn_color)
 				//	{firebase.database().ref('users/').child(myId).update({placesAray: myplaces});}
 				//if(myRivalId!="")
