@@ -65,8 +65,8 @@ setInterval(frame, 1000);
 			//console.log(childData.placesAray);
 			//console.log(places);
 			console.log("get hear in Email: "+userEmail ); 
-			console.log(childData.placesAray[0]+childData.placesAray[1]+childData.placesAray[2]+childData.placesAray[3]);
-			//console.log(stringToArray(childData.placesAray));
+			//console.log(childData.placesAray[0]+childData.placesAray[1]+childData.placesAray[2]+childData.placesAray[3]);
+			console.log(stringToArray(childData.placesAray));
 			//firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
 			//firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});	
 		}
@@ -307,16 +307,16 @@ function stringToArray(s)
 		{
 		    if (s[placeInArray]=='-')
 			  {myplaces[i][j]= -1;
-			   placeInArray=placeInArray+3}
+			   placeInArray=placeInArray+4}
 		    else if (s[placeInArray]=='1')
 			  {myplaces[i][j]= 1;
-			   placeInArray=placeInArray+2}
+			   placeInArray=placeInArray+3}
 		    else if (s[placeInArray]=='2')
 			  {myplaces[i][j]= 2;
-			   placeInArray=placeInArray+2}
+			   placeInArray=placeInArray+3}
 		    else if (s[placeInArray]=='0')
 			  {myplaces[i][j]= 0;
-			   placeInArray=placeInArray+2}
+			   placeInArray=placeInArray+3}
 					
 		}
 	}
