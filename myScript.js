@@ -79,7 +79,7 @@ setInterval(frame, 5000);
 				//	{firebase.database().ref('users/').child(myId).update({placesAray: myplaces});}
 				//if(myRivalId!="")
 				//	{firebase.database().ref('users/').child(myRivalId).update({placesAray: myplaces});}
-				//}
+				}
 		
 			}
           });
