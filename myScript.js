@@ -751,7 +751,9 @@ function ifNotEqualToStart(placesArrayToChack)
 		}
 		
 		function onOutBall()
-		{putAllBallInPlace();
+		{	
+			putAllBallInPlace();
+		 	hold=0;
 			clickball=0;
 			//flagInBall=0;
 			flagWait=0;
