@@ -63,9 +63,9 @@ setInterval(frame, 5000);
 	        if(childData.user_Email==userEmail)
 			{//chack if rival did anithing
 			//console.log(childData.placesAray);
-			console.log(places);
-			console.log("get hear in Email: "+userEmail ); 
-			console.log(stringToArray(childData.placesAray));
+			//console.log(places);
+			//console.log("get hear in Email: "+userEmail ); 
+			//console.log(stringToArray(childData.placesAray));
 			
 			//console.log(myplaces);same
 				if (hold == 0)
@@ -78,7 +78,7 @@ setInterval(frame, 5000);
 					}
 			 	    else
 					{
-					//myplacesStr=places.toString();
+					console.log("get into else!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					myId=childData.user_id;
 					console.log("myId is:"+myId);
 					console.log(places);
