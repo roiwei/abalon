@@ -74,7 +74,8 @@ setInterval(frame, 5000);
 				//console.log(myplaces.toString())
 				    if((ifNotEqualToStart(stringToArray(childData.placesAray))) && (!(ifNotEqualToStart(stringToArray(places)))))
 					{
-					putAllBallFromUser(stringToArray(childData.placesAray));
+					//putAllBallFromUser(stringToArray(childData.placesAray));
+					console.log(stringToArray(childData.placesAray));
 					}
 			 	    else
 					{
@@ -83,6 +84,7 @@ setInterval(frame, 5000);
 					console.log("myId is:"+myId);
 					console.log(places);
 					firebase.database().ref('users/').child(myId).update({placesAray: places.toString()});
+					console.log(stringToArray(childData.placesAray));
 					}
 				//putAllBallFromUser(stringToArray(childData.placesAray));
 				//if(childData.my_color==childData.turn_color)
