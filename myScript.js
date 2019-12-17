@@ -73,6 +73,8 @@ setInterval(frame, 5000);
 				{
 				////////////////////////////////////////////////////////////
 				//console.log(myplaces.toString())
+				console.log("(!(ifNotEqualToStart(stringToArray(places))))="(!(ifNotEqualToStart(stringToArray(places)))));
+				console.log("ifNotEqualToStart(stringToArray(childData.placesAray))="+ifNotEqualToStart(stringToArray(childData.placesAray)));
 				    if((ifNotEqualToStart(stringToArray(childData.placesAray))) && (!(ifNotEqualToStart(stringToArray(places)))))
 					{
 					putAllBallFromUser(stringToArray(childData.placesAray));
