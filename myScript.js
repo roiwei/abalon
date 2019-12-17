@@ -68,6 +68,7 @@ setInterval(frame, 5000);
 			//console.log(stringToArray(childData.placesAray));
 			
 			//console.log(myplaces);same
+				console.log("hold ="+hold);
 				if (hold == 0)
 				{
 				////////////////////////////////////////////////////////////
@@ -82,7 +83,7 @@ setInterval(frame, 5000);
 					console.log("get into else!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					myId=childData.user_id;
 					console.log("myId is:"+myId);
-					console.log(places);
+					//console.log(places);//work
 					firebase.database().ref('users/').child(myId).update({placesAray: places.toString()});
 					console.log(stringToArray(childData.placesAray));
 					}
