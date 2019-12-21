@@ -334,20 +334,21 @@ function stringToArray(str)
 	     for (j=0; j<11; j++)
 		{//console.log("s[placeInArray]= "+s.charAt(placeInArray)+" placeInArray="+placeInArray);
 		    if (s.charAt(placeInArray)=='-')
-			  {myplaces[i][j]= -1;
+			  {myplaces[i][j]= -1;console.log("-1,");
 			   placeInArray=placeInArray+3}
 		    else if (s.charAt(placeInArray)=='1')
-			  {myplaces[i][j]= 1;
+			  {myplaces[i][j]= 1;console.log("1,");
 			   placeInArray=placeInArray+2}
 		    else if (s.charAt(placeInArray)=='2')
-			  {myplaces[i][j]= 2;
+			  {myplaces[i][j]= 2;console.log("2,");
 			   placeInArray=placeInArray+2}
 		    else if (s.charAt(placeInArray)=='0')
-			  {myplaces[i][j]= 0;
+			  {myplaces[i][j]= 0;console.log("0,");
 			   placeInArray=placeInArray+2}
 		    else {console.log("problem hepned in stringToArray in place:"+placeInArray+"that the char is: "+s[placeInArray]);}
 					
 		}
+		console.log("next line:");
 	}
  arr=myplaces;
  return arr;
