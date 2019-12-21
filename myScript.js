@@ -331,7 +331,7 @@ function stringToArray(s)
      for (i=0; i<11; i++)
 	{
 	     for (j=0; j<11; j++)
-		{console.log("s[placeInArray]= "+s.charAt(placeInArray)" placeInArray="+placeInArray);
+		{console.log("s[placeInArray]= "+s.charAt(placeInArray)+" placeInArray="+placeInArray);
 		    if (s.charAt(placeInArray)=='-')
 			  {myplaces[i][j]= -1;
 			   placeInArray=placeInArray+3}
