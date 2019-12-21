@@ -187,10 +187,6 @@ function initUser(){
 }	
 
 	
-var myplaces = new Array(11);
-for (var i = 0; i < myplaces.length; i++) 
-	myplaces[i] = new Array(11);
-	
 	
 function save_user(){
 		var flag=0;
@@ -328,6 +324,9 @@ function putAllBallFromUser(usrePlaces)
 function stringToArray(str)
 {console.log("get in stringToArray");
      placeInArray=0;
+     var myplaces = new Array(11);
+     for (var i = 0; i < myplaces.length; i++) 
+     {myplaces[i] = new Array(11);}
      s=str.toString();
      for (i=0; i<11; i++)
 	{
@@ -351,7 +350,7 @@ function stringToArray(str)
 		console.log("next line:");
 	}
  //arr=myplaces;
- console.log("arr issssssssssssssssssssssssss:");
+ console.log("myplaces issssssssssssssssssssssssss:");
  console.log(myplaces);
  return myplaces;
 }
