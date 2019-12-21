@@ -314,12 +314,12 @@ function putAllBallFromUser(usrePlaces)
 				      {BallId.src="newBlackBall.jpg";}
 				if(usrePlaces[i][j]==2)
 				      {BallId.src="whiteBall.jpg";}
-				putAllBallInPlace();
+				
 			     }
 			}
 		}
 	
-	
+  putAllBallInPlace();
 }
 function stringToArray(str)
 {console.log("get in stringToArray");
