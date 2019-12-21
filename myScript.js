@@ -301,9 +301,9 @@ function getData(){
 }
 function putAllBallFromUser(usrePlaces)
 { 
-	for(i=1;i<=11;i++)
+	for(i=0;i<11;i++)
 	    {
-		for(j=1;j<=11;j++)
+		for(j=0;j<11;j++)
 		   {
 			if(usrePlaces[i][j]!=places[i][j])
 			   {
