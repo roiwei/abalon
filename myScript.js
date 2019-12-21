@@ -325,9 +325,10 @@ function putAllBallFromUser(usrePlaces)
 	
 	
 }
-function stringToArray(s)
+function stringToArray(str)
 {console.log("get in stringToArray");
      placeInArray=0;
+     s=str.toString();
      for (i=0; i<11; i++)
 	{
 	     for (j=0; j<11; j++)
