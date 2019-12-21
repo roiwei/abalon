@@ -301,9 +301,9 @@ function getData(){
 }
 function putAllBallFromUser(usrePlaces)
 { 
-	for(i=1;i<=9;i++)
+	for(i=1;i<=11;i++)
 	    {
-		for(j=1;j<=9;j++)
+		for(j=1;j<=11;j++)
 		   {
 			if(usrePlaces[i][j]!=places[i][j])
 			   {
@@ -312,11 +312,11 @@ function putAllBallFromUser(usrePlaces)
 				var BallId= document.getElementById(getIdBall(i,j));//////getIdBall()
 				console.log(places);
 				console.log("places"+i+" "+j+ "="+ places[i][j]);
-				if(places[i][j]==0)
+				if(usrePlaces[i][j]==0)
 				      {BallId.src="empty.png";}
-				if(places[i][j]==1)
+				if(usrePlaces[i][j]==1)
 				      {BallId.src="newBlackBall.jpg";}
-				if(places[i][j]==2)
+				if(usrePlaces[i][j]==2)
 				      {BallId.src="whiteBall.jpg";}
 				putAllBallInPlace();
 			     }
@@ -332,7 +332,7 @@ function stringToArray(str)
      for (i=0; i<11; i++)
 	{
 	     for (j=0; j<11; j++)
-		{console.log("s[placeInArray]= "+s.charAt(placeInArray)+" placeInArray="+placeInArray);
+		{//console.log("s[placeInArray]= "+s.charAt(placeInArray)+" placeInArray="+placeInArray);
 		    if (s.charAt(placeInArray)=='-')
 			  {myplaces[i][j]= -1;
 			   placeInArray=placeInArray+3}
