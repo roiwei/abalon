@@ -70,7 +70,7 @@ setInterval(frame, 5000);
 			//console.log(myplaces);same
 			var userRef = firebase.database().ref('/users/' + myRivalId);
 			console.log("myRivalId is: "+myRivalId);
-			userRef.once('value').then(functioconsole.log("userData.user_name=n(snapshot) {
+			userRef.once('value').then(function(snapshot) {
 			userData = snapshot.val();
 			console.log("userData.user_name= "+userData.user_name);
 			if(match_id.innerHTML!= "You have mach with "+userData.user_name+"! start play:)")
