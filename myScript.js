@@ -146,6 +146,7 @@ function craeteRival(){
 			console.log("my id is: " + myId);
 			firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
 			firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});
+			firebase.database().ref('users/').child(myRivalId).update({my_color: 'black'});
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";
 			alert('You have mach! start play!');
 			}
@@ -692,7 +693,7 @@ function ifNotEqualToStart(placesArrayToChack)
 			var d=getBallTop(row,column);
 				d=d+0.15;
 				var s= "document.getElementById(getIdBall(row,column)).style.top="+'"'+d+"%"+'";';
-				console.log(s);
+				//console.log(s);
 				eval(s.toString());
 				var dl=getBallLeft(row,column);
 				dl=dl+0.09;
@@ -706,13 +707,13 @@ function ifNotEqualToStart(placesArrayToChack)
 		{
 			
 			var d=getBallTop(row,column);
-			console.log("the top is"+d);
+			//console.log("the top is"+d);
 				d=d-0.15;
 				var s= "document.getElementById(getIdBall(row,column)).style.top="+'"'+d+"%"+'";';
 				//console.log(s);
 				eval(s.toString());
 				var dl=getBallLeft(row,column);
-				console.log("the left is"+dl);
+				//console.log("the left is"+dl);
 				dl=dl+0.09;
 				var s= "document.getElementById(getIdBall(row,column)).style.left="+'"'+dl+"%"+'";';
 				//console.log(s);
@@ -791,18 +792,18 @@ function ifNotEqualToStart(placesArrayToChack)
 			if( ((dy*dy)>9) || ((dx*dx)>9) )
 			{
 				flagInBall=1;
-				console.log("good");
+				//console.log("good");
 				if((dy*dy)<0.3)//its left or right
 				{
 					if(dx>0)//its left
 					{
-						console.log("its left");
+						//console.log("its left");
 						topflag=2;//not up and not down
 						leftflag=1;
 						onBallstart(e,id,row,column);
 					}
 				else{
-						console.log("its right");
+						//console.log("its right");
 						topflag=2;//not up and not down
 						leftflag=0;
 						onBallstart(e,id,row,column);
@@ -815,13 +816,13 @@ function ifNotEqualToStart(placesArrayToChack)
 					{
 						if(dx>0)//its down left
 						{
-						console.log("its down-left");
+						//console.log("its down-left");
 						topflag=0;
 						leftflag=1;
 						onBallstart(e,id,row,column);
 						}
 					else{
-						console.log("its down-right");
+						//console.log("its down-right");
 						topflag=0;
 						leftflag=0;
 						onBallstart(e,id,row,column);
@@ -832,13 +833,13 @@ function ifNotEqualToStart(placesArrayToChack)
 					{
 						if(dx>0)//its up left
 						{
-						console.log("its up-left");
+						//console.log("its up-left");
 						topflag=1;
 						leftflag=1;
 						onBallstart(e,id,row,column);
 						}
 					else{
-						console.log("its up-right");
+						//console.log("its up-right");
 						topflag=1;
 						leftflag=0;
 						onBallstart(e,id,row,column);
@@ -901,8 +902,298 @@ function ifNotEqualToStart(placesArrayToChack)
 			if(topflag==0)//its down
 				{
 					if(leftflag==0)//its down right 
-					{movBallDR(row,column);console.log("leftflag= "+leftflag);//1
+					{movBallDR(row,column);//console.log("leftflag= "+leftflag);//1
 					var mor5=0;
+						if(row+1<5){mor5=1;}
+					if(((realTop[row][column+mor5-1])-(getBallTop(row,column)))>1)	
+					{
+					var column5=column;//console.log("column= "+column5);
+					if((row+1>5)&&(row>=5)){column5=column-1;}
+						if(ifBallTouchFromUp(row,column,row+1,column5+1))
+						{//if(row+1>5){column5=column5-1;}
+							movBallDR(row+1,column5+1);//console.log("column5= "+column5);//2
+							if((ifBallTouchFromUp(row+1,column5+1,row+2,column5+1))&&(places[row+1][column5+1]!=0))//////////////////
+							{if(row+2>5){column5=column5-1;}//console.log("column521= "+column5);
+							movBallDR(row+2,column5+2);//console.log("column52= "+column5);//3
+								if((ifBallTouchFromUp(row+2,column5+2,row+3,column5+1))&&(places[row+2][column5+2]!=0))
+								{if(row+3>5){column5=column5-1;}
+								movBallDR(row+3,column5+3);//4
+									if((ifBallTouchFromUp(row+3,column5+3,row+4,column5+1))&&(places[row+3][column5+3]!=0))
+									{if(row+4>5){column5=column5-1;}
+									movBallDR(row+4,column5+1);//5
+									}	
+								}	
+							}	
+						}
+					}
+					else{
+							//console.log("les then 4444444444444444");
+							if(blackTurn==1)
+							{
+							if(checkAndChangeDR(row,column,1)==-1)
+							{id_ifLigal.innerHTML="not ligal move!!! wait for black ligal move";}
+							else{id_ifLigal.innerHTML="wait for white move";blackTurn=0;}
+							}//the ball move enough, make the mov
+							else
+							{
+							if(checkAndChangeDR(row,column,2)==-1)
+							{id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
+							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;}
+							}
+						 }	
+					}
+					else if(leftflag==1)//its down left
+					{var mor5=0;
+						if(row+1>5){mor5=1;}
+						movBallDL(row,column);
+					if(((realTop[row][column-mor5-1])-(getBallTop(row,column)))>1)	
+					{//console.log("leftflag= "+leftflag);console.log("getBallTop(row,column-mor5)="+getBallTop(row,column)+"  realTop[row][column-mor5]"+realTop[row][column-mor5]);//1
+					var column5=column;//console.log("column= "+column5);
+					if(row+1<=5){column5=column+1;}
+						if(ifBallTouchFromUp(row,column,row+1,column5-1))
+						{if(row+1<=5){column5=column+1;}
+							movBallDL(row+1,column5-1);     //console.log("column5= "+column5);//2
+							if(places[row+1][column5-1]!=0){
+							if((ifBallTouchFromUp(row+1,column5-1,row+2,column5))&&(places[row+1][column5-1]!=0))//////////////////
+							{if(row+2<=5){column5=column5+1;}      //console.log("column521= "+column5);
+							movBallDL(row+2,column5-2);         // console.log("column52= "+column5);//3
+								if((ifBallTouchFromUp(row+2,column5-2,row+3,column5))&&(places[row+2][column5-2]!=0))
+								{if(row+3<=5){column5=column5+1;}
+								movBallDL(row+3,column5-3);//4
+									if((ifBallTouchFromUp(row+3,column5-3,row+4,column5))&&(places[row+3][column5-3]!=0))
+									{if(row+4<=5){column5=column5+1;}
+									movBallDL(row+4,column5-4);//5
+									}	
+								}	
+							}	
+						}
+						}
+					 }	
+					 else{
+							//console.log("les then 4444444444444444");
+							if(blackTurn==1)
+							{
+							if(checkAndChangeDL(row,column,1)==-1)
+							{id_ifLigal.innerHTML="not ligal move!!! wait for black ligal move";}
+							else{id_ifLigal.innerHTML="wait for white move";blackTurn=0;}
+							}//the ball move enough, make the mov
+							else
+							{
+							if(checkAndChangeDL(row,column,2)==-1)
+							{id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
+							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;}
+							}
+						 }
+					}//////////////
+				}
+				//////////////end down options
+			else if(topflag==1)//its up
+				{
+					if(leftflag==0)//its up right 
+					{movBallUR(row,column);//console.log("leftflag= "+leftflag);//1
+						var mor5=0;
+						if(row-1>=5){mor5=1;}//console.log("(getBallTop(row,column)-(realTop[row-2][column+mor5])=  "+(getBallTop(row,column)-(realTop[row-2][column+mor5])));
+						//console.log("row,column= "+row+" "+column);
+					if(((getBallTop(row,column))-(realTop[row-2][column+mor5-1]))>1)	
+					{
+					var column5=column;//console.log("column= "+column5);
+					if(row-1>=5){column5=column5+1;}//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");}//if((row+1>5)&&(row>=5)){column5=column-1;}
+						if(ifBallTouchFromUp(row-1,column5,row,column))
+						{//if(row-2>5){column5=column5+1;}
+							movBallUR(row-1,column5);//console.log("column5= "+column5);//2
+							if((ifBallTouchFromUp(row-2,column5,row-1,column5))&&(places[row-1][column5]!=0))//////////////////
+							{if(row-2>=5){column5=column5+1;}//console.log("column521= "+column5);
+							movBallUR(row-2,column5);//console.log("column52= "+column5);//3
+								if((ifBallTouchFromUp(row-3,column5,row-2,column5))&&(places[row-2][column5]!=0))
+								{if(row-3>=5){column5=column5+1;}
+								movBallUR(row-3,column5);//4
+									if((ifBallTouchFromUp(row-4,column5,row-3,column5))&&(places[row-3][column5]!=0))
+									{if(row-4>=5){column5=column5+1;}
+									movBallUR(row-4,column5);//5
+									}	
+								}	
+							}	
+						}
+					}
+					else{
+							//console.log("les then 4444444444444444");
+							if(blackTurn==1)
+							{
+							if(checkAndChangeUR(row,column,1)==-1)
+							{id_ifLigal.innerHTML="not ligal move!!! wait for black ligal move";}
+							else{id_ifLigal.innerHTML="wait for white move";blackTurn=0;}
+							}//the ball move enough, make the mov
+							else
+							{
+							if(checkAndChangeUR(row,column,2)==-1)
+							{id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
+							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;}
+							}
+						 }
+					}////////////////
+					else if(leftflag==1)//its up left
+					{movBallUL(row,column);//console.log("leftflag= "+leftflag);
+						var mor5=0;
+						if(row-1<5){mor5=-1;}//console.log("(getBallTop(row,column)-(realTop[row-2][column+mor5])=  "+(getBallTop(row,column)-(realTop[row-2][column+mor5])));
+						//console.log("row,column= "+row+" "+column);
+					if(((getBallTop(row,column))-(realTop[row-2][column+mor5-1]))>1)	
+					{
+					var column5=column;//console.log("column= "+column5);
+					if(row-1<5){column5=column5-1;}//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");}//if((row+1>5)&&(row>=5)){column5=column-1;}
+						if(ifBallTouchFromUp(row-1,column5,row,column))
+						{//if(row-2>5){column5=column5+1;}
+							movBallUL(row-1,column5);//console.log("column5= "+column5);//2
+							if((ifBallTouchFromUp(row-2,column5,row-1,column5))&&(places[row-1][column5]!=0))//////////////////
+							{if(row-2<5){column5=column5-1;}//console.log("column521= "+column5);
+							movBallUL(row-2,column5);//console.log("column52= "+column5);//3
+								if((ifBallTouchFromUp(row-3,column5,row-2,column5))&&(places[row-2][column5]!=0))
+								{if(row-3<5){column5=column5-1;}
+								movBallUL(row-3,column5);//4
+									if((ifBallTouchFromUp(row-4,column5,row-3,column5))&&(places[row-3][column5]!=0))
+									{if(row-4<5){column5=column5-1;}
+									movBallUL(row-4,column5);//5
+									}	
+								}	
+							}	
+						}
+					}
+					else{
+							//console.log("les then 4444444444444444");
+							if(blackTurn==1)
+							{
+							if(checkAndChangeUL(row,column,1)==-1)
+							{id_ifLigal.innerHTML="not ligal move!!! wait for black ligal move";}
+							else{id_ifLigal.innerHTML="wait for white move";blackTurn=0;}
+							}//the ball move enough, make the mov
+							else
+							{
+							if(checkAndChangeUL(row,column,2)==-1)
+							{id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
+							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;}
+							}
+						 }
+					}
+					
+
+				}
+			else if(topflag==2)//its flat
+				{////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+					if(leftflag==0)//its right 
+					{
+						if(((realLeft[row-1][column])-(getBallLeft(row,column)))>1)
+						{//console.log("realLeft[row][column+1]="+realLeft[row-1][column]+"  getBallLeft(row,column)="+getBallLeft(row,column));
+							movBallR(row,column);//console.log("leftflag= "+leftflag);//1			
+						if(ifBallTouchFromLeft(row,column,row,column+1))				
+						{movBallR(row,column+1);
+							if((ifBallTouchFromLeft(row,column+1,row,column+2))&&(places[row][column+1]!=0))//////////////////
+							{
+							movBallR(row,column+2);//3
+								if((ifBallTouchFromLeft(row,column+2,row,column+3))&&(places[row][column+2]!=0))					
+								{movBallR(row,column+3);//4
+									if((ifBallTouchFromLeft(row,column+3,row,column+4))&&(places[row][column+3]!=0))						
+									{
+										movBallR(row,column+4);//5
+									}	
+								}	
+							}	
+						}
+						}
+						else{
+							//console.log("les then 4");
+							if(blackTurn==1)
+							{
+							if(checkAndChangeR(row,column,1)==-1)
+							{id_ifLigal.innerHTML="not ligal move!!! wait for black ligal move";}
+							else{id_ifLigal.innerHTML="wait for white move";blackTurn=0;}
+							}//the ball move enough, make the mov
+							else
+							{
+							if(checkAndChangeR(row,column,2)==-1)
+							{id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
+							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;}
+							}
+						}
+					}
+					else if(leftflag==1)//its left
+					if(((getBallLeft(row,column))-(realLeft[row-1][column-2]))>1)
+					{movBallL(row,column);//console.log("leftflag= "+leftflag);
+						if(ifBallTouchFromLeft(row,column-1,row,column))				
+						{movBallL(row,column-1);
+							if((ifBallTouchFromLeft(row,column-2,row,column-1))&&(places[row][column-1]!=0))//////////////////
+							{
+							movBallL(row,column-2);//3
+								if((ifBallTouchFromLeft(row,column-3,row,column-2))&&(places[row][column-2]!=0))					
+								{movBallL(row,column-3);//4
+									if((ifBallTouchFromLeft(row,column-4,row,column-3))&&(places[row][column-3]!=0))						
+									{
+										movBallL(row,column-4);//5
+									}	
+								}	
+							}	
+						}	
+						
+					}
+						else{
+							//console.log("les then 4444444444444444111111111111111");
+							if(blackTurn==1)
+							{
+								if(checkAndChangeL(row,column,1)==-1){id_ifLigal.innerHTML="not ligal move!!! wait for black ligal move";console.log("!not ligal move!!! wait for black ligal move!");}
+				
+								else{id_ifLigal.innerHTML="wait for white move";blackTurn=0;console.log("!!!!!!!!wait for white move!!!!!!!!!!!");}
+							}//the ball move enough, make the mov
+							else
+							{
+							if(checkAndChangeL(row,column,2)==-1){id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
+							
+							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;console.log("!!!!!!!!wait for black move!!!!!!!!!!!");}
+							}
+						}
+				
+				}
+	
+		
+		}//console.log(places);
+		}
+		var flagWait=0;
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			///////////////////////////////////////////////////////////////////////////
+		function onRivalMove(e,row,column,dirUp,dirLeft)//////////////////////////////////////////////////////////
+	//	{console.log("flagLeftRiht= "+flagLeftRiht+"flag2= "+flag2+" flagDownRight= "+flagDownRight+"  placeY1-placeY = "+(placeY1-placeY)+" (placeX1-placeX) = "+(placeX1-placeX)+"  clickball= "+clickball);
+		{
+		
+			if(dirUp==0)//its down
+				{
+					if(dirLeft==0)//its down right 
+					{
+						var moveTime = setInterval(frame, 10);
+			function frame() {
+						movBallDR(row,column);console.log("dirLeft= "+dirLeft);//1
+					var mor5=0;//the midle row
 						if(row+1<5){mor5=1;}
 					if(((realTop[row][column+mor5-1])-(getBallTop(row,column)))>1)	
 					{
@@ -939,14 +1230,20 @@ function ifNotEqualToStart(placesArrayToChack)
 							{id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
 							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;}
 							}
+							clearInterval(moveTime);
+							onOutBall();
 						 }	
+						}
 					}
-					else if(leftflag==1)//its down left
-					{var mor5=0;
+					else if(dirLeft==1)//its down left
+					{
+						var moveTime = setInterval(frame, 10);
+			function frame() {
+						var mor5=0;
 						if(row+1>5){mor5=1;}
 						movBallDL(row,column);
 					if(((realTop[row][column-mor5-1])-(getBallTop(row,column)))>1)	
-					{console.log("leftflag= "+leftflag);console.log("getBallTop(row,column-mor5)="+getBallTop(row,column)+"  realTop[row][column-mor5]"+realTop[row][column-mor5]);//1
+					{console.log("dirLeft= "+dirLeft);console.log("getBallTop(row,column-mor5)="+getBallTop(row,column)+"  realTop[row][column-mor5]"+realTop[row][column-mor5]);//1
 					var column5=column;console.log("column= "+column5);
 					if(row+1<=5){column5=column+1;}
 						if(ifBallTouchFromUp(row,column,row+1,column5-1))
@@ -982,14 +1279,21 @@ function ifNotEqualToStart(placesArrayToChack)
 							{id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
 							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;}
 							}
+							clearInterval(moveTime);
+							onOutBall();
 						 }
+					}
 					}//////////////
 				}
 				//////////////end down options
-			else if(topflag==1)//its up
+			else if(dirUp==1)//its up
 				{
-					if(leftflag==0)//its up right 
-					{movBallUR(row,column);console.log("leftflag= "+leftflag);//1
+					if(dirLeft==0)//its up right 
+					{
+						var moveTime = setInterval(frame, 10);
+			function frame() {
+						
+						movBallUR(row,column);console.log("leftflag= "+dirLeft);//1
 						var mor5=0;
 						if(row-1>=5){mor5=1;}//console.log("(getBallTop(row,column)-(realTop[row-2][column+mor5])=  "+(getBallTop(row,column)-(realTop[row-2][column+mor5])));
 						console.log("row,column= "+row+" "+column);
@@ -1028,10 +1332,18 @@ function ifNotEqualToStart(placesArrayToChack)
 							{id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
 							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;}
 							}
-						 }
+							clearInterval(moveTime);
+							onOutBall();
+						 } 
+					}
 					}////////////////
-					else if(leftflag==1)//its up left
-					{movBallUL(row,column);console.log("leftflag= "+leftflag);
+					else if(dirLeft==1)//its up left
+					{
+						var moveTime = setInterval(frame, 10);
+			function frame() {
+						
+						
+						movBallUL(row,column);console.log("dirLeft= "+dirLeft);
 						var mor5=0;
 						if(row-1<5){mor5=-1;}//console.log("(getBallTop(row,column)-(realTop[row-2][column+mor5])=  "+(getBallTop(row,column)-(realTop[row-2][column+mor5])));
 						console.log("row,column= "+row+" "+column);
@@ -1070,18 +1382,22 @@ function ifNotEqualToStart(placesArrayToChack)
 							{id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
 							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;}
 							}
+						 clearInterval(moveTime);
+						 onOutBall();
 						 }
 					}
-					
+				}
 
 				}
-			else if(topflag==2)//its flat
+			else if(dirUp==2)//its flat
 				{////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-					if(leftflag==0)//its right 
+					if(dirLeft==0)//its right 
 					{
+						var moveTime = setInterval(frame, 10);
+			function frame() {
 						if(((realLeft[row-1][column])-(getBallLeft(row,column)))>1)
 						{console.log("realLeft[row][column+1]="+realLeft[row-1][column]+"  getBallLeft(row,column)="+getBallLeft(row,column));
-							movBallR(row,column);console.log("leftflag= "+leftflag);//1			
+							movBallR(row,column);console.log("dirLeft= "+dirLeft);//1			
 						if(ifBallTouchFromLeft(row,column,row,column+1))				
 						{movBallR(row,column+1);
 							if((ifBallTouchFromLeft(row,column+1,row,column+2))&&(places[row][column+1]!=0))//////////////////
@@ -1111,9 +1427,15 @@ function ifNotEqualToStart(placesArrayToChack)
 							{id_ifLigal.innerHTML="not ligal move!!! wait for white ligal move";}
 							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;}
 							}
-						}
+							clearInterval(moveTime);
+							onOutBall();
+						} 
 					}
-					else if(leftflag==1)//its left
+					}
+					else if(dirLeft==1)//its left
+					{
+						var moveTime = setInterval(frame, 10);
+			function frame() {
 					if(((getBallLeft(row,column))-(realLeft[row-1][column-2]))>1)
 					{movBallL(row,column);console.log("leftflag= "+leftflag);
 						if(ifBallTouchFromLeft(row,column-1,row,column))				
@@ -1132,6 +1454,7 @@ function ifNotEqualToStart(placesArrayToChack)
 						}	
 						
 					}
+				
 						else{
 							console.log("les then 4444444444444444111111111111111");
 							if(blackTurn==1)
@@ -1146,44 +1469,29 @@ function ifNotEqualToStart(placesArrayToChack)
 							
 							else{id_ifLigal.innerHTML="wait for black move";blackTurn=1;console.log("!!!!!!!!wait for black move!!!!!!!!!!!");}
 							}
-						}
-				
+							clearInterval(moveTime);
+							onOutBall();
+							}
 				}
-	
+			}
 		
 		}console.log(places);
 		}
-		var flagWait=0;
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		function checkAndChangeR(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{console.log("------------------------------");
-			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
+			if((places[row][column]!=color)&&(flagWait==0))
+			 {console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
 			
 		  
 				if((places[row][column+1]==color)||(places[row][column+1]==0))//one ball cant mov one rivel ball
