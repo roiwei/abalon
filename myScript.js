@@ -68,6 +68,8 @@ setInterval(frame, 5000);
 			//console.log(stringToArray(childData.placesAray));
 			
 			//console.log(myplaces);same
+			if(myRivalId=="")
+			{myRivalId=childData.rivai_id}
 			var userRef = firebase.database().ref('/users/' + myRivalId);
 			console.log("myRivalId is: "+myRivalId);
 			userRef.once('value').then(function(snapshot) {
