@@ -69,9 +69,10 @@ setInterval(frame, 5000);
 			
 			//console.log(myplaces);same
 			var userRef = firebase.database().ref('/users/' + myRivalId);
-		
-			userRef.once('value').then(function(snapshot) {
+			console.log("myRivalId is: "+myRivalId);
+			userRef.once('value').then(functioconsole.log("userData.user_name=n(snapshot) {
 			userData = snapshot.val();
+			console.log("userData.user_name= "+userData.user_name);
 			if(match_id.innerHTML!= "You have mach with "+userData.user_name+"! start play:)")
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";});
 				console.log("hold ="+hold);
@@ -79,21 +80,21 @@ setInterval(frame, 5000);
 				{
 				////////////////////////////////////////////////////////////
 				//console.log(myplaces.toString())
-				console.log("(!(ifNotEqualToStart(stringToArray(places))))="+(!(ifNotEqualToStart(stringToArray(places)))));
-				console.log("ifNotEqualToStart(stringToArray(childData.placesAray))="+ifNotEqualToStart(stringToArray(childData.placesAray)));
+				//console.log("(!(ifNotEqualToStart(stringToArray(places))))="+(!(ifNotEqualToStart(stringToArray(places)))));
+				//console.log("ifNotEqualToStart(stringToArray(childData.placesAray))="+ifNotEqualToStart(stringToArray(childData.placesAray)));
 				    if((ifNotEqualToStart(stringToArray(childData.placesAray))) && (!(ifNotEqualToStart(stringToArray(places)))))
 					{
-					console.log(stringToArray(childData.placesAray));
+					//console.log(stringToArray(childData.placesAray));
 					putAllBallFromUser(stringToArray(childData.placesAray));
 					}
 			 	    else
 					{
-					console.log("get into else!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					//console.log("get into else!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					myId=childData.user_id;
-					console.log("myId is:"+myId);
+					//console.log("myId is:"+myId);
 					//console.log(places);//work
 					firebase.database().ref('users/').child(myId).update({placesAray: places.toString()});
-					console.log(stringToArray(childData.placesAray));
+					//console.log(stringToArray(childData.placesAray));
 					}
 				//putAllBallFromUser(stringToArray(childData.placesAray));
 				//if(childData.my_color==childData.turn_color)
@@ -328,7 +329,7 @@ function putAllBallFromUser(usrePlaces)
   putAllBallInPlace();
 }
 function stringToArray(str)
-{console.log("get in stringToArray");
+{//console.log("get in stringToArray");
      placeInArray=0;
      var myplaces = new Array(11);
      for (var i = 0; i < myplaces.length; i++) 
@@ -339,21 +340,21 @@ function stringToArray(str)
 	     for (j=0; j<11; j++)
 		{//console.log("s[placeInArray]= "+s.charAt(placeInArray)+" placeInArray="+placeInArray);
 		    if (s.charAt(placeInArray)=='-')
-			  {myplaces[i][j]= -1;console.log("-1,");
+			  {myplaces[i][j]= -1;//console.log("-1,");
 			   placeInArray=placeInArray+3}
 		    else if (s.charAt(placeInArray)=='1')
-			  {myplaces[i][j]= 1;console.log("1,");
+			  {myplaces[i][j]= 1;//console.log("1,");
 			   placeInArray=placeInArray+2}
 		    else if (s.charAt(placeInArray)=='2')
-			  {myplaces[i][j]= 2;console.log("2,");
+			  {myplaces[i][j]= 2;//console.log("2,");
 			   placeInArray=placeInArray+2}
 		    else if (s.charAt(placeInArray)=='0')
-			  {myplaces[i][j]= 0;console.log("0,");
+			  {myplaces[i][j]= 0;//console.log("0,");
 			   placeInArray=placeInArray+2}
 		    else {console.log("problem hepned in stringToArray in place:"+placeInArray+"that the char is: "+s[placeInArray]);}
 					
 		}
-		console.log("next line:");
+		//console.log("next line:");
 	}
  //arr=myplaces;
  console.log("myplaces issssssssssssssssssssssssss:");
