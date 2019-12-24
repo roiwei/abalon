@@ -2069,7 +2069,25 @@ function ifNotEqualToStart(placesArrayToChack)
 		function checkAndChangeDR(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{
 			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
-				
+			
+			////////////////////////////////////////////////////////////////////
+			var userRef = firebase.database().ref('/users/' + myRivalId);
+		
+			userRef.once('value').then(function(snapshot) {
+			userData = snapshot.val();
+		
+			console.log("my rival_id is " + myRivalId);
+			
+			console.log("my id is: " + myId);
+			if(color==1)
+			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});}
+			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});}
+			firebase.database().ref('users/').child(myRivalId).update({direction: "DR"});
+			firebase.database().ref('users/').child(myRivalId).update({row: row.toString()});
+			firebase.database().ref('users/').child(myRivalId).update({column: column.toString()});
+			
+			  });
+			////////////////////////////////////////////////////////////////////
 				var column1=column;var column2=0;var column3=0;var column4=0;var column5=0;
 				
 				if(row+1<=5){column1=column1+1;}
@@ -2468,7 +2486,24 @@ function ifNotEqualToStart(placesArrayToChack)
 		function checkAndChangeUL(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{
 			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
-				
+			////////////////////////////////////////////////////////////////////
+			var userRef = firebase.database().ref('/users/' + myRivalId);
+		
+			userRef.once('value').then(function(snapshot) {
+			userData = snapshot.val();
+		
+			console.log("my rival_id is " + myRivalId);
+			
+			console.log("my id is: " + myId);
+			if(color==1)
+			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});}
+			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});}
+			firebase.database().ref('users/').child(myRivalId).update({direction: "UL"});
+			firebase.database().ref('users/').child(myRivalId).update({row: row.toString()});
+			firebase.database().ref('users/').child(myRivalId).update({column: column.toString()});
+			
+			  });
+			////////////////////////////////////////////////////////////////////
 				var column1=column;var column2=0;var column3=0;var column4=0;var column5=0;
 				
 				if(row-1<5){column1=column1-1;}
