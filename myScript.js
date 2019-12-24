@@ -68,6 +68,12 @@ setInterval(frame, 5000);
 			//console.log(stringToArray(childData.placesAray));
 			
 			//console.log(myplaces);same
+			var userRef = firebase.database().ref('/users/' + myRivalId);
+		
+			userRef.once('value').then(function(snapshot) {
+			userData = snapshot.val();
+			if(match_id.innerHTML!= "You have mach with "+userData.user_name+"! start play:)")
+			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";});
 				console.log("hold ="+hold);
 				if (hold == 0)
 				{
@@ -137,7 +143,7 @@ function craeteRival(){
 			console.log("my id is: " + myId);
 			firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
 			firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});
-			match_id.innerHTML= "You have mach! start play:)";
+			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";
 			alert('You have mach! start play!');
 			}
 			else {alert('the user is busy :( try anthr one');}
