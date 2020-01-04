@@ -2099,9 +2099,9 @@ function ifNotEqualToStart(placesArrayToChack)
 			console.log("my rival_id is " + myRivalId);
 			
 			console.log("my id is: " + myId);
-			if(color==1)
-			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});}
-			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});}
+			if(color==1)black
+			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});}
+			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});}
 			firebase.database().ref('users/').child(myRivalId).update({direction: "DR"});
 			firebase.database().ref('users/').child(myRivalId).update({row: row.toString()});
 			firebase.database().ref('users/').child(myRivalId).update({column: column.toString()});
