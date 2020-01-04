@@ -1217,6 +1217,7 @@ function ifNotEqualToStart(placesArrayToChack)
 						movBallDR(row,column);console.log("dirLeft= "+dirLeft);//1
 					var mor5=0;//the midle row
 						if(row+1<5){mor5=1;}
+					console.log(realTop[row][column+mor5-1]+ " - "+getBallTop(row,column));
 					if(((realTop[row][column+mor5-1])-(getBallTop(row,column)))>1)	
 					{
 					var column5=column;console.log("column= "+column5);
