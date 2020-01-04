@@ -2100,13 +2100,17 @@ function ifNotEqualToStart(placesArrayToChack)
 			
 			console.log("my id is: " + myId);
 			if(color==1)
-			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});}
-			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});}
+			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
+			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
+			}
+			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});
+			firebase.database().ref('users/').child(myId).update({turn_color: 'black'});
+			}
 			firebase.database().ref('users/').child(myRivalId).update({direction: "DR"});
 			firebase.database().ref('users/').child(myRivalId).update({row: row.toString()});
 			firebase.database().ref('users/').child(myRivalId).update({column: column.toString()});
 			
-			  });
+			});
 			////////////////////////////////////////////////////////////////////
 				var column1=column;var column2=0;var column3=0;var column4=0;var column5=0;
 				
