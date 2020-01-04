@@ -89,22 +89,7 @@ setInterval(frame, 5000);
 					firebase.database().ref('users/').child(tempId).update({row: "wait"});
 					firebase.database().ref('users/').child(tempId).update({column: "wait"});
 				   }
-				   ////////////////////////////////////////////////////////////////////
-				   var userRef = firebase.database().ref('/users/' + myRivalId);
-		
-				   userRef.once('value').then(function(snapshot) {
-				   userData = snapshot.val();
-		
-				   console.log("my rival_id is " + myRivalId);
-		
-			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});}
-			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});}
-			firebase.database().ref('users/').child(myRivalId).update({direction: "DR"});
-			firebase.database().ref('users/').child(myRivalId).update({row: row.toString()});
-			firebase.database().ref('users/').child(myRivalId).update({column: column.toString()});
-			
-			  });
-			////////////////////////////////////////////////////////////////////
+				   
 				}
 				if (hold == 0)
 				{
