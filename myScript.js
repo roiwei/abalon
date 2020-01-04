@@ -224,7 +224,7 @@ function save_user(){
 			user_Email: userEmail,
 			status: 1, //1 is avilable, 0 meen he olrady play with somone
 			rivai_id: "",
-			my_color: 'whith',
+			my_color: 'white',
 			turn_color: 'black',
 			direction: "",
 			row: "",
