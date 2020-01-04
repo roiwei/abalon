@@ -87,6 +87,7 @@ setInterval(frame, 5000);
 				}
 				if (childData.new_game=="1")
 				{
+					var tempId=childData.user_id;
 					putAllBallFromUser(placesStart);
 					firebase.database().ref('users/').child(tempId).update({new_game: "0"});
 				}
