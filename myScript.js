@@ -90,6 +90,10 @@ setInterval(frame, 5000);
 					var tempId=childData.user_id;
 					putAllBallFromUser(placesStart);
 					firebase.database().ref('users/').child(tempId).update({new_game: "0"});
+					firebase.database().ref('users/').child(tempId).update({direction: "wait"});
+					firebase.database().ref('users/').child(tempId).update({row: "wait"});
+					firebase.database().ref('users/').child(tempId).update({column: "wait"})
+					
 				}
 				else{
 					if (hold == 0)
