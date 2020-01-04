@@ -78,6 +78,34 @@ setInterval(frame, 5000);
 			if(match_id.innerHTML!= "You have mach with "+userData.user_name+"! start play:)")
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";});
 				console.log("hold ="+hold);
+				if(childData.turn_color==childData.my_color)
+				{
+				   var dir = childData.direction;
+				   if(dir=="DR")
+				   {
+					onRivalMove(childData.row,childData.column,0,0);
+					var tempId=childData.user_id;
+					firebase.database().ref('users/').child(tempId).update({direction: "wait"});
+					firebase.database().ref('users/').child(tempId).update({row: "wait"});
+					firebase.database().ref('users/').child(tempId).update({column: "wait"});
+				   }
+				   ////////////////////////////////////////////////////////////////////
+				   var userRef = firebase.database().ref('/users/' + myRivalId);
+		
+				   userRef.once('value').then(function(snapshot) {
+				   userData = snapshot.val();
+		
+				   console.log("my rival_id is " + myRivalId);
+		
+			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});}
+			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});}
+			firebase.database().ref('users/').child(myRivalId).update({direction: "DR"});
+			firebase.database().ref('users/').child(myRivalId).update({row: row.toString()});
+			firebase.database().ref('users/').child(myRivalId).update({column: column.toString()});
+			
+			  });
+			////////////////////////////////////////////////////////////////////
+				}
 				if (hold == 0)
 				{
 				////////////////////////////////////////////////////////////
@@ -1182,7 +1210,7 @@ function ifNotEqualToStart(placesArrayToChack)
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////
-		function onRivalMove(e,row,column,dirUp,dirLeft)//////////////////////////////////////////////////////////
+		function onRivalMove(row,column,dirUp,dirLeft)//////////////////////////////////////////////////////////
 	//	{console.log("flagLeftRiht= "+flagLeftRiht+"flag2= "+flag2+" flagDownRight= "+flagDownRight+"  placeY1-placeY = "+(placeY1-placeY)+" (placeX1-placeX) = "+(placeX1-placeX)+"  clickball= "+clickball);
 		{
 		
