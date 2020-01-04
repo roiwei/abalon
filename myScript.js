@@ -92,7 +92,7 @@ setInterval(frame, 5000);
 				   		var dir = childData.direction;
 				   		if(dir=="DR")
 				   		{console.log("its DR!!!!!!!!!!!!!");
-						onRivalMove(childData.row,childData.column,0,0);
+						onRivalMove(parseInt(childData.row),parseInt(childData.column),0,0);
 						var tempId=childData.user_id;
 						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
 						firebase.database().ref('users/').child(tempId).update({row: "wait"});
