@@ -384,7 +384,8 @@ function stringToArray(str)
 		the_input.value= "enter your name";
 		the_h1.innerHTML= "shalom";
 		putRealTopAndLeft();
-		//putNewBallLinear(1,1,20,28);
+		console.log("realTop="+realTop);
+		
 		}
 		var blackOut=6;
 		var whiteOut=6;
