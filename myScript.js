@@ -72,6 +72,8 @@ setInterval(frame, 5000);
 			if(match_id.innerHTML!= "You have mach with "+userData.user_name+"! start play:)")
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";});
 				console.log("hold ="+hold);
+				console.log("childData.turn_color ="+childData.turn_color);
+				console.log("childData.my_color ="+childData.my_color);
 				if(childData.turn_color==childData.my_color)
 				{console.log("its my turn");
 				   var dir = childData.direction;
