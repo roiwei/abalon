@@ -72,32 +72,34 @@ setInterval(frame, 5000);
 			if(match_id.innerHTML!= "You have mach with "+userData.user_name+"! start play:)")
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";});
 				console.log("hold ="+hold);
-				console.log("childData.turn_color ="+childData.turn_color);
-				console.log("childData.my_color ="+childData.my_color);
-				if(childData.turn_color==childData.my_color)
-				{console.log("its my turn");
-				   var dir = childData.direction;
-				   if(dir=="DR")
-				   {console.log("its DR!!!!!!!!!!!!!");
-					onRivalMove(childData.row,childData.column,0,0);
-					var tempId=childData.user_id;
-					firebase.database().ref('users/').child(tempId).update({direction: "wait"});
-					firebase.database().ref('users/').child(tempId).update({row: "wait"});
-					firebase.database().ref('users/').child(tempId).update({column: "wait"});
-				   }
-				   
-				}
+				
 				if (childData.new_game=="1")
-				{
+				{console.log("new game!");
 					var tempId=childData.user_id;
 					putAllBallFromUser(placesStart);
 					firebase.database().ref('users/').child(tempId).update({new_game: "0"});
-					firebase.database().ref('users/').child(tempId).update({direction: "wait"});
-					firebase.database().ref('users/').child(tempId).update({row: "wait"});
-					firebase.database().ref('users/').child(tempId).update({column: "wait"})
+					firebase.database().ref('users/').child(tempId).update({direction: ""});
+					firebase.database().ref('users/').child(tempId).update({row: ""});
+					firebase.database().ref('users/').child(tempId).update({column: ""})
+				 	firebase.database().ref('users/').child(tempId).update({turn_color: "black"})
 					
 				}
 				else{
+					console.log("childData.turn_color ="+childData.turn_color);
+					console.log("childData.my_color ="+childData.my_color);
+					if(childData.turn_color==childData.my_color)
+					{console.log("its my turn");
+				   		var dir = childData.direction;
+				   		if(dir=="DR")
+				   		{console.log("its DR!!!!!!!!!!!!!");
+						onRivalMove(childData.row,childData.column,0,0);
+						var tempId=childData.user_id;
+						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
+						firebase.database().ref('users/').child(tempId).update({row: "wait"});
+						firebase.database().ref('users/').child(tempId).update({column: "wait"});
+				   		}
+				   
+					}
 					if (hold == 0)
 					{
 				         if( (ifNotEqualToStart(stringToArray(childData.placesAray))) && (!(ifNotEqualToStart(stringToArray(places)))) )                           
