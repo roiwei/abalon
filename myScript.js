@@ -62,11 +62,6 @@ setInterval(frame, 5000);
 			var childData = childSnapshot.val();
 	        if(childData.user_Email==userEmail)
 			{//chack if rival did anithing
-			//console.log(childData.placesAray);
-			//console.log(places);
-			//console.log("get hear in Email: "+userEmail ); 
-			//console.log(stringToArray(childData.placesAray));
-			//console.log(myplaces);same
 			if(myRivalId=="")
 			{myRivalId=childData.rivai_id}
 			var userRef = firebase.database().ref('/users/' + myRivalId);
@@ -90,33 +85,26 @@ setInterval(frame, 5000);
 				   }
 				   
 				}
-				if (hold == 0)
+				if (childData.new_game=="1")
 				{
-				////////////////////////////////////////////////////////////
-				//console.log(myplaces.toString())
-				//console.log("(!(ifNotEqualToStart(stringToArray(places))))="+(!(ifNotEqualToStart(stringToArray(places)))));
-				//console.log("ifNotEqualToStart(stringToArray(childData.placesAray))="+ifNotEqualToStart(stringToArray(childData.placesAray)));
-				    if(((ifNotEqualToStart(stringToArray(childData.placesAray))) && (!(ifNotEqualToStart(stringToArray(places))))) || ((!(ifNotEqualToStart(stringToArray(childData.placesAray)))) && (ifNotEqualToStart(stringToArray(places)))))                            
-					{
-					//console.log(stringToArray(childData.placesAray));
-					putAllBallFromUser(stringToArray(childData.placesAray));
-					}
-			 	    else
-					{
-					//console.log("get into else!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-					myId=childData.user_id;
-					//console.log("myId is:"+myId);
-					//console.log(places);//work
-					firebase.database().ref('users/').child(myId).update({placesAray: places.toString()});
-					//console.log(stringToArray(childData.placesAray));
-					}
-				//putAllBallFromUser(stringToArray(childData.placesAray));
-				//if(childData.my_color==childData.turn_color)
-				//	{firebase.database().ref('users/').child(myId).update({placesAray: myplaces});}
-				//if(myRivalId!="")
-				//	{firebase.database().ref('users/').child(myRivalId).update({placesAray: myplaces});}
+					putAllBallFromUser(placesStart);
+					firebase.database().ref('users/').child(tempId).update({new_game: "0"});
 				}
-		
+				else{
+					if (hold == 0)
+					{
+				         if( (ifNotEqualToStart(stringToArray(childData.placesAray))) && (!(ifNotEqualToStart(stringToArray(places)))) )                           
+					  {
+					  putAllBallFromUser(stringToArray(childData.placesAray));
+					  }
+			 	         else
+					  {
+					  myId=childData.user_id;
+					  firebase.database().ref('users/').child(myId).update({placesAray: places.toString()});
+					  }
+				
+					}	
+			    }
 			}
           });
      });
@@ -234,6 +222,7 @@ function save_user(){
 			direction: "",
 			row: "",
 			column: "",
+			new_game: "0",
 			placesAray: places.toString()
 		}
 		var updates = {};
@@ -555,11 +544,13 @@ function startNewGame()
 	firebase.database().ref('users/').child(myId).update({direction: ""});
 	firebase.database().ref('users/').child(myId).update({row: ""});
 	firebase.database().ref('users/').child(myId).update({column: ""});
+ 	firebase.database().ref('users/').child(myId).update({new_game: "1"});
 	firebase.database().ref('users/').child(myId).update({placesAray: placesStart.toString()});
 	
 	firebase.database().ref('users/').child(myRivalId).update({direction: ""});
 	firebase.database().ref('users/').child(myRivalId).update({row: ""});
 	firebase.database().ref('users/').child(myRivalId).update({column: ""});
+ 	firebase.database().ref('users/').child(myRivalId).update({new_game: "1"});
 	firebase.database().ref('users/').child(myRivalId).update({placesAray: placesStart.toString()});
 	
 }
