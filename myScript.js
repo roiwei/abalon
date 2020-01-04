@@ -72,7 +72,7 @@ setInterval(frame, 5000);
 			if(match_id.innerHTML!= "You have mach with "+userData.user_name+"! start play:)")
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";});
 				console.log("hold ="+hold);
-				
+				console.log("childData.new_game ="+childData.new_game);
 				if (childData.new_game=="1")
 				{console.log("new game!");
 					var tempId=childData.user_id;
