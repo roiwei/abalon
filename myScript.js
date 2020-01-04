@@ -66,7 +66,6 @@ setInterval(frame, 5000);
 			//console.log(places);
 			//console.log("get hear in Email: "+userEmail ); 
 			//console.log(stringToArray(childData.placesAray));
-			
 			//console.log(myplaces);same
 			if(myRivalId=="")
 			{myRivalId=childData.rivai_id}
@@ -79,10 +78,10 @@ setInterval(frame, 5000);
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";});
 				console.log("hold ="+hold);
 				if(childData.turn_color==childData.my_color)
-				{
+				{console.log("its my turn");
 				   var dir = childData.direction;
 				   if(dir=="DR")
-				   {
+				   {console.log("its DR!!!!!!!!!!!!!");
 					onRivalMove(childData.row,childData.column,0,0);
 					var tempId=childData.user_id;
 					firebase.database().ref('users/').child(tempId).update({direction: "wait"});
@@ -97,7 +96,7 @@ setInterval(frame, 5000);
 				//console.log(myplaces.toString())
 				//console.log("(!(ifNotEqualToStart(stringToArray(places))))="+(!(ifNotEqualToStart(stringToArray(places)))));
 				//console.log("ifNotEqualToStart(stringToArray(childData.placesAray))="+ifNotEqualToStart(stringToArray(childData.placesAray)));
-				    if((ifNotEqualToStart(stringToArray(childData.placesAray))) && (!(ifNotEqualToStart(stringToArray(places)))))
+				    if(((ifNotEqualToStart(stringToArray(childData.placesAray))) && (!(ifNotEqualToStart(stringToArray(places))))) || ((!(ifNotEqualToStart(stringToArray(childData.placesAray)))) && (ifNotEqualToStart(stringToArray(places)))))                            
 					{
 					//console.log(stringToArray(childData.placesAray));
 					putAllBallFromUser(stringToArray(childData.placesAray));
@@ -551,7 +550,19 @@ function stringToArray(str)
 		}	
 		console.log(places);
 		console.log(placesStart);
-		
+function startNewGame()
+{
+	firebase.database().ref('users/').child(myId).update({direction: ""});
+	firebase.database().ref('users/').child(myId).update({row: ""});
+	firebase.database().ref('users/').child(myId).update({column: ""});
+	firebase.database().ref('users/').child(myId).update({placesAray: placesStart.toString()});
+	
+	firebase.database().ref('users/').child(myRivalId).update({direction: ""});
+	firebase.database().ref('users/').child(myRivalId).update({row: ""});
+	firebase.database().ref('users/').child(myRivalId).update({column: ""});
+	firebase.database().ref('users/').child(myRivalId).update({placesAray: placesStart.toString()});
+	
+}
 function ifNotEqualToStart(placesArrayToChack)
 {
 	for (var i = 0; i < places.length; i++) 
