@@ -72,7 +72,7 @@ setInterval(frame, 5000);
 			{
 			myRealColor=childData.my_color;
 				console.log("myRealColor if if= "+myRealColor);
-				console.log(document.getElementById('yourColor_id').innerHTML");
+				console.log(document.getElementById('yourColor_id').innerHTML);
 			document.getElementById('yourColor_id').innerHTML= "Your color is "+myRealColor+"";
 			if(myRealColor=="black"){myNumColor=1;}else{myNumColor=0;}
 			}
