@@ -32,6 +32,7 @@ userEmail=user.email;
 var IDarray = new Array();
 var nameArray = new Array();
 var myRealColor = "";
+var myNumColor =-1;
 //var tblUsers = document.getElementById('tb1_users_list');
 var databaseRef = firebase.database().ref('users/');
 var rowIndex = 1;
@@ -64,9 +65,13 @@ setInterval(frame, 5000);
 	        if(childData.user_Email==userEmail)
 			{//chack if rival did anithing
 			if(myRivalId=="")
-			{myRivalId=childData.rivai_id}
+			{myRivalId=childData.rivai_id;}
 			if(myRealColor=="")
-			{myRealColor=childData.my_color}
+			{
+			myRealColor=childData.my_color;
+			your_color.innerHTML= "Your color is "+userData.my_color;
+			if(myRealColor=="black"){myNumColor=1;}else{myNumColor=0;}
+			}
 			var userRef = firebase.database().ref('/users/' + myRivalId);
 			console.log("myRivalId is: "+myRivalId);
 			userRef.once('value').then(function(snapshot) {
@@ -201,7 +206,6 @@ function craeteRival(){
 			firebase.database().ref('users/').child(myRivalId).update({my_color: 'black'});
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";
 			alert('You have mach! start play!');
-			your_color.innerHTML= "Your color is "+userData.my_color;
 			}
 			else {alert('the user is busy :( try anthr one');}
 		
@@ -851,7 +855,8 @@ function ifNotEqualToStart(placesArrayToChack)
 		
 		function onBall(e,id,row,column)
 		{
-		if((blackWin==0)&&(whiteWin==0))
+		//if(myRealColor=="black"){myNumColor=1;}else{myNumColor=0;}
+		if((blackWin==0)&&(whiteWin==0)&&(myNumColor==blackTurn))
 		{
 			id.style.cursor = "pointer";
 			if(flagInBall==0)
