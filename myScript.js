@@ -66,9 +66,11 @@ setInterval(frame, 5000);
 			{//chack if rival did anithing
 			if(myRivalId=="")
 			{myRivalId=childData.rivai_id;}
+				console.log("myRealColor befor if= "+myRealColor);	
 			if(myRealColor=="")
 			{
 			myRealColor=childData.my_color;
+				console.log("myRealColor if if= "+myRealColor);
 			your_color.innerHTML= "Your color is "+myRealColor;
 			if(myRealColor=="black"){myNumColor=1;}else{myNumColor=0;}
 			}
