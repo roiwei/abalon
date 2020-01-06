@@ -94,6 +94,7 @@ setInterval(frame, 5000);
 					firebase.database().ref('users/').child(tempId).update({row: ""});
 					firebase.database().ref('users/').child(tempId).update({column: ""})
 				 	firebase.database().ref('users/').child(tempId).update({turn_color: "black"})
+				 	reload_page();
 					
 				}
 				else{
