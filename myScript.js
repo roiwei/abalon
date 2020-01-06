@@ -201,6 +201,7 @@ function craeteRival(){
 			firebase.database().ref('users/').child(myRivalId).update({my_color: 'black'});
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";
 			alert('You have mach! start play!');
+			your_color.innerHTML= "Your color is "+userData.my_color;
 			}
 			else {alert('the user is busy :( try anthr one');}
 		
