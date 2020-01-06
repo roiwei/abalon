@@ -31,6 +31,7 @@ userEmail=user.email;
 
 var IDarray = new Array();
 var nameArray = new Array();
+var myRealColor = "";
 //var tblUsers = document.getElementById('tb1_users_list');
 var databaseRef = firebase.database().ref('users/');
 var rowIndex = 1;
@@ -64,6 +65,8 @@ setInterval(frame, 5000);
 			{//chack if rival did anithing
 			if(myRivalId=="")
 			{myRivalId=childData.rivai_id}
+			if(myRealColor=="")
+			{myRealColor=childData.my_color}
 			var userRef = firebase.database().ref('/users/' + myRivalId);
 			console.log("myRivalId is: "+myRivalId);
 			userRef.once('value').then(function(snapshot) {
@@ -93,6 +96,46 @@ setInterval(frame, 5000);
 				   		if(dir=="DR")
 				   		{console.log("its DR!!!!!!!!!!!!!");
 						onRivalMove(parseInt(childData.row),parseInt(childData.column),0,0);
+						var tempId=childData.user_id;
+						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
+						firebase.database().ref('users/').child(tempId).update({row: "wait"});
+						firebase.database().ref('users/').child(tempId).update({column: "wait"});
+				   		}
+					 	if(dir=="DL")
+				   		{console.log("its DR!!!!!!!!!!!!!");
+						onRivalMove(parseInt(childData.row),parseInt(childData.column),0,1);
+						var tempId=childData.user_id;
+						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
+						firebase.database().ref('users/').child(tempId).update({row: "wait"});
+						firebase.database().ref('users/').child(tempId).update({column: "wait"});
+				   		}
+					 	if(dir=="UR")
+				   		{console.log("its DR!!!!!!!!!!!!!");
+						onRivalMove(parseInt(childData.row),parseInt(childData.column),1,0);
+						var tempId=childData.user_id;
+						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
+						firebase.database().ref('users/').child(tempId).update({row: "wait"});
+						firebase.database().ref('users/').child(tempId).update({column: "wait"});
+				   		}
+					 	if(dir=="UL")
+				   		{console.log("its DR!!!!!!!!!!!!!");
+						onRivalMove(parseInt(childData.row),parseInt(childData.column),1,1);
+						var tempId=childData.user_id;
+						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
+						firebase.database().ref('users/').child(tempId).update({row: "wait"});
+						firebase.database().ref('users/').child(tempId).update({column: "wait"});
+				   		}
+					 	if(dir=="R")
+				   		{console.log("its DR!!!!!!!!!!!!!");
+						onRivalMove(parseInt(childData.row),parseInt(childData.column),2,0);
+						var tempId=childData.user_id;
+						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
+						firebase.database().ref('users/').child(tempId).update({row: "wait"});
+						firebase.database().ref('users/').child(tempId).update({column: "wait"});
+				   		}
+					 	if(dir=="L")
+				   		{console.log("its DR!!!!!!!!!!!!!");
+						onRivalMove(parseInt(childData.row),parseInt(childData.column),2,1);
 						var tempId=childData.user_id;
 						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
 						firebase.database().ref('users/').child(tempId).update({row: "wait"});
@@ -1519,6 +1562,28 @@ function ifNotEqualToStart(placesArrayToChack)
 			if((places[row][column]!=color)&&(flagWait==0))
 			 {console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
 			
+		 	////////////////////////////////////////////////////////////////////
+			var userRef = firebase.database().ref('/users/' + myRivalId);
+		
+			userRef.once('value').then(function(snapshot) {
+			userData = snapshot.val();
+		
+			console.log("my rival_id is " + myRivalId);
+			
+			console.log("my id is: " + myId);
+			if(color==1)
+			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
+			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
+			}
+			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});
+			firebase.database().ref('users/').child(myId).update({turn_color: 'black'});
+			}
+			firebase.database().ref('users/').child(myRivalId).update({direction: "R"});
+			firebase.database().ref('users/').child(myRivalId).update({row: row.toString()});
+			firebase.database().ref('users/').child(myRivalId).update({column: column.toString()});
+			
+			});
+			////////////////////////////////////////////////////////////////////
 		  
 				if((places[row][column+1]==color)||(places[row][column+1]==0))//one ball cant mov one rivel ball
 				{console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
@@ -1704,7 +1769,28 @@ function ifNotEqualToStart(placesArrayToChack)
 		function checkAndChangeL(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{
 			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
+			////////////////////////////////////////////////////////////////////
+			var userRef = firebase.database().ref('/users/' + myRivalId);
+		
+			userRef.once('value').then(function(snapshot) {
+			userData = snapshot.val();
+		
+			console.log("my rival_id is " + myRivalId);
 			
+			console.log("my id is: " + myId);
+			if(color==1)
+			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
+			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
+			}
+			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});
+			firebase.database().ref('users/').child(myId).update({turn_color: 'black'});
+			}
+			firebase.database().ref('users/').child(myRivalId).update({direction: "L"});
+			firebase.database().ref('users/').child(myRivalId).update({row: row.toString()});
+			firebase.database().ref('users/').child(myRivalId).update({column: column.toString()});
+			
+			});
+			////////////////////////////////////////////////////////////////////
 		  
 				if((places[row][column-1]==color)||(places[row][column-1]==0))//one ball cant mov one rivel ball
 				{
@@ -1895,6 +1981,28 @@ function ifNotEqualToStart(placesArrayToChack)
 		{
 			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
 				
+			////////////////////////////////////////////////////////////////////
+			var userRef = firebase.database().ref('/users/' + myRivalId);
+		
+			userRef.once('value').then(function(snapshot) {
+			userData = snapshot.val();
+		
+			console.log("my rival_id is " + myRivalId);
+			
+			console.log("my id is: " + myId);
+			if(color==1)
+			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
+			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
+			}
+			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});
+			firebase.database().ref('users/').child(myId).update({turn_color: 'black'});
+			}
+			firebase.database().ref('users/').child(myRivalId).update({direction: "DL"});
+			firebase.database().ref('users/').child(myRivalId).update({row: row.toString()});
+			firebase.database().ref('users/').child(myRivalId).update({column: column.toString()});
+			
+			});
+			////////////////////////////////////////////////////////////////////
 				var column1=column;var column2=0;var column3=0;var column4=0;var column5=0;
 				
 				if(row+1>5){column1=column1-1;}
@@ -2318,7 +2426,30 @@ function ifNotEqualToStart(placesArrayToChack)
 		function checkAndChangeUR(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{
 			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
-				
+			
+			////////////////////////////////////////////////////////////////////
+			var userRef = firebase.database().ref('/users/' + myRivalId);
+		
+			userRef.once('value').then(function(snapshot) {
+			userData = snapshot.val();
+		
+			console.log("my rival_id is " + myRivalId);
+			
+			console.log("my id is: " + myId);
+			if(color==1)
+			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
+			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
+			}
+			else{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'black'});
+			firebase.database().ref('users/').child(myId).update({turn_color: 'black'});
+			}
+			firebase.database().ref('users/').child(myRivalId).update({direction: "UR"});
+			firebase.database().ref('users/').child(myRivalId).update({row: row.toString()});
+			firebase.database().ref('users/').child(myRivalId).update({column: column.toString()});
+			
+			});
+			////////////////////////////////////////////////////////////////////
+			
 				var column1=column;var column2=0;var column3=0;var column4=0;var column5=0;
 				
 				if(row-1>=5){column1=column1+1;}
