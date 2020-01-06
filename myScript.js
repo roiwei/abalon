@@ -60,12 +60,13 @@ setInterval(frame, 5000);
  function frame() {
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
-			var childKey = childSnapshot.key;	
-			var childData = childSnapshot.val();
-	        if(childData.user_Email==userEmail)
+		   var childKey = childSnapshot.key;	
+		   var childData = childSnapshot.val();
+	           if(childData.user_Email==userEmail)
 			{//chack if rival did anithing
+			console.log("get into my user ");
 			if(myRivalId=="")
-			{myRivalId=childData.rivai_id;}
+			{myRivalId=childData.rivai_id;console.log("get first time to update my rival ID ");}
 				console.log("myRealColor befor if= "+myRealColor);	
 			if(myRealColor=="")
 			{
