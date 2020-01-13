@@ -67,7 +67,7 @@ setInterval(frame, 5000);
 			console.log("get into my user ");
 			if(myRivalId=="")
 			{myRivalId=childData.rivai_id;console.log("get first time to update my rival ID ");
-				if(childData.rivai_id=="")
+				if(childData.rivai_id=="stop_connecting")
 				{alert('You stop the connection with your rival, choos new one!');}
 			}
 				//console.log("myRealColor befor if= "+myRealColor);	
@@ -307,8 +307,8 @@ function update_user(){
 	firebase.database().ref('users/').child(myRivalId).update({user_name: name})
 	}
 function stop_conecting_with_rival(){
-	firebase.database().ref('users/').child(myId).update({rivai_id: ""});
-	firebase.database().ref('users/').child(myRivalId).update({rivai_id: ""});
+	firebase.database().ref('users/').child(myId).update({rivai_id: "stop_connecting"});
+	firebase.database().ref('users/').child(myRivalId).update({rivai_id: "stop_connecting"});
 	firebase.database().ref('users/').child(myId).update({my_color: 'white'});
 	firebase.database().ref('users/').child(myRivalId).update({my_color: 'white'});
 	firebase.database().ref('users/').child(myId).update({status: 1});
@@ -325,8 +325,8 @@ function stop_conecting_with_rival(){
 	firebase.database().ref('users/').child(myRivalId).update({new_game: "0"});
 	firebase.database().ref('users/').child(myId).update({placesAray: placesStart.toString()});
 	firebase.database().ref('users/').child(myRivalId).update({placesAray: placesStart.toString()});
+	reload_page();
 	
-	alert('You stop the connection with your rival, choos new one!');
 	}
 function delete_user(){
 		var user_id = document.getElementById('user_id').value; 
