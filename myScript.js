@@ -71,6 +71,7 @@ setInterval(frame, 5000);
 				{alert('You stop the connection with your rival, choos new one!');
 				tempId= childData.user_id;
 				firebase.database().ref('users/').child(tempId).update({rivai_id: ""});
+				reload_page(); 
 				}
 			}
 			if(myRivalId=="" || myRivalId=="stop_connecting")	
