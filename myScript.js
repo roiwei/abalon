@@ -68,7 +68,10 @@ setInterval(frame, 5000);
 			if(myRivalId=="" || childData.rivai_id=="stop_connecting")
 			{myRivalId=childData.rivai_id;console.log("get first time to update my rival ID ");
 				if(childData.rivai_id=="stop_connecting")
-				{alert('You stop the connection with your rival, choos new one!');}
+				{alert('You stop the connection with your rival, choos new one!');
+				tempId= childData.user_id;
+				firebase.database().ref('users/').child(tempId).update({rivai_id: ""});
+				}
 			}
 			if(myRivalId=="" || myRivalId=="stop_connecting")	
 			{match_id.innerHTML= "wait for you to choose player to play with";}
