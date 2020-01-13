@@ -65,7 +65,7 @@ setInterval(frame, 5000);
 	           if(childData.user_Email==userEmail)
 			{//chack if rival did anithing
 			console.log("get into my user ");
-			if(myRivalId=="")
+			if(myRivalId=="" || childData.rivai_id=="stop_connecting")
 			{myRivalId=childData.rivai_id;console.log("get first time to update my rival ID ");
 				if(childData.rivai_id=="stop_connecting")
 				{alert('You stop the connection with your rival, choos new one!');}
