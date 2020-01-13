@@ -70,6 +70,8 @@ setInterval(frame, 5000);
 				if(childData.rivai_id=="stop_connecting")
 				{alert('You stop the connection with your rival, choos new one!');}
 			}
+			if(myRivalId=="" || myRivalId=="stop_connecting")	
+			{match_id.innerHTML= "wait for you to choose player to play with";}
 			if(myRivalId!="" && myRivalId!="stop_connecting")
 			{	
 				//console.log("myRealColor befor if= "+myRealColor);	
