@@ -4,6 +4,9 @@ div.ex1 {
   height: 210px;
   overflow: scroll;
 }
+.row {
+  display: flex;
+}
 .img-circle {
 	width:33.5;
     border-radius: 100%;
