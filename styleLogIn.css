@@ -3,7 +3,10 @@ body{
 	margin: 0px;
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	font-size:16px;
- 	background-image: "abalonLoogin.jpg";
+ 	background-image: "abalonLogin.jpg";
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover;
   
 }
 
