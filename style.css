@@ -1,3 +1,9 @@
+div.ex1 {
+  background-color: lightblue;
+  width: 210px;
+  height: 110px;
+  overflow: scroll;
+}
 .img-circle {
 	width:33.5;
     border-radius: 100%;
