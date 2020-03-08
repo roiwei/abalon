@@ -46,7 +46,7 @@ databaseRef.once('value', function(snapshot) {
 	    var row = document.getElementById('tb1_users_list').insertRow(rowIndex);
 	   // var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(0);
-            cellId.appendChild(document.createTextNode(childKey));
+            //cellId.appendChild(document.createTextNode(childKey));
 	    cellName.appendChild(document.createTextNode(childData.user_name));
 	    console.log("rowIndex after refresh is: " + rowIndex);   
 	    rowIndex = rowIndex + 1;
