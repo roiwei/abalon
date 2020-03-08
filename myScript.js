@@ -44,7 +44,7 @@ databaseRef.once('value', function(snapshot) {
 	    nameArray[rowIndex]=childData.user_name;
 		  console.log(nameArray[rowIndex]);
 	    var row = document.getElementById('tb1_users_list').insertRow(rowIndex);
-	    var cellId = row.insertCell(0);
+	   // var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
             cellId.appendChild(document.createTextNode(childKey));
 	    cellName.appendChild(document.createTextNode(childData.user_name));
