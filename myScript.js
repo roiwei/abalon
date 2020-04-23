@@ -273,7 +273,7 @@ function initUser(){
 }	
 	
 
-function save_user1(){
+function save_user(){
 	var flag=0;
 	console.log("get into save");
 	databaseRef.once('value', function(snapshot) {
@@ -293,11 +293,11 @@ function save_user1(){
      });
 	if (flag==1)
 	{console.log("you dont have user yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		return 1;}
+		save_user1();}
 }			
 
 
-function save_user(){
+function save_user1(){
 
 	// setTimeout( function(){
     //console.log(1);
