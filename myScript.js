@@ -283,6 +283,8 @@ function save_user(){
 	       console.log("get into hhhhheeeeere");
 		   var childKey = childSnapshot.key;	
 		   var childData = childSnapshot.val();
+	       console.log(childData.user_Email);
+	       console.log(userEmail);
 	           if(childData.user_Email==userEmail)
 			{
 			console.log("get into my user ");
