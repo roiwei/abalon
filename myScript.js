@@ -274,6 +274,7 @@ function initUser(){
 	
 
 function save_user1(){
+	var flag=0;
 	console.log("get into save");
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
@@ -287,17 +288,22 @@ function save_user1(){
 			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			return 1;
 			}
+	       flag=1;
 	        });
      });
+	if (flag==1)
+	{return 0}
 }			
 
 
-function save_user(iHaveUser = save_user1()){
-//	function stateChange(iHaveUser=save_user1()) {
-//  setTimeout('', 3000);
-//		iHaveUser=save_user1;
+function save_user(){
+
+	iHaveUser=save_user1();
+	while(iHaveUser== null){
+	iHaveUser=save_user1();
+	}
 	console.log("ihaveuser ="+iHaveUser);			
-	if( iHaveUser !==1 ){
+	if( iHaveUser == 0 ){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
