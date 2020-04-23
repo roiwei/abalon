@@ -281,23 +281,11 @@ function save_user(){
 	       console.log("get into hhhhheeeeere");
 		  // var childKey = childSnapshot.key;	
 		   var childData = childSnapshot.val();
-	       console.log(childData.user_Email);
-	       console.log(userEmail);
-	        flag=1;
-	           if(childData.user_Email==userEmail)
-			{
-			 alert('you allraedy hav name2');
-			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			flag=0;
-			//return true;
-			}
+	     
 	        });
 		//if(flag==0){return true;}
      });
-	if(flag==1){
-		console.log("you dont have user yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		save_user1();} 
-
+	
 }			
 
 
