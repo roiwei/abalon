@@ -301,7 +301,7 @@ function save_user(){
 	iHaveUser=save_user1();
 	 setTimeout( function(){
     console.log(1);
-  }, 1500 );
+
 	console.log("ihaveuser ="+iHaveUser);			
 	if( iHaveUser == 0 ){
 		var flag=0;
@@ -345,7 +345,7 @@ function save_user(){
 	myId = uid;
 	}
 	  else{alert('you all rady have a name');}
-	
+	  }, 2000 );
 }
 function update_user(){
 	console.log("my id in update ="+myId);	
