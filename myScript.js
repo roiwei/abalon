@@ -292,7 +292,7 @@ function save_user1(){
 }			
 
 
-function save_user(var iHaveUser = save_user1()){
+function save_user(iHaveUser = save_user1()){
 //	function stateChange(iHaveUser=save_user1()) {
 //  setTimeout('', 3000);
 //		iHaveUser=save_user1;
