@@ -289,7 +289,7 @@ function save_user(){
 			 alert('you allraedy hav name2');
 			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			flag=0;
-			return true;
+			//return true;
 			}
 	        });
 		//if(flag==0){return true;}
