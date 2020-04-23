@@ -275,11 +275,11 @@ function initUser(){
 	
 function save_user(){
 	console.log("get into save_user!!");
-	databaseRef = firebase.database().ref('users/'); 
-	databaseRef.once('value', function(snapshot) {
-	  snapshot.forEach(function(childSnapshot) {
-	    var childKey = childSnapshot.key;
-	    var childData = childSnapshot.val(); 
+	var myRef = firebase.database().ref('/users/' + myId);
+	userRef.once('value').then(function(snapshot) {
+		userData = snapshot.val();
+	    var childKey = userData.key;
+	    var childData = userData.val(); 
 	    var str = childData.user_name;
 		   console.log(str+"lama");
 	if(str !== "            "){
