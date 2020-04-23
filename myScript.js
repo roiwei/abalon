@@ -275,6 +275,7 @@ function initUser(){
 	
 function save_user(){
 	console.log("get into save_user!!");
+	databaseRef = firebase.database().ref('users/'); 
 	databaseRef.once('value', function(snapshot) {
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
