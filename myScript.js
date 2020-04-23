@@ -292,9 +292,9 @@ function save_user1(){
 }			
 
 
-function save_user(){
-	function stateChange(iHaveUser=save_user1();) {
-  setTimeout('', 5000);
+function save_user(save_user1){
+	function stateChange(iHaveUser=save_user1()) {
+  setTimeout('', 3000);
 		iHaveUser=save_user1;
 	console.log("ihaveuser ="+iHaveUser);			
 	if( iHaveUser !==1 ){
@@ -339,7 +339,7 @@ function save_user(){
 	myId = uid;
 	}
 	  else{alert('you all rady have a name');}
-	
+	}
 }
 function update_user(){
 	console.log("my id in update ="+myId);	
