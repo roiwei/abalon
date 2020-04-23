@@ -35,7 +35,7 @@ var nameArray = new Array();
 var myRealColor = "";
 var myNumColor =-1;
 //var tblUsers = document.getElementById('tb1_users_list');
-var databaseRef = firebase.database().ref('users/');
+var databaseRef = firebase.database().ref('users/'); 
 var rowIndex = 1;
 databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
