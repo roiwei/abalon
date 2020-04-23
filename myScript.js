@@ -267,7 +267,7 @@ function initUser(){
 		
 	  });
 	
-
+ });
 
 }	
 
@@ -324,7 +324,7 @@ function save_user(){
 	}
 	  else{alert('you all rady have a name');}
 	  });
-	});
+	
 }
 function update_user(){
 	var name = document.getElementById('user_name').value; 
