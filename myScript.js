@@ -313,7 +313,7 @@ function save_user(){
 			     flag=0;
 			     }
 	reload_page(); 
-		var imPlay=1;
+	imPlay=1;
 	}
 	}
 function update_user(){
