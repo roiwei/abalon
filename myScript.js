@@ -274,7 +274,7 @@ function initUser(){
 	
 	
 function save_user(){
-	console.log("get into save_user!!");
+	console.log("get into save_user!!"+ myId);
 	var myRef = firebase.database().ref('/users/' + myId);
 	myRef.once('value').then(function(snapshot) {
 		userData = snapshot.val();
