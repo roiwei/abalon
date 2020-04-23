@@ -30,7 +30,7 @@ userEmail=user.email;
   }
 });
 
-var IDarray = new Array();
+var IDarray = new Array(); 
 var nameArray = new Array();
 var myRealColor = "";
 var myNumColor =-1;
