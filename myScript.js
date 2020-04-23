@@ -175,7 +175,7 @@ setInterval(frame, 5000);
 					  {
 					  myId=childData.user_id;
 					  firebase.database().ref('users/').child(myId).update({placesAray: places.toString()});
-						  
+						   
 					  }
 				
 					}	
