@@ -292,7 +292,6 @@ function save_user(){
 	        });
      });
 				
-	console.log("get into save_user!!"+ myId1);
 	if( iHaveUser==1){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
