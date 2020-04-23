@@ -58,7 +58,7 @@ databaseRef.once('value', function(snapshot) {
 	
 var hold=0;	
 setInterval(frame, 5000);
- function frame() {
+ function frame() { 
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
 		   var childKey = childSnapshot.key;	
