@@ -462,8 +462,6 @@ function stringToArray(str)
 		function init()
 		{
 		getData();
-	
-		the_input.value= "enter your name";
 		the_h1.innerHTML= "shalom";
 		putRealTopAndLeft();
 		console.log("realTop="+realTop);
