@@ -292,7 +292,7 @@ function save_user(){
 	        });
      });
 				
-	if( iHaveUser==1){
+	if( iHaveUser==0){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
