@@ -277,14 +277,15 @@ function save_user(){
 	//var flag=1;
 	console.log("get into save");
 	console.log("number of usres is: "+rowIndex);
+	var howManyUsers=1;
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
 	       console.log("get into hhhhheeeeere");
-		  // var childKey = childSnapshot.key;	
 		   var childData = childSnapshot.val();
 	       console.log(childData.user_Email);
 	       console.log(userEmail);
-	        //flag=1;
+	       console.log(howManyUsers);
+	 	howManyUsers=howManyUsers+1;
 	           if(childData.user_Email==userEmail)
 			{
 			// alert('you allraedy hav name2');
@@ -292,9 +293,10 @@ function save_user(){
 			flag=0;
 			return true;
 			}
+	       	if(howManyUsers==rowIndex)
+		{save_user1();}
 	        });
-		//if(flag==0){return true;}
-		save_user1();
+		
      });
 	//if(flag==1){
 	//	console.log("you dont have user yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
