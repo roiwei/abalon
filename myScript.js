@@ -274,6 +274,7 @@ function initUser(){
 	
 	
 function save_user(){
+	console.log("get into save_user!!");
 	databaseRef.once('value', function(snapshot) {
 	  snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
@@ -321,8 +322,9 @@ function save_user(){
 	reload_page(); 
 	}
 	  else{alert('you all rady have a name');}
-	  });});
-	}
+	  });
+	});
+}
 function update_user(){
 	var name = document.getElementById('user_name').value; 
 	firebase.database().ref('users/').child(myRivalId).update({user_name: name})
