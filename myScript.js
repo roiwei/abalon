@@ -276,9 +276,11 @@ function initUser(){
 function save_user(){
 	databaseRef.once('value', function(snapshot) {
 	  snapshot.forEach(function(childSnapshot) {
+	    var childKey = childSnapshot.key;
 	    var childData = childSnapshot.val();
-		   console.log(childData.user_name)
-	if(childData.user_name !== "            "){
+	    var str = childData.user_name;
+		   console.log(str)
+	if(str !== "            "){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
