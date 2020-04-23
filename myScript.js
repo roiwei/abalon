@@ -275,14 +275,16 @@ function initUser(){
 	
 	
 function save_user(){
+	console.log("get into save");
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
+	       console.log("get into hhhhheeeeere");
 		   var childKey = childSnapshot.key;	
 		   var childData = childSnapshot.val();
 	           if(childData.user_Email==userEmail)
 			{
 			console.log("get into my user ");
-				myId=childData.user_id;
+			myId=childData.user_id;
 			}
 	        });
      });
