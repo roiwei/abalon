@@ -315,6 +315,7 @@ function save_user(){
 			     flag=0;
 			     }
 	reload_page(); 
+	myId = uid;
 	}
 	  else{alert('you all rady have a name');}
 	
