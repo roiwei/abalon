@@ -299,9 +299,9 @@ function save_user1(){
 function save_user(){
 
 	iHaveUser=save_user1();
-	while(iHaveUser== null){
-	iHaveUser=save_user1();
-	}
+	 setTimeout( function(){
+    console.log(1);
+  }, 1500 );
 	console.log("ihaveuser ="+iHaveUser);			
 	if( iHaveUser == 0 ){
 		var flag=0;
