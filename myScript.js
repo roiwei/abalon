@@ -310,6 +310,7 @@ function save_user(){
 			     alert('the user name allredy exist! please put diferent name');
 			     flag=0;
 			     }
+	reload_page(); 
 	}
 function update_user(){
 	var name = document.getElementById('user_name').value; 
