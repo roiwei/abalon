@@ -278,8 +278,8 @@ function save_user(){
 	var myRef = firebase.database().ref('/users/' + myId);
 	myRef.once('value').then(function(snapshot) {
 		userData = snapshot.val();
-	    var childData = userData.val(); 
-	    var str = childData.user_name;
+	   
+	    var str = userData.user_name;
 		   console.log(str+"lama");
 	if(str !== "            "){
 		var flag=0;
