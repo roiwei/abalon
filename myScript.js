@@ -274,7 +274,7 @@ function initUser(){
 	
 	
 function save_user(){
-	if(imPlay=0){
+	
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
@@ -313,11 +313,10 @@ function save_user(){
 			     flag=0;
 			     }
 	reload_page(); 
-		imPlay=1;
-	}
+	
 	}
 function update_user(){
-	imPlay=0;
+	
 	var name = document.getElementById('user_name').value; 
 	firebase.database().ref('users/').child(myRivalId).update({user_name: name})
 	}
