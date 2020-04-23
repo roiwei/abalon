@@ -272,10 +272,9 @@ function initUser(){
 
 }	
 
-	
+var iHaveUser=0;	
 	
 function save_user(){
-	var iHaveUser=0;
 	console.log("get into save");
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
