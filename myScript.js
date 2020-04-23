@@ -16,7 +16,7 @@
 */
 
 var userEmail="";  
-//var myDataEmail = document.getElementById('datah1');
+//var myDataEmail = document.getElementById('datah1'); 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 var user = firebase.auth().currentUser;	 
