@@ -86,7 +86,7 @@ setInterval(frame, 5000);
 				console.log("myRealColor if if= "+myRealColor);
 				console.log(document.getElementById('yourColor_id').innerHTML);
 			document.getElementById('yourColor_id').innerHTML= "Your color is "+myRealColor+"";
-			if(myRealColor=="black"){myNumColor=1;}else{myNumColor=0;}
+			if(myRealColor=="black"){myNumColor=1;}else{myNumColor=0;} 
 			}
 			var userRef = firebase.database().ref('/users/' + myRivalId);
 			console.log("myRivalId is: "+myRivalId);
