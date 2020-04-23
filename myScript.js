@@ -29,7 +29,7 @@ userEmail=user.email;
     // No user is signed in.
   }
 });
-var imPlay = 0;
+
 var IDarray = new Array();
 var nameArray = new Array();
 var myRealColor = "";
@@ -274,7 +274,7 @@ function initUser(){
 	
 	
 function save_user(){
-	if(imPlay==0){
+	if(firebase.database().ref('users/').child(myId).user_name)!=""){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
@@ -313,7 +313,6 @@ function save_user(){
 			     flag=0;
 			     }
 	reload_page(); 
-	imPlay=1;
 	}
 	}
 function update_user(){
