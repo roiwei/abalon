@@ -292,7 +292,8 @@ function save_user1(){
 	        });
      });
 	if (flag==1)
-	{return 1;console.log("you dont have user yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");}
+	{console.log("you dont have user yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		return 1;}
 }			
 
 
@@ -300,9 +301,9 @@ function save_user(){
 
 	// setTimeout( function(){
     //console.log(1);
-if(save_user1()==1){
-	console.log("ihaveuser ="+iHaveUser);			
-	if( iHaveUser == 0 ){
+//if(save_user1()==1){
+//	console.log("ihaveuser ="+iHaveUser);			
+//	if( iHaveUser == 0 ){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
@@ -345,7 +346,7 @@ if(save_user1()==1){
 	}
 	  else{alert('you all rady have a name');}
 	 // }, 2000 );
-}
+//}
 }
 function update_user(){
 	console.log("my id in update ="+myId);	
