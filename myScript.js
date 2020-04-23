@@ -80,7 +80,7 @@ setInterval(frame, 5000);
 			if(myRivalId!="" && myRivalId!="stop_connecting")
 			{	
 				//console.log("myRealColor befor if= "+myRealColor);	
-			if(myRealColor=="")
+			if(myRealColor=="") 
 			{
 			myRealColor=childData.my_color;
 				console.log("myRealColor if if= "+myRealColor);
