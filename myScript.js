@@ -274,7 +274,10 @@ function initUser(){
 	
 	
 function save_user(){
-	if(firebase.database().ref('users/').child(myId).user_name)!=""){
+	databaseRef.once('value', function(snapshot) {
+	  snapshot.forEach(function(childSnapshot) {
+	    var childData = childSnapshot.val();
+	if(childData.user_name != ""){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
@@ -313,7 +316,7 @@ function save_user(){
 			     flag=0;
 			     }
 	reload_page(); 
-	}
+	}}}
 	}
 function update_user(){
 	var name = document.getElementById('user_name').value; 
