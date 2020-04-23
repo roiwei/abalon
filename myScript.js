@@ -317,7 +317,6 @@ function save_user(){
 	}
 	}
 function update_user(){
-	var imPlay=0;
 	var name = document.getElementById('user_name').value; 
 	firebase.database().ref('users/').child(myRivalId).update({user_name: name})
 	}
