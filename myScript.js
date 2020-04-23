@@ -174,7 +174,9 @@ setInterval(frame, 5000);
 			 	         else
 					  {
 					  myId=childData.user_id;
+						  console.log("THE id IS " + myId);
 					  firebase.database().ref('users/').child(myId).update({placesAray: places.toString()});
+						  
 					  }
 				
 					}	
