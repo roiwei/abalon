@@ -294,7 +294,7 @@ function save_user1(){
 
 function save_user(){
 	iHaveUser=save_user1();
-				
+	console.log("ihaveuser ="+iHaveUser);			
 	if( iHaveUser !==1 ){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
@@ -340,6 +340,7 @@ function save_user(){
 	
 }
 function update_user(){
+	console.log("my id in update ="+myId);	
 	var name = document.getElementById('user_name').value; 
 	firebase.database().ref('users/').child(myId).update({user_name: name});
 	alert('you update your name');
