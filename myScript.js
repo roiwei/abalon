@@ -266,7 +266,7 @@ function initUser(){
 		  flag=0;  
 		
 	  });
-	});
+	
 
 
 }	
