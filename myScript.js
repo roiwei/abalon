@@ -278,9 +278,10 @@ function save_user(){
 	console.log("get into save");
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
-	       console.log("get into hhhhheeeeere");
-		  // var childKey = childSnapshot.key;	
+	      
+		   var childKey = childSnapshot.key;	
 		   var childData = childSnapshot.val();
+	        console.log("get into hhhhheeeeere"+childData.user_name);
 	     
 	        });
 		//if(flag==0){return true;}
