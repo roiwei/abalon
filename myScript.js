@@ -316,7 +316,7 @@ function save_user(){
 			     flag=0;
 			     }
 	reload_page(); 
-	}}}
+	}});});
 	}
 function update_user(){
 	var name = document.getElementById('user_name').value; 
