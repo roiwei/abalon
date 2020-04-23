@@ -279,7 +279,7 @@ function save_user(){
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
 	       console.log("get into hhhhheeeeere");
-		   var childKey = childSnapshot.key;	
+		  // var childKey = childSnapshot.key;	
 		   var childData = childSnapshot.val();
 	       console.log(childData.user_Email);
 	       console.log(userEmail);
@@ -288,8 +288,8 @@ function save_user(){
 			{
 			 alert('you allraedy hav name2');
 			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			return true;
 			flag=0;
+			return true;
 			}
 	        });
 		//if(flag==0){return true;}
