@@ -338,7 +338,8 @@ function save_user(){
 }
 function update_user(){
 	var name = document.getElementById('user_name').value; 
-	firebase.database().ref('users/').child(myId).update({user_name: name})
+	firebase.database().ref('users/').child(myId).update({user_name: name});
+	alert('you update your name');
 	}
 function stop_conecting_with_rival(){
 	firebase.database().ref('users/').child(myId).update({rivai_id: "stop_connecting"});
