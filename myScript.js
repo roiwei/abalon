@@ -40,7 +40,7 @@ var rowIndex = 1;
 databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
 	    var childKey = childSnapshot.key;
-            IDarray[rowIndex]=childKey;  
+            IDarray[rowIndex]=childKey;   
 	    var childData = childSnapshot.val();
 	    nameArray[rowIndex]=childData.user_name;
 		  console.log(nameArray[rowIndex]);
