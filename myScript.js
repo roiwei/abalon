@@ -50,7 +50,7 @@ databaseRef.once('value', function(snapshot) {
             //cellId.appendChild(document.createTextNode(childKey));
 	    cellName.appendChild(document.createTextNode(childData.user_name));
 	    console.log("rowIndex after refresh is: " + rowIndex);   
-	    rowIndex = rowIndex + 1; 
+	    rowIndex = rowIndex + 1;  
 		  
 		
 	  });
