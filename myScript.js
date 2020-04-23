@@ -275,6 +275,18 @@ function initUser(){
 	
 	
 function save_user(){
+	databaseRef.once('value', function(snapshot) {
+       snapshot.forEach(function(childSnapshot) {
+		   var childKey = childSnapshot.key;	
+		   var childData = childSnapshot.val();
+	           if(childData.user_Email==userEmail)
+			{
+			console.log("get into my user ");
+				myId=childData.user_id;
+			}
+	        });
+     });
+				
 	console.log("get into save_user!!"+ myId);
 	if( myId == null){
 		var flag=0;
