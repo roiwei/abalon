@@ -274,7 +274,7 @@ function initUser(){
 	
 
 function save_user(){
-	var flag=1;
+	var flag=2;
 	console.log("get into save");
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
@@ -283,15 +283,16 @@ function save_user(){
 		   var childData = childSnapshot.val();
 	       console.log(childData.user_Email);
 	       console.log(userEmail);
+	       flag=1;
 	           if(childData.user_Email==userEmail)
 			{
 			 alert('you allraedy hav name2');
 			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			return 0;
+			return true;
 			flag=0;
 			}
 	        });
-		if(flag==0){return;}
+		if(flag==0){return true;}
 		if(flag==1){
 		console.log("you dont have user yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		save_user1();} 
