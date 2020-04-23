@@ -287,7 +287,7 @@ function save_user(){
 	       console.log(userEmail);
 	           if(childData.user_Email==userEmail)
 			{
-			console.log("get into my user ");
+			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			myId1=childData.user_id;
 			wait=1;
 			}
