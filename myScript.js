@@ -283,7 +283,7 @@ function save_user(){
 		   var childData = childSnapshot.val();
 	       console.log(childData.user_Email);
 	       console.log(userEmail);
-	       flag=1;
+	       
 	           if(childData.user_Email==userEmail)
 			{
 			 alert('you allraedy hav name2');
@@ -291,12 +291,14 @@ function save_user(){
 			return true;
 			flag=0;
 			}
+	       flag=1;
 	        });
 		if(flag==0){return true;}
-		if(flag==1){
+	
+     });
+	if(flag==1){
 		console.log("you dont have user yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		save_user1();} 
-     });
 //	if (flag==1)
 	//{
 		//}
