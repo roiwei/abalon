@@ -316,7 +316,9 @@ function save_user(){
 			     flag=0;
 			     }
 	reload_page(); 
-	}});});
+	}
+	  else{alert('you all rady have a name');}
+	  });});
 	}
 function update_user(){
 	var name = document.getElementById('user_name').value; 
