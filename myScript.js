@@ -276,7 +276,7 @@ function initUser(){
 function save_user(){
 	//var flag=1;
 	console.log("get into save");
-	console.log("number of usres is: "rowIndex);
+	console.log("number of usres is: "+rowIndex);
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
 	       console.log("get into hhhhheeeeere");
