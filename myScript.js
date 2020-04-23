@@ -235,7 +235,7 @@ function craeteRival(){
 	
 	
 }
-function initUser(){
+function initUser(){ 
 	console.log("get into init!!!");
 	var flag =0;
 	var initrowIndex=rowIndex;
