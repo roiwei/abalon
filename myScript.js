@@ -286,7 +286,7 @@ function save_user(){
 	        flag=1;
 	           if(childData.user_Email==userEmail)
 			{
-			 alert('you allraedy hav name2');
+			// alert('you allraedy hav name2');
 			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			flag=0;
 			return true;
