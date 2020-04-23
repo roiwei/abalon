@@ -286,22 +286,21 @@ function save_user1(){
 	           if(childData.user_Email==userEmail)
 			{
 			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			return 1;
+			return 0;
 			}
 	       flag=1;
 	        });
      });
 	if (flag==1)
-	{return 0}
+	{return 1;console.log("you dont have user yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");}
 }			
 
 
 function save_user(){
 
-	iHaveUser=save_user1();
-	 setTimeout( function(){
-    console.log(1);
-
+	// setTimeout( function(){
+    //console.log(1);
+if(save_user1()){
 	console.log("ihaveuser ="+iHaveUser);			
 	if( iHaveUser == 0 ){
 		var flag=0;
@@ -345,7 +344,8 @@ function save_user(){
 	myId = uid;
 	}
 	  else{alert('you all rady have a name');}
-	  }, 2000 );
+	 // }, 2000 );
+}
 }
 function update_user(){
 	console.log("my id in update ="+myId);	
