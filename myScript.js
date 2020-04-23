@@ -293,7 +293,9 @@ function save_user1(){
 
 
 function save_user(){
-	iHaveUser=save_user1();
+	function stateChange(iHaveUser=save_user1();) {
+  setTimeout('', 5000);
+		iHaveUser=save_user1;
 	console.log("ihaveuser ="+iHaveUser);			
 	if( iHaveUser !==1 ){
 		var flag=0;
