@@ -277,6 +277,7 @@ function save_user(){
 	databaseRef.once('value', function(snapshot) {
 	  snapshot.forEach(function(childSnapshot) {
 	    var childData = childSnapshot.val();
+		   console.log(childData.user_name)
 	if(childData.user_name !== "            "){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
