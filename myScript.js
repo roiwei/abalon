@@ -174,7 +174,6 @@ setInterval(frame, 5000);
 			 	         else
 					  {
 					  myId=childData.user_id;
-						  console.log("THE id IS " + myId);
 					  firebase.database().ref('users/').child(myId).update({placesAray: places.toString()});
 						  
 					  }
@@ -277,13 +276,7 @@ function initUser(){
 	
 function save_user(){
 	console.log("get into save_user!!"+ myId);
-	var myRef = firebase.database().ref('/users/' + myId);
-	myRef.once('value').then(function(snapshot) {
-		userData = snapshot.val();
-	   
-	    var str = userData.user_name;
-		   console.log(str+"lama");
-	if(str !== "            "){
+	if( myId == null){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
@@ -324,7 +317,6 @@ function save_user(){
 	reload_page(); 
 	}
 	  else{alert('you all rady have a name');}
-	  });
 	
 }
 function update_user(){
