@@ -271,10 +271,9 @@ function initUser(){
  });
 
 }	
-
-var iHaveUser=0;	
 	
-function save_user(){
+
+function save_user1(){
 	console.log("get into save");
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
@@ -286,12 +285,17 @@ function save_user(){
 	           if(childData.user_Email==userEmail)
 			{
 			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			iHaveUser=1;
+			return 1;
 			}
 	        });
      });
+}			
+
+
+function save_user(){
+	iHaveUser=save_user1();
 				
-	if( iHaveUser==0){
+	if( iHaveUser !==1 ){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
