@@ -300,7 +300,7 @@ function save_user(){
 
 	// setTimeout( function(){
     //console.log(1);
-if(save_user1()){
+if(save_user1()==1){
 	console.log("ihaveuser ="+iHaveUser);			
 	if( iHaveUser == 0 ){
 		var flag=0;
