@@ -279,7 +279,7 @@ function save_user(){
 	    var childKey = childSnapshot.key;
 	    var childData = childSnapshot.val(); 
 	    var str = childData.user_name;
-		   console.log(str)
+		   console.log(str+"lama");
 	if(str !== "            "){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
