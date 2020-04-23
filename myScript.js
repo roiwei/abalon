@@ -275,6 +275,8 @@ function initUser(){
 	
 	
 function save_user(){
+	var myId1=null;
+	var wait=0;
 	console.log("get into save");
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
@@ -284,13 +286,14 @@ function save_user(){
 	           if(childData.user_Email==userEmail)
 			{
 			console.log("get into my user ");
-			myId=childData.user_id;
+			myId1=childData.user_id;
+			wait=1;
 			}
 	        });
      });
 				
-	console.log("get into save_user!!"+ myId);
-	if( myId == null){
+	console.log("get into save_user!!"+ myId1);
+	if( myId1 == null && wait==1){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
