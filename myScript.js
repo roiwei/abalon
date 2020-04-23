@@ -189,7 +189,7 @@ setInterval(frame, 5000);
 
 
 var myRivalId = "";
-var myId="";
+var myId=null;
 var rivalRef;
 var userData;
 
