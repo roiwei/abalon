@@ -274,7 +274,6 @@ function initUser(){
 	
 
 function save_user(){
-	//var flag=1;
 	console.log("get into save");
 	console.log("number of usres is: "+rowIndex);
 	var howManyUsers=1;
@@ -288,9 +287,8 @@ function save_user(){
 	 	howManyUsers=howManyUsers+1;
 	           if(childData.user_Email==userEmail)
 			{
-			// alert('you allraedy hav name2');
 			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			flag=0;
+			alert('you allraedy hav name2');
 			return true;
 			}
 	       	if(howManyUsers==rowIndex)
@@ -351,12 +349,8 @@ function save_user1(){
 			     alert('the user name allredy exist! please put diferent name');
 			     flag=0;
 			     }
-	//reload_page(); 
-	//myId = uid;
-//	}
-	//  else{alert('you all rady have a name');}
-	 // }, 2000 );
-//}
+	reload_page(); 
+
 }
 function update_user(){
 	console.log("my id in update ="+myId);	
