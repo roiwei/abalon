@@ -291,7 +291,7 @@ function save_user(){
 			flag=0;
 			}
 	        });
-		if(flag==0){return;break;}
+		if(flag==0){return;}
 		if(flag==1){
 		console.log("you dont have user yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		save_user1();} 
