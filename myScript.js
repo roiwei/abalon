@@ -202,7 +202,7 @@ function craeteRival(){
 	    	myRivalId=IDarray[i];
 		flag = 1;    
 	    }
-	}
+	} 
 	if(flag){
 		console.log(rival_name + "id: " + myRivalId);
 		var userRef = firebase.database().ref('/users/' + myRivalId);
