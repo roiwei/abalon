@@ -293,12 +293,8 @@ function save_user(){
 			}
 	       	if(howManyUsers==rowIndex)
 		{save_user1();}
-	        });
-		
+	        });	
      });
-	//if(flag==1){
-	//	console.log("you dont have user yet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		//save_user1();} 
 
 }			
 	
@@ -357,6 +353,7 @@ function update_user(){
 	var name = document.getElementById('user_name').value; 
 	firebase.database().ref('users/').child(myId).update({user_name: name});
 	alert('you update your name');
+	reload_page(); 
 	}
 function stop_conecting_with_rival(){
 	firebase.database().ref('users/').child(myId).update({rivai_id: "stop_connecting"});
