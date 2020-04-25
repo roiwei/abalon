@@ -65,6 +65,7 @@ setInterval(frame, 5000);
 		   var childData = childSnapshot.val();
 	           if(childData.user_Email==userEmail)
 			{//chack if rival did anithing
+			if(myId==null){myId=childData.user_id;}
 			console.log("get into my user ");
 			if(myRivalId=="" || childData.rivai_id=="stop_connecting")
 			{myRivalId=childData.rivai_id;console.log("get first time to update my rival ID ");
@@ -288,7 +289,7 @@ function save_user(){
 	           if(childData.user_Email==userEmail)
 			{
 			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			alert('you allraedy hav name2');
+			alert('you allraedy hav name');
 			return true;
 			}
 	       	if(howManyUsers==rowIndex)
@@ -303,11 +304,6 @@ function save_user(){
 
 function save_user1(){
 
-	// setTimeout( function(){
-    //console.log(1);
-//if(save_user1()==1){
-//	console.log("ihaveuser ="+iHaveUser);			
-//	if( iHaveUser == 0 ){
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
 		console.log(user_name);
