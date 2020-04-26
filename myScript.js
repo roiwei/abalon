@@ -192,7 +192,7 @@ setInterval(frame, 5000);
 var myRivalId = "";
 var myId=null;
 var rivalRef;
-var userData;
+var userData; 
 
 function craeteRival(){
 	var flag = 0;
