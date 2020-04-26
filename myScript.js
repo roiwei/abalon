@@ -101,7 +101,8 @@ setInterval(frame, 5000);
 				if (childData.new_game=="1")
 				{console.log("new game!");
 					var tempId=childData.user_id;
-					putAllBallFromUser(placesStart);
+				 	firebase.database().ref('users/').child(myId).update({placesAray: placesStart.toString()});
+					//putAllBallFromUser(placesStart);
 					firebase.database().ref('users/').child(tempId).update({new_game: "0"});
 					firebase.database().ref('users/').child(tempId).update({direction: ""});
 					firebase.database().ref('users/').child(tempId).update({row: ""});
