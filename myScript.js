@@ -1,22 +1,6 @@
-/* src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyDYFvTJAzB5PWCcVLqJz-ImVcLU8r1uj7Q",
-    authDomain: "abalonfb1.firebaseapp.com",
-    databaseURL: "https://abalonfb1.firebaseio.com",
-    projectId: "abalonfb1",
-    storageBucket: "abalonfb1.appspot.com",
-    messagingSenderId: "296930691996",
-    appId: "1:296930691996:web:3935ed42de1b94e5a19659",
-    measurementId: "G-D71N1EYXSV"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  //firebase.analytics();
-*/
+
 
 var userEmail="";  
-//var myDataEmail = document.getElementById('datah1'); 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 var user = firebase.auth().currentUser;	 
@@ -34,7 +18,6 @@ var IDarray = new Array();
 var nameArray = new Array(); 
 var myRealColor = "";
 var myNumColor =-1; 
-//var tblUsers = document.getElementById('tb1_users_list');
 var databaseRef = firebase.database().ref('users/'); 
 var rowIndex = 1; 
 databaseRef.once('value', function(snapshot) {
@@ -45,9 +28,7 @@ databaseRef.once('value', function(snapshot) {
 	    nameArray[rowIndex]=childData.user_name;
 		  console.log(nameArray[rowIndex]);
 	    var row = document.getElementById('tb1_users_list').insertRow(rowIndex);
-	   // var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(0);
-            //cellId.appendChild(document.createTextNode(childKey));
 	    cellName.appendChild(document.createTextNode(childData.user_name));
 	    console.log("rowIndex after refresh is: " + rowIndex);   
 	    rowIndex = rowIndex + 1;  
@@ -80,7 +61,6 @@ setInterval(frame, 5000);
 			{match_id.innerHTML= "wait for you to choose player to play with";}
 			if(myRivalId!="" && myRivalId!="stop_connecting")
 			{	
-				//console.log("myRealColor befor if= "+myRealColor);	
 			if(myRealColor=="") 
 			{
 			myRealColor=childData.my_color;
@@ -88,12 +68,17 @@ setInterval(frame, 5000);
 				console.log(document.getElementById('yourColor_id').innerHTML);
 			document.getElementById('yourColor_id').innerHTML= "Your color is "+myRealColor+"";
 			if(myRealColor=="black"){myNumColor=1;}else{myNumColor=0;} 
+			if(turn_color=="black"){blackTurn=1;}
+			else{
+				id_ifLigal.innerHTML="wait for white move";blackTurn=0;
+				} 
 			}
 			var userRef = firebase.database().ref('/users/' + myRivalId);
 			console.log("myRivalId is: "+myRivalId);
 			userRef.once('value').then(function(snapshot) {
 			userData = snapshot.val();
-			console.log("userData.user_name= "+userData.user_name);
+			
+			console.log("rival name= "+userData.user_name);
 			if(match_id.innerHTML!= "You have mach with "+userData.user_name+"! start play:)")
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";});
 				console.log("hold ="+hold);
@@ -194,6 +179,11 @@ var myRivalId = "";
 var myId=null;
 var rivalRef;
 var userData; 
+
+function single_player()
+{
+	window.location ='singlePlayer.html';  
+}
 
 function craeteRival(){
 	var flag = 0;
@@ -704,10 +694,8 @@ function ifNotEqualToStart(placesArrayToChack)
 		function onPlace(e)
 		{
 			placeX=e.clientX;
-			placeY=e.clientY;//console.log(placeX+" "+placeY);
-			rect = id_background.getBoundingClientRect();
-			//console.log(rect.top, rect.right, rect.bottom, rect.left);
-	
+			placeY=e.clientY;
+			rect = id_background.getBoundingClientRect();	
 		}
 		function getIdBall(row,column)
 		{
@@ -746,12 +734,8 @@ function ifNotEqualToStart(placesArrayToChack)
 			{var BallId= document.getElementById(getIdBall(i+1,j+1));
 				if((BallId!=undefined)&&(BallId!=null))
 				{
-				//console.log("hereeee")
-				//console.log("top is "+getBallTop(i+1,j+1));
-				//console.log("left is "+getBallLeft(i+1,j+1));
 				realTop[i][j]=getBallTop(i+1,j+1);
 				realLeft[i][j]=getBallLeft(i+1,j+1);	
-				//console.log("realTop[i][j] is "+realTop[i][j]);
 				}
 			}
 		}
@@ -765,7 +749,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						var BallId= document.getElementById(getIdBall(i,j));//////getIdBall()
 						if((BallId!=undefined)&&(BallId!=null))
 						{
-					//		console.log(getIdBall(i,j)+" realTop[i-1][j-1] is "+realTop[i-1][j-1]);
 							RT=realTop[i-1][j-1];
 							RL=realLeft[i-1][j-1];
 						eval("BallId.style.top="+'"'+RT+"%"+'";');
@@ -777,30 +760,21 @@ function ifNotEqualToStart(placesArrayToChack)
 		
 		function movballToPoint(row,column,x,y)
 		{
-			var BallId= document.getElementById(getIdBall(row,column));
-			//var s= "document.getElementById(getIdBall(row,column)).style.left="+'"'+x+"%"+'";';
-				//console.log(s);
+				var BallId= document.getElementById(getIdBall(row,column));
 				var dl=getBallLeft(row,column);
 				x=x+dl;
 				var d=getBallTop(row,column);
 				y=y+d;
 				eval("BallId.style.top="+'"'+y+"%"+'";');
 				eval("BallId.style.left="+'"'+x+"%"+'";');
-			//var s= "document.getElementById(getIdBall(row,column)).style.top="+'"'+y+"%"+'";';
-				//console.log(s);
-				//eval(s.toString());
+			
 			
 		}
 		
 		///////////////////////////////////
 		function movBallR(row,column)
 		{
-			
-		//	var d=getBallTop(row,column);
-			//	d=d+0.1;
-				//var s= "document.getElementById(getIdBall(row,column)).style.top="+'"'+d+"%"+'";';
-				//console.log(s);
-				//eval(s.toString());
+	
 				var dl=getBallLeft(row,column);
 				dl=dl+0.15;
 				var s= "document.getElementById(getIdBall(row,column)).style.left="+'"'+dl+"%"+'";';
@@ -811,11 +785,6 @@ function ifNotEqualToStart(placesArrayToChack)
 			function movBallL(row,column)
 		{
 			
-			//var d=getBallTop(row,column);
-			//	d=d+0.1;
-			//	var s= "document.getElementById(getIdBall(row,column)).style.top="+'"'+d+"%"+'";';
-				//console.log(s);
-			//	eval(s.toString());
 				var dl=getBallLeft(row,column);
 				dl=dl-0.15;
 				var s= "document.getElementById(getIdBall(row,column)).style.left="+'"'+dl+"%"+'";';
@@ -900,13 +869,12 @@ function ifNotEqualToStart(placesArrayToChack)
 			{return 1}
 			else {return 0}
 		}
-		
+		/////////////////////////////////////////////////////////on functions
 		function onOutBall()
 		{	
 			putAllBallInPlace();
 		 	hold=0;
 			clickball=0;
-			//flagInBall=0;
 			flagWait=0;
 			topflag=-1;
 			leftflag=-1;
@@ -916,9 +884,37 @@ function ifNotEqualToStart(placesArrayToChack)
 		var leftflag=-1;
 		var blackTurn=1;
 		
-		function onBall(e,id,row,column)
+		function longClickBall()
 		{
-		//if(myRealColor=="black"){myNumColor=1;}else{myNumColor=0;}
+			flagInBall=0;
+			clickball=clickball+1;
+			if(clickball>1)//to restart
+			{
+				clickball=0;
+				hold=0;
+				flagWait=0;
+				topflag=-1;
+				leftflag=-1;
+				putAllBallInPlace();
+				
+			}
+			placeX1=placeX;
+			placeY1=placeY;
+		
+		}
+		function mouseUp()
+		{
+				console.log("mousUp clickball= "+clickball);
+				hold=0;
+				flagWait=0;
+				topflag=-1;
+				leftflag=-1;
+				putAllBallInPlace();
+				
+		}
+		
+		function onBall(e,id,row,column)
+		{console.log("myNumColor= "+myNumColor+" blackTurn= "+blackTurn);
 		if((blackWin==0)&&(whiteWin==0)&&(myNumColor==blackTurn))
 		{
 			id.style.cursor = "pointer";
@@ -929,12 +925,10 @@ function ifNotEqualToStart(placesArrayToChack)
 			if( ((dy*dy)>9) || ((dx*dx)>9) )
 			{
 				flagInBall=1;
-				//console.log("good");
 				if((dy*dy)<0.3)//its left or right
 				{
 					if(dx>0)//its left
 					{
-						//console.log("its left");
 						topflag=2;//not up and not down
 						leftflag=1;
 						onBallstart(e,id,row,column);
@@ -997,61 +991,36 @@ function ifNotEqualToStart(placesArrayToChack)
 		}
 		
 		
+	//////////////////////////////////////////	
 		
 		
-		
-		
-			//////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-		
-		
-		
-		//////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////	
-		
-		
-		//////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////	
-		
-		
-	//////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
+
 		function onBallstart(e,id,row,column)//////////////////////////////////////////////////////////
-	//	{console.log("flagLeftRiht= "+flagLeftRiht+"flag2= "+flag2+" flagDownRight= "+flagDownRight+"  placeY1-placeY = "+(placeY1-placeY)+" (placeX1-placeX) = "+(placeX1-placeX)+"  clickball= "+clickball);
 		{
 			if(clickball==0)
 			{
 			putAllBallInPlace();
 			hold=0;
 			}
-	//		id.style.cursor = "pointer";
 			if(clickball==1)
 			{
 			hold=1;	
 			if(topflag==0)//its down
 				{
 					if(leftflag==0)//its down right 
-					{movBallDR(row,column);//console.log("leftflag= "+leftflag);//1
+					{movBallDR(row,column);
 					var mor5=0;
 						if(row+1<5){mor5=1;}
 					if(((realTop[row][column+mor5-1])-(getBallTop(row,column)))>1)	
 					{
-					var column5=column;//console.log("column= "+column5);
+					var column5=column;
 					if((row+1>5)&&(row>=5)){column5=column-1;}
 						if(ifBallTouchFromUp(row,column,row+1,column5+1))
-						{//if(row+1>5){column5=column5-1;}
-							movBallDR(row+1,column5+1);//console.log("column5= "+column5);//2
+						{
+							movBallDR(row+1,column5+1);
 							if((ifBallTouchFromUp(row+1,column5+1,row+2,column5+1))&&(places[row+1][column5+1]!=0))//////////////////
-							{if(row+2>5){column5=column5-1;}//console.log("column521= "+column5);
-							movBallDR(row+2,column5+2);//console.log("column52= "+column5);//3
+							{if(row+2>5){column5=column5-1;}
+							movBallDR(row+2,column5+2);
 								if((ifBallTouchFromUp(row+2,column5+2,row+3,column5+1))&&(places[row+2][column5+2]!=0))
 								{if(row+3>5){column5=column5-1;}
 								movBallDR(row+3,column5+3);//4
@@ -1064,7 +1033,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 					}
 					else{
-							//console.log("les then 4444444444444444");
 							if(blackTurn==1)
 							{
 							if(checkAndChangeDR(row,column,1)==-1)
@@ -1084,16 +1052,16 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(row+1>5){mor5=1;}
 						movBallDL(row,column);
 					if(((realTop[row][column-mor5-1])-(getBallTop(row,column)))>1)	
-					{//console.log("leftflag= "+leftflag);console.log("getBallTop(row,column-mor5)="+getBallTop(row,column)+"  realTop[row][column-mor5]"+realTop[row][column-mor5]);//1
-					var column5=column;//console.log("column= "+column5);
+					{
+					var column5=column;
 					if(row+1<=5){column5=column+1;}
 						if(ifBallTouchFromUp(row,column,row+1,column5-1))
 						{if(row+1<=5){column5=column+1;}
-							movBallDL(row+1,column5-1);     //console.log("column5= "+column5);//2
+							movBallDL(row+1,column5-1);     
 							if(places[row+1][column5-1]!=0){
 							if((ifBallTouchFromUp(row+1,column5-1,row+2,column5))&&(places[row+1][column5-1]!=0))//////////////////
-							{if(row+2<=5){column5=column5+1;}      //console.log("column521= "+column5);
-							movBallDL(row+2,column5-2);         // console.log("column52= "+column5);//3
+							{if(row+2<=5){column5=column5+1;}      
+							movBallDL(row+2,column5-2);        //3
 								if((ifBallTouchFromUp(row+2,column5-2,row+3,column5))&&(places[row+2][column5-2]!=0))
 								{if(row+3<=5){column5=column5+1;}
 								movBallDL(row+3,column5-3);//4
@@ -1107,13 +1075,12 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 					 }	
 					 else{
-							//console.log("les then 4444444444444444");
 							if(blackTurn==1)
 							{
 							if(checkAndChangeDL(row,column,1)==-1)
 							{id_ifLigal.innerHTML="not ligal move!!! wait for black ligal move";}
 							else{id_ifLigal.innerHTML="wait for white move";blackTurn=0;}
-							}//the ball move enough, make the mov
+							}
 							else
 							{
 							if(checkAndChangeDL(row,column,2)==-1)
@@ -1127,20 +1094,19 @@ function ifNotEqualToStart(placesArrayToChack)
 			else if(topflag==1)//its up
 				{
 					if(leftflag==0)//its up right 
-					{movBallUR(row,column);//console.log("leftflag= "+leftflag);//1
+					{movBallUR(row,column);
 						var mor5=0;
-						if(row-1>=5){mor5=1;}//console.log("(getBallTop(row,column)-(realTop[row-2][column+mor5])=  "+(getBallTop(row,column)-(realTop[row-2][column+mor5])));
-						//console.log("row,column= "+row+" "+column);
+						if(row-1>=5){mor5=1;}
 					if(((getBallTop(row,column))-(realTop[row-2][column+mor5-1]))>1)	
 					{
-					var column5=column;//console.log("column= "+column5);
-					if(row-1>=5){column5=column5+1;}//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");}//if((row+1>5)&&(row>=5)){column5=column-1;}
+					var column5=column;
+					if(row-1>=5){column5=column5+1;}
 						if(ifBallTouchFromUp(row-1,column5,row,column))
-						{//if(row-2>5){column5=column5+1;}
-							movBallUR(row-1,column5);//console.log("column5= "+column5);//2
-							if((ifBallTouchFromUp(row-2,column5,row-1,column5))&&(places[row-1][column5]!=0))//////////////////
-							{if(row-2>=5){column5=column5+1;}//console.log("column521= "+column5);
-							movBallUR(row-2,column5);//console.log("column52= "+column5);//3
+						{
+							movBallUR(row-1,column5);
+							if((ifBallTouchFromUp(row-2,column5,row-1,column5))&&(places[row-1][column5]!=0))
+							{if(row-2>=5){column5=column5+1;}
+							movBallUR(row-2,column5);
 								if((ifBallTouchFromUp(row-3,column5,row-2,column5))&&(places[row-2][column5]!=0))
 								{if(row-3>=5){column5=column5+1;}
 								movBallUR(row-3,column5);//4
@@ -1153,7 +1119,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 					}
 					else{
-							//console.log("les then 4444444444444444");
 							if(blackTurn==1)
 							{
 							if(checkAndChangeUR(row,column,1)==-1)
@@ -1169,20 +1134,19 @@ function ifNotEqualToStart(placesArrayToChack)
 						 }
 					}////////////////
 					else if(leftflag==1)//its up left
-					{movBallUL(row,column);//console.log("leftflag= "+leftflag);
+					{movBallUL(row,column);
 						var mor5=0;
-						if(row-1<5){mor5=-1;}//console.log("(getBallTop(row,column)-(realTop[row-2][column+mor5])=  "+(getBallTop(row,column)-(realTop[row-2][column+mor5])));
-						//console.log("row,column= "+row+" "+column);
+						if(row-1<5){mor5=-1;}
 					if(((getBallTop(row,column))-(realTop[row-2][column+mor5-1]))>1)	
 					{
-					var column5=column;//console.log("column= "+column5);
-					if(row-1<5){column5=column5-1;}//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");}//if((row+1>5)&&(row>=5)){column5=column-1;}
+					var column5=column;
+					if(row-1<5){column5=column5-1;}
 						if(ifBallTouchFromUp(row-1,column5,row,column))
-						{//if(row-2>5){column5=column5+1;}
-							movBallUL(row-1,column5);//console.log("column5= "+column5);//2
-							if((ifBallTouchFromUp(row-2,column5,row-1,column5))&&(places[row-1][column5]!=0))//////////////////
-							{if(row-2<5){column5=column5-1;}//console.log("column521= "+column5);
-							movBallUL(row-2,column5);//console.log("column52= "+column5);//3
+						{
+							movBallUL(row-1,column5);
+							if((ifBallTouchFromUp(row-2,column5,row-1,column5))&&(places[row-1][column5]!=0))
+							{if(row-2<5){column5=column5-1;}
+							movBallUL(row-2,column5);
 								if((ifBallTouchFromUp(row-3,column5,row-2,column5))&&(places[row-2][column5]!=0))
 								{if(row-3<5){column5=column5-1;}
 								movBallUL(row-3,column5);//4
@@ -1195,7 +1159,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 					}
 					else{
-							//console.log("les then 4444444444444444");
 							if(blackTurn==1)
 							{
 							if(checkAndChangeUL(row,column,1)==-1)
@@ -1218,11 +1181,11 @@ function ifNotEqualToStart(placesArrayToChack)
 					if(leftflag==0)//its right 
 					{
 						if(((realLeft[row-1][column])-(getBallLeft(row,column)))>1)
-						{//console.log("realLeft[row][column+1]="+realLeft[row-1][column]+"  getBallLeft(row,column)="+getBallLeft(row,column));
-							movBallR(row,column);//console.log("leftflag= "+leftflag);//1			
+						{
+							movBallR(row,column);			
 						if(ifBallTouchFromLeft(row,column,row,column+1))				
 						{movBallR(row,column+1);
-							if((ifBallTouchFromLeft(row,column+1,row,column+2))&&(places[row][column+1]!=0))//////////////////
+							if((ifBallTouchFromLeft(row,column+1,row,column+2))&&(places[row][column+1]!=0))
 							{
 							movBallR(row,column+2);//3
 								if((ifBallTouchFromLeft(row,column+2,row,column+3))&&(places[row][column+2]!=0))					
@@ -1236,7 +1199,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 						}
 						else{
-							//console.log("les then 4");
 							if(blackTurn==1)
 							{
 							if(checkAndChangeR(row,column,1)==-1)
@@ -1253,10 +1215,10 @@ function ifNotEqualToStart(placesArrayToChack)
 					}
 					else if(leftflag==1)//its left
 					if(((getBallLeft(row,column))-(realLeft[row-1][column-2]))>1)
-					{movBallL(row,column);//console.log("leftflag= "+leftflag);
+					{movBallL(row,column);
 						if(ifBallTouchFromLeft(row,column-1,row,column))				
 						{movBallL(row,column-1);
-							if((ifBallTouchFromLeft(row,column-2,row,column-1))&&(places[row][column-1]!=0))//////////////////
+							if((ifBallTouchFromLeft(row,column-2,row,column-1))&&(places[row][column-1]!=0))
 							{
 							movBallL(row,column-2);//3
 								if((ifBallTouchFromLeft(row,column-3,row,column-2))&&(places[row][column-2]!=0))					
@@ -1271,7 +1233,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						
 					}
 						else{
-							//console.log("les then 4444444444444444111111111111111");
 							if(blackTurn==1)
 							{
 								if(checkAndChangeL(row,column,1)==-1){id_ifLigal.innerHTML="not ligal move!!! wait for black ligal move";console.log("!not ligal move!!! wait for black ligal move!");}
@@ -1289,38 +1250,11 @@ function ifNotEqualToStart(placesArrayToChack)
 				}
 	
 		
-		}//console.log(places);
 		}
+		}//end onBallstart
 		var flagWait=0;
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			///////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		function onRivalMove(row,column,dirUp,dirLeft)//////////////////////////////////////////////////////////
-	//	{console.log("flagLeftRiht= "+flagLeftRiht+"flag2= "+flag2+" flagDownRight= "+flagDownRight+"  placeY1-placeY = "+(placeY1-placeY)+" (placeX1-placeX) = "+(placeX1-placeX)+"  clickball= "+clickball);
 		{
 		
 			if(dirUp==0)//its down
@@ -1329,7 +1263,7 @@ function ifNotEqualToStart(placesArrayToChack)
 					{
 						var moveTime = setInterval(frame, 10);
 			function frame() {
-						movBallDR(row,column);console.log("dirLeft= "+dirLeft);//1
+						movBallDR(row,column);//1
 					var mor5=0;//the midle row
 						if(row+1<5){mor5=1;}
 					console.log(realTop[row][column+mor5-1]+ " - "+getBallTop(row,column));
@@ -1338,9 +1272,9 @@ function ifNotEqualToStart(placesArrayToChack)
 					var column5=column;console.log("column= "+column5);
 					if((row+1>5)&&(row>=5)){column5=column-1;}
 						if(ifBallTouchFromUp(row,column,row+1,column5+1))
-						{//if(row+1>5){column5=column5-1;}
+						{
 							movBallDR(row+1,column5+1);console.log("column5= "+column5);//2
-							if((ifBallTouchFromUp(row+1,column5+1,row+2,column5+1))&&(places[row+1][column5+1]!=0))//////////////////
+							if((ifBallTouchFromUp(row+1,column5+1,row+2,column5+1))&&(places[row+1][column5+1]!=0))
 							{if(row+2>5){column5=column5-1;}console.log("column521= "+column5);
 							movBallDR(row+2,column5+2);console.log("column52= "+column5);//3
 								if((ifBallTouchFromUp(row+2,column5+2,row+3,column5+1))&&(places[row+2][column5+2]!=0))
@@ -1355,7 +1289,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 					}
 					else{
-							console.log("les then 4444444444444444");
 							if(blackTurn==1)
 							{
 							if(checkAndChangeDR(row,column,1)==-1)
@@ -1381,16 +1314,16 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(row+1>5){mor5=1;}
 						movBallDL(row,column);
 					if(((realTop[row][column-mor5-1])-(getBallTop(row,column)))>1)	
-					{console.log("dirLeft= "+dirLeft);console.log("getBallTop(row,column-mor5)="+getBallTop(row,column)+"  realTop[row][column-mor5]"+realTop[row][column-mor5]);//1
-					var column5=column;console.log("column= "+column5);
+					{
+					var column5=column;
 					if(row+1<=5){column5=column+1;}
 						if(ifBallTouchFromUp(row,column,row+1,column5-1))
 						{if(row+1<=5){column5=column+1;}
-							movBallDL(row+1,column5-1);     console.log("column5= "+column5);//2
+							movBallDL(row+1,column5-1);    //2
 							if(places[row+1][column5-1]!=0){
 							if((ifBallTouchFromUp(row+1,column5-1,row+2,column5))&&(places[row+1][column5-1]!=0))//////////////////
-							{if(row+2<=5){column5=column5+1;}      console.log("column521= "+column5);
-							movBallDL(row+2,column5-2);          console.log("column52= "+column5);//3
+							{if(row+2<=5){column5=column5+1;}      
+							movBallDL(row+2,column5-2);         //3
 								if((ifBallTouchFromUp(row+2,column5-2,row+3,column5))&&(places[row+2][column5-2]!=0))
 								{if(row+3<=5){column5=column5+1;}
 								movBallDL(row+3,column5-3);//4
@@ -1404,7 +1337,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 					 }	
 					 else{
-							console.log("les then 4444444444444444");
 							if(blackTurn==1)
 							{
 							if(checkAndChangeDL(row,column,1)==-1)
@@ -1433,18 +1365,18 @@ function ifNotEqualToStart(placesArrayToChack)
 						
 						movBallUR(row,column);console.log("leftflag= "+dirLeft);//1
 						var mor5=0;
-						if(row-1>=5){mor5=1;}//console.log("(getBallTop(row,column)-(realTop[row-2][column+mor5])=  "+(getBallTop(row,column)-(realTop[row-2][column+mor5])));
+						if(row-1>=5){mor5=1;}
 						console.log("row,column= "+row+" "+column);
 					if(((getBallTop(row,column))-(realTop[row-2][column+mor5-1]))>1)	
 					{
-					var column5=column;console.log("column= "+column5);
-					if(row-1>=5){column5=column5+1;console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");}//if((row+1>5)&&(row>=5)){column5=column-1;}
+					var column5=column;
+					if(row-1>=5){column5=column5+1;}//if((row+1>5)&&(row>=5)){column5=column-1;}
 						if(ifBallTouchFromUp(row-1,column5,row,column))
 						{//if(row-2>5){column5=column5+1;}
-							movBallUR(row-1,column5);console.log("column5= "+column5);//2
-							if((ifBallTouchFromUp(row-2,column5,row-1,column5))&&(places[row-1][column5]!=0))//////////////////
-							{if(row-2>=5){column5=column5+1;}console.log("column521= "+column5);
-							movBallUR(row-2,column5);console.log("column52= "+column5);//3
+							movBallUR(row-1,column5);//2
+							if((ifBallTouchFromUp(row-2,column5,row-1,column5))&&(places[row-1][column5]!=0))
+							{if(row-2>=5){column5=column5+1;}
+							movBallUR(row-2,column5);//3
 								if((ifBallTouchFromUp(row-3,column5,row-2,column5))&&(places[row-2][column5]!=0))
 								{if(row-3>=5){column5=column5+1;}
 								movBallUR(row-3,column5);//4
@@ -1457,7 +1389,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 					}
 					else{
-							console.log("les then 4444444444444444");
 							if(blackTurn==1)
 							{
 							if(checkAndChangeUR(row,column,1)==-1)
@@ -1479,22 +1410,20 @@ function ifNotEqualToStart(placesArrayToChack)
 					{
 						var moveTime = setInterval(frame, 10);
 			function frame() {
-						
-						
-						movBallUL(row,column);console.log("dirLeft= "+dirLeft);
+								
+						movBallUL(row,column);
 						var mor5=0;
-						if(row-1<5){mor5=-1;}//console.log("(getBallTop(row,column)-(realTop[row-2][column+mor5])=  "+(getBallTop(row,column)-(realTop[row-2][column+mor5])));
-						console.log("row,column= "+row+" "+column);
+						if(row-1<5){mor5=-1;}
 					if(((getBallTop(row,column))-(realTop[row-2][column+mor5-1]))>1)	
 					{
-					var column5=column;console.log("column= "+column5);
-					if(row-1<5){column5=column5-1;console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");}//if((row+1>5)&&(row>=5)){column5=column-1;}
+					var column5=column;
+					if(row-1<5){column5=column5-1;}
 						if(ifBallTouchFromUp(row-1,column5,row,column))
 						{//if(row-2>5){column5=column5+1;}
-							movBallUL(row-1,column5);console.log("column5= "+column5);//2
+							movBallUL(row-1,column5);//2
 							if((ifBallTouchFromUp(row-2,column5,row-1,column5))&&(places[row-1][column5]!=0))//////////////////
-							{if(row-2<5){column5=column5-1;}console.log("column521= "+column5);
-							movBallUL(row-2,column5);console.log("column52= "+column5);//3
+							{if(row-2<5){column5=column5-1;}
+							movBallUL(row-2,column5);//3
 								if((ifBallTouchFromUp(row-3,column5,row-2,column5))&&(places[row-2][column5]!=0))
 								{if(row-3<5){column5=column5-1;}
 								movBallUL(row-3,column5);//4
@@ -1507,7 +1436,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 					}
 					else{
-							console.log("les then 4444444444444444");
 							if(blackTurn==1)
 							{
 							if(checkAndChangeUL(row,column,1)==-1)
@@ -1534,7 +1462,7 @@ function ifNotEqualToStart(placesArrayToChack)
 						var moveTime = setInterval(frame, 10);
 			function frame() {
 						if(((realLeft[row-1][column])-(getBallLeft(row,column)))>1)
-						{console.log("realLeft[row][column+1]="+realLeft[row-1][column]+"  getBallLeft(row,column)="+getBallLeft(row,column));
+						{
 							movBallR(row,column);console.log("dirLeft= "+dirLeft);//1			
 						if(ifBallTouchFromLeft(row,column,row,column+1))				
 						{movBallR(row,column+1);
@@ -1552,7 +1480,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 						}
 						else{
-							console.log("les then 4");
 							if(blackTurn==1)
 							{
 							if(checkAndChangeR(row,column,1)==-1)
@@ -1575,7 +1502,7 @@ function ifNotEqualToStart(placesArrayToChack)
 						var moveTime = setInterval(frame, 10);
 			function frame() {
 					if(((getBallLeft(row,column))-(realLeft[row-1][column-2]))>1)
-					{movBallL(row,column);console.log("leftflag= "+leftflag);
+					{movBallL(row,column);
 						if(ifBallTouchFromLeft(row,column-1,row,column))				
 						{movBallL(row,column-1);
 							if((ifBallTouchFromLeft(row,column-2,row,column-1))&&(places[row][column-1]!=0))//////////////////
@@ -1594,7 +1521,6 @@ function ifNotEqualToStart(placesArrayToChack)
 					}
 				
 						else{
-							console.log("les then 4444444444444444111111111111111");
 							if(blackTurn==1)
 							{
 								if(checkAndChangeL(row,column,1)==-1){id_ifLigal.innerHTML="not ligal move!!! wait for black ligal move";console.log("!not ligal move!!! wait for black ligal move!");}
@@ -1617,19 +1543,11 @@ function ifNotEqualToStart(placesArrayToChack)
 		}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		function checkAndChangeR(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{console.log("------------------------------");
 			if((places[row][column]!=color)&&(flagWait==0))
-			 {console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
+			 {return -1;}
 			
 		 	////////////////////////////////////////////////////////////////////
 			var userRef = firebase.database().ref('/users/' + myRivalId);
@@ -1655,7 +1573,7 @@ function ifNotEqualToStart(placesArrayToChack)
 			////////////////////////////////////////////////////////////////////
 		  
 				if((places[row][column+1]==color)||(places[row][column+1]==0))//one ball cant mov one rivel ball
-				{console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+				{
 					if(places[row][column+1]==0)
 					{
 						places[row][column+1]=color;
@@ -1666,12 +1584,11 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee111111");
 						flagWait=1;
 						return 1;
 					}
 					if(places[row][column+1]==color)
-					{console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+					{
 						if(places[row][column+2]==0)//2 ball in same color push without thach another ball
 						{
 						places[row][column+2]=color;
@@ -1682,26 +1599,25 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 						flagWait=1;
 						return 1;
 						}
 						if(places[row][column+2]==abs(color-3))//abs(color-3))=the other color.2 ball in same color push rivel ball
-						{  console.log("................................");
+						{  
 							if((places[row][column+3]!=0)&&(flagWait==0)&&(places[row][column+3]!=-1)){return -1;}//2ball try to push 2 rivel ball or one ball of himself- not ligal
-							console.log("0000000000000");
+							
 								//2 ball phush 1 ball in diferent color to a hole
 								places[row][column]=0;
 								places[row][column+2]=color;
 								if(places[row][column+3]==-1)//2 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row,column+2,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row,column+2,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row,column+2,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row,column+2,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -1723,7 +1639,6 @@ function ifNotEqualToStart(placesArrayToChack)
 								if(color==1){id.src="whiteBall.jpg";}
 								else{id.src="newBlackBall.jpg";}
 								putAllBallInPlace();
-								console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 								flagWait=1;
 								return 1;			
 								}
@@ -1763,14 +1678,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								return 1;		
 							}
 							if(places[row][column+4]==-1)//3 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row,column+3,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row,column+3,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row,column+3,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row,column+3,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -1803,14 +1718,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								return 1;		
 								}
 							if(places[row][column+5]==-1)//3 ball push 2 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row,column+4,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row,column+4,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row,column+4,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row,column+4,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -1829,15 +1744,15 @@ function ifNotEqualToStart(placesArrayToChack)
 					
 					}
 				
-				else if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+				else if(flagWait==0){return -1;}
 				}
-			 if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+			 if(flagWait==0){return -1;}
 		}
 //////////////////////////////////////////		///////   ///////////////
 		
 		function checkAndChangeL(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{
-			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
+			if((places[row][column]!=color)&&(flagWait==0)){return -1;}
 			////////////////////////////////////////////////////////////////////
 			var userRef = firebase.database().ref('/users/' + myRivalId);
 		
@@ -1873,7 +1788,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee111111");
 						flagWait=1;
 						return 1;
 					}
@@ -1889,7 +1803,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 						flagWait=1;
 						return 1;
 						}
@@ -1911,19 +1824,18 @@ function ifNotEqualToStart(placesArrayToChack)
 								if(color==1){id.src="whiteBall.jpg";}
 								else{id.src="newBlackBall.jpg";}
 								putAllBallInPlace();
-								console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 								flagWait=1;
 								return 1;			
 								}
 								if(places[row][column-3]==-1)//2 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row,column-2,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row,column-2,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row,column-2,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row,column-2,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -1974,14 +1886,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								return 1;		
 							}
 							if(places[row][column-4]==-1)//3 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row,column-3,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row,column-3,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row,column-3,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row,column-3,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2015,14 +1927,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								return 1;		
 								}
 								if(places[row][column-5]==-1)//3 ball push 2 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row,column-4,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row,column-4,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row,column-4,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row,column-4,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2040,15 +1952,15 @@ function ifNotEqualToStart(placesArrayToChack)
 					
 					}
 				
-				else if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+				else if(flagWait==0){return -1;}
 				}
-			 if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+			 if(flagWait==0){return -1;}
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				
 		function checkAndChangeDL(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{
-			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
+			if((places[row][column]!=color)&&(flagWait==0)){return -1;}
 				
 			////////////////////////////////////////////////////////////////////
 			var userRef = firebase.database().ref('/users/' + myRivalId);
@@ -2096,7 +2008,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee111111");
 						flagWait=1;
 						return 1;
 					}
@@ -2112,7 +2023,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 						flagWait=1;
 						return 1;
 						}
@@ -2135,19 +2045,18 @@ function ifNotEqualToStart(placesArrayToChack)
 								if(color==1){id.src="whiteBall.jpg";}
 								else{id.src="newBlackBall.jpg";}
 								putAllBallInPlace();
-								console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 								flagWait=1;
 								return 1;			
 								}
 								if(places[row+3][column3]==-1)//2 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row+2,column2,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row+2,column2,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row+2,column2,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row+2,column2,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2171,7 +2080,6 @@ function ifNotEqualToStart(placesArrayToChack)
 								if(color==2){id.src="whiteBall.jpg";}
 								else{id.src="newBlackBall.jpg";}
 								putAllBallInPlace();
-								console.log("abs(color-3)= "+abs(color-3));
 								flagWait=1;
 								return 1;		
 							}
@@ -2196,14 +2104,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								return 1;		
 							}
 							if(places[row+4][column4]==-1)//3 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row+3,column3,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row+3,column3,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row+3,column3,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row+3,column3,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2238,14 +2146,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								return 1;		
 								}
 								if(places[row+5][column5]==-1)//3 ball push 2 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row+4,column4,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row+4,column4,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row+4,column4,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row+4,column4,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2264,14 +2172,14 @@ function ifNotEqualToStart(placesArrayToChack)
 					
 					}
 				
-				else if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+				else if(flagWait==0){return -1;}
 				}
-		 if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+		 if(flagWait==0){return -1;}
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////end function
 		function checkAndChangeDR(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{
-			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
+			if((places[row][column]!=color)&&(flagWait==0)){return -1;}
 			
 			////////////////////////////////////////////////////////////////////
 			var userRef = firebase.database().ref('/users/' + myRivalId);
@@ -2319,7 +2227,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee111111");
 						flagWait=1;
 						return 1;
 					}
@@ -2335,7 +2242,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 						flagWait=1;
 						return 1;
 						}
@@ -2358,19 +2264,18 @@ function ifNotEqualToStart(placesArrayToChack)
 								if(color==1){id.src="whiteBall.jpg";}
 								else{id.src="newBlackBall.jpg";}
 								putAllBallInPlace();
-								console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 								flagWait=1;
 								return 1;			
 								}
 								if(places[row+3][column3]==-1)//2 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row+2,column2,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row+2,column2,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row+2,column2,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row+2,column2,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2420,14 +2325,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								return 1;		
 							}
 							if(places[row+4][column4]==-1)//3 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row+3,column3,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row+3,column3,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row+3,column3,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row+3,column3,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2462,14 +2367,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								return 1;		
 								}
 								if(places[row+5][column5]==-1)//3 ball push 2 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row+4,column4,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row+4,column4,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row+4,column4,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row+4,column4,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2487,14 +2392,14 @@ function ifNotEqualToStart(placesArrayToChack)
 					
 					}
 				
-				else if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+				else if(flagWait==0){return -1;}
 				}
-			 if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+			 if(flagWait==0){return -1;}
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		function checkAndChangeUR(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{
-			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
+			if((places[row][column]!=color)&&(flagWait==0)){return -1;}
 			
 			////////////////////////////////////////////////////////////////////
 			var userRef = firebase.database().ref('/users/' + myRivalId);
@@ -2543,7 +2448,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee111111");
 						flagWait=1;
 						return 1;
 					}
@@ -2559,7 +2463,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 						flagWait=1;
 						return 1;
 						}
@@ -2581,19 +2484,18 @@ function ifNotEqualToStart(placesArrayToChack)
 								if(color==1){id.src="whiteBall.jpg";}
 								else{id.src="newBlackBall.jpg";}
 								putAllBallInPlace();
-								console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 								flagWait=1;
 								return 1;
 								}
 								if(places[row-3][column3]==-1)//2 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row-2,column2,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row-2,column2,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row-2,column2,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row-2,column2,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2643,14 +2545,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								return 1;		
 							}
 								if(places[row-4][column4]==-1)//3 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row-3,column3,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row-3,column3,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row-3,column3,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row-3,column3,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2685,14 +2587,14 @@ function ifNotEqualToStart(placesArrayToChack)
 							  }
 							
 								if(places[row-5][column5]==-1)//3 ball push 2 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row-4,column4,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row-4,column4,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row-4,column4,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row-4,column4,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2709,13 +2611,13 @@ function ifNotEqualToStart(placesArrayToChack)
 					}
 					}
 				
-				else if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+				else if(flagWait==0){return -1;}
 				}
-			 if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+			 if(flagWait==0){return -1;}
 		}
 		function checkAndChangeUL(row,column,color)//color:if its 1 color=black,if its 2 color = white
 		{
-			if((places[row][column]!=color)&&(flagWait==0)){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee000000");return -1;}
+			if((places[row][column]!=color)&&(flagWait==0)){return -1;}
 			////////////////////////////////////////////////////////////////////
 			var userRef = firebase.database().ref('/users/' + myRivalId);
 		
@@ -2762,7 +2664,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee111111");
 						flagWait=1;
 						return 1;
 					}
@@ -2778,7 +2679,6 @@ function ifNotEqualToStart(placesArrayToChack)
 						if(color==1){id.src="newBlackBall.jpg";}
 						else {id.src="whiteBall.jpg";}
 						putAllBallInPlace();
-						console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 						flagWait=1;
 						return 1;
 						}
@@ -2800,19 +2700,18 @@ function ifNotEqualToStart(placesArrayToChack)
 								if(color==1){id.src="whiteBall.jpg";}
 								else{id.src="newBlackBall.jpg";}
 								putAllBallInPlace();
-								console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee11111122222");
 								flagWait=1;
 								return 1;			
 								}
 								if(places[row-3][column3]==-1)//2 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row-2,column2,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row-2,column2,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row-2,column2,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row-2,column2,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2836,7 +2735,6 @@ function ifNotEqualToStart(placesArrayToChack)
 								if(color==2){id.src="whiteBall.jpg";}
 								else{id.src="newBlackBall.jpg";}
 								putAllBallInPlace();
-								console.log("abs(color-3)= "+abs(color-3));
 								flagWait=1;
 								return 1;		
 							}
@@ -2861,14 +2759,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								return 1;		
 							}
 							if(places[row-4][column4]==-1)//3 ball push 1 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row-3,column3,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row-3,column3,25,91.5,(abs(color-3)));/////////////////////////mymmov
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row-3,column3,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row-3,column3,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2904,14 +2802,14 @@ function ifNotEqualToStart(placesArrayToChack)
 								}
 							
 							if(places[row-5][column5]==-1)//3 ball push 2 ball out of the game
-								{console.log("11111111111111");
+								{
 									if(color==1){
-										blackOut--;console.log("222222222222");
-										myMove(row-4,column4,25,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										blackOut--;
+										myMove(row-4,column4,25,91.5,(abs(color-3)));
 									}
 									else{
-										whiteOut--;console.log("3333333333333");
-										myMove(row-4,column4,70,91.5,(abs(color-3)));console.log("444444444444444");/////////////////////////mymmov
+										whiteOut--;
+										myMove(row-4,column4,70,91.5,(abs(color-3)));
 									}
 									id=document.getElementById(getIdBall(row,column));
 									id.src="empty.png";
@@ -2928,37 +2826,15 @@ function ifNotEqualToStart(placesArrayToChack)
 						}
 					}
 				
-				else if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+				else if(flagWait==0){return -1;}
 				}
-			 if(flagWait==0){console.log("geeeeeeeeeeettttttttttttt   hhhhhhhhheeeeeeerrrrrrrreeeeeeeee222222222222");return -1;}
+			 if(flagWait==0){return -1;}
 		}
-	/*	function onBall(e,id,row,column,top1,left1)
-		{
-			id.style.cursor = "pointer";
-			if(clickball==1)
-			{
-				console.log("the top is:"+top1+"the left is:"+left1);
-				d=top1-((placeY1-placeY)/8);
-				var s="id.style.top="+'"'+d+"%"+'";';
-				eval(s.toString());
-				dl=left1-((placeX1-placeX)/8);
-				var s="id.style.left="+'"'+dl+"%"+'";';
-				eval(s.toString());
-				//console.log("id_"+row+column);
-				//console.log(getIdBall(row,column));
-				//if(getIdBall(row+1,column).top>=top1+4)
-				//{
-					movBall(row+1,column)
-				//}
-				
-			}
-		}
-		*/
+	
 	
 		function onClickBall()
 		{
 			flagInBall=0;
-			clickball=clickball+1;
 			if(clickball>1)//to restart
 			{
 				clickball=0;
@@ -2981,14 +2857,11 @@ function ifNotEqualToStart(placesArrayToChack)
 				{
 					firstClickRow =-1;
 					firstClickColumn=-1;
-					console.log("places[row][column]=0");
 				}
 				else{
 				firstIdClick=id;
 				firstClickRow =row;
 				firstClickColumn=column;
-				console.log("first row:"+firstClickRow);
-				console.log("first column"+firstClickColumn);
 				}
 			}
 			else 
