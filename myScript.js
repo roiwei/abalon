@@ -5,7 +5,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 var user = firebase.auth().currentUser;	 
 console.log("MY USER IS " + user);
-document.getElementById('datah1').innerHTML= "Your Email is: "+ user.email;
+document.getElementById('datah1').innerHTML= "You're connected with: "+ user.email;
 userEmail=user.email;
     // User is signed in.
   } else {
@@ -18,36 +18,122 @@ var IDarray = new Array();
 var nameArray = new Array(); 
 var myRealColor = "";
 var myNumColor =-1; 
-var databaseRef = firebase.database().ref('users/'); 
 var rowIndex = 1; 
+var databaseRef = firebase.database().ref('users/'); 
+function update_userTable_data()
+{
+	var Table = document.getElementById("tb1_users_list");
+		   var rowCount = Table.rows.length;	
+console.log("rowCount= "+rowCount);	
+var rowIndex1 = 1; 
 databaseRef.once('value', function(snapshot) {
+	
        snapshot.forEach(function(childSnapshot) {
+	   		   var Table = document.getElementById("tb1_users_list");
+		   var rowCount = Table.rows.length;	
+console.log("rowCount= "+rowCount);		   
 	    var childKey = childSnapshot.key;
-            IDarray[rowIndex]=childKey;   
+            IDarray[rowIndex1]=childKey;   
 	    var childData = childSnapshot.val();
-	    nameArray[rowIndex]=childData.user_name;
-		  console.log(nameArray[rowIndex]);
-	    var row = document.getElementById('tb1_users_list').insertRow(rowIndex);
-	    var cellName = row.insertCell(0);
-	    cellName.appendChild(document.createTextNode(childData.user_name));
-	    console.log("rowIndex after refresh is: " + rowIndex);   
-	    rowIndex = rowIndex + 1;  
-		  
-		
+	    nameArray[rowIndex1]=childData.user_name;
+		  console.log(nameArray[rowIndex1]);
+		  if(rowIndex1 >= rowCount)
+		  {
+			var row = document.getElementById("tb1_users_list").insertRow(rowIndex1-1);
+			var cellName = row.insertCell(0);
+			cellName.appendChild(document.createTextNode(childData.user_name));
+			console.log("childData.user_name= "+childData.user_name);
+		  }
+		  else
+		  {
+			  rowCount = Table.rows.length;
+			  console.log("rowCount= "+rowCount);
+			  var s = document.getElementById("tb1_users_list").rows[rowIndex1-1];
+			  console.log("s= "+s);
+			  s.innerHTML = childData.user_name;
+			  console.log("childData.user_name without new node= "+childData.user_name);
+		  }
+		  ///
+		  rowCount = Table.rows.length;	
+console.log("rowCount= "+rowCount);
+console.log(Table);
+		  ///
+	    console.log("rowIndex after refresh is: " + rowIndex1);   
+	    rowIndex1 = rowIndex1 + 1;  
+		  	
 	  });
 	});
-	
+}
+var chatIdArray = new Array();  
+var chatNoteArray = new Array(); 	
+var databaseRefChat = firebase.database().ref('chat/'); 
+function update_chatTable_data()
+{
+console.log("get into update_chatTable_data");
+var Table = document.getElementById("tb_chat");
+var rowCount = Table.rows.length;
+var rowCount1 = Table.rows.length;
+var maxPlaceForChat=15;
+var rowIndex2 = 1; 
+databaseRefChat.once('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {	   
+	   if(rowCount1 > maxPlaceForChat)
+			{
+				rowCount1=0;
+			console.log("!!!!!!!!!!!!!! "+rowIndex2+" rowCount= "+rowCount);
+			var childKey = childSnapshot.key;
+			var childData = childSnapshot.val();
+			
+			var adaRef = firebase.database().ref('/chat/'+childKey);
+			adaRef.remove();
+			}
+		else
+		{
+	    var childKey = childSnapshot.key;
+            chatIdArray[rowIndex2]=childKey;   
+	    var childData = childSnapshot.val();
+	    chatNoteArray[rowIndex2]=childData;
+		  console.log(chatNoteArray[rowIndex2]);
+		  if(rowIndex2 >= rowCount)
+		  {
+			var row = document.getElementById("tb_chat").insertRow(rowIndex2-1);
+			var cellName = row.insertCell(0);
+			cellName.appendChild(document.createTextNode(childData.name+": "+childData.NOTE));
+		  }
+		  else
+		  {
+			  rowCount = Table.rows.length;
+			  console.log("rowCount= "+rowCount);
+			  var s = document.getElementById("tb_chat").rows[rowIndex2-1];
+			  console.log("s= "+s);
+			  s.innerHTML = childData.name+": "+childData.NOTE;
+		  }
+	    console.log("rowIndex2 after refresh is: " + rowIndex2);   
+	    rowIndex2 = rowIndex2 + 1;  
+		  
+	   }
+	  });
+	});
+}
+
+
 var hold=0;	
+var myRivalId = "";
+var myId=null;
+var myName=null;
+var rivalRef;
+var userData; 
 setInterval(frame, 5000);
  function frame() { 
+
 	databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
 		   var childKey = childSnapshot.key;	
 		   var childData = childSnapshot.val();
 	           if(childData.user_Email==userEmail)
 			{//chack if rival did anithing
-			if(myId==null){myId=childData.user_id;}
-			console.log("get into my user ");
+			if(myId==null){myId=childData.user_id; myName=childData.user_name;}
+			console.log("get into my user, my name is: "+myName);
 			if(myRivalId=="" || childData.rivai_id=="stop_connecting")
 			{myRivalId=childData.rivai_id;console.log("get first time to update my rival ID ");
 				if(childData.rivai_id=="stop_connecting")
@@ -64,11 +150,12 @@ setInterval(frame, 5000);
 			if(myRealColor=="") 
 			{
 			myRealColor=childData.my_color;
+			RealTurnColor=childData.turn_color;
 				console.log("myRealColor if if= "+myRealColor);
 				console.log(document.getElementById('yourColor_id').innerHTML);
 			document.getElementById('yourColor_id').innerHTML= "Your color is "+myRealColor+"";
 			if(myRealColor=="black"){myNumColor=1;}else{myNumColor=0;} 
-			if(turn_color=="black"){blackTurn=1;}
+			if(RealTurnColor=="black"){blackTurn=1;}
 			else{
 				id_ifLigal.innerHTML="wait for white move";blackTurn=0;
 				} 
@@ -173,13 +260,47 @@ setInterval(frame, 5000);
      });
 			
  }
-
-
-var myRivalId = "";
-var myId=null;
-var rivalRef;
-var userData; 
-
+window.onkeydown=function(event){
+    if(event.keyCode==13){
+        send_to_chat();
+    }
+}
+///////////////////////////////chat box function
+function send_to_chat()
+{
+		var note = document.getElementById('chatText_id').value;
+		if((note!="") && (note!=null))
+		{
+		var data = myName + ": " + note;
+		var uid = firebase.database().ref().child('chat').push().key;
+	
+	var data = {
+			name: myName,
+			NOTE: note,
+		}
+		var updates = {};
+		updates['/chat/' + uid] = data;
+		firebase.database().ref().update(updates);
+		document.getElementById('chatText_id').value="";
+		}
+}
+////////////
+//var chatRef = firebase.database().ref('chat/');
+firebase.database().ref('chat/').limitToLast(1).on('child_added', update_chatTable_data);
+/*
+var chatRef = firebase.database().ref('chat/');
+chatRef.on('value', function(snapshot) {
+  s=snapshot.val();
+  console.log(s);
+  update_chatTable_data();
+});*/
+//end chat
+databaseRef.on('value', function(snapshot) {
+  s=snapshot.val();
+  console.log(s);
+  update_userTable_data();
+});
+/////////////////////////////end user update
 function single_player()
 {
 	window.location ='singlePlayer.html';  
@@ -243,7 +364,7 @@ function initUser(){
 	    if(flag==0)
 	    {
 	    console.log("rowIndex is: " + initrowIndex);    
-	    var row = document.getElementById('tb1_users_list').insertRow(initrowIndex);
+	   /* var row = document.getElementById('tb1_users_list').insertRow(initrowIndex);
 	    var cellId = row.insertCell(0);
 	    var cellName = row.insertCell(1);
 	    var user_name = document.getElementById('user_name').value; 
@@ -251,7 +372,7 @@ function initUser(){
             cellId.appendChild(document.createTextNode(childKey));
 	    cellName.appendChild(document.createTextNode(childData.user_name));
 		    rowIndex = rowIndex+1;
-	    }
+	    }*/
 	    }  
 	    
 	    //initrowIndex = initrowIndex + 1;
@@ -332,15 +453,17 @@ function save_user1(){
 			     alert('the user name allredy exist! please put diferent name');
 			     flag=0;
 			     }
-	reload_page(); 
 
 }
 function update_user(){
-	console.log("my id in update ="+myId);	
+	var Table = document.getElementById("tb1_users_list");
 	var name = document.getElementById('user_name').value; 
+	console.log("name= "+name);
+if((name!="") && (name!=null))
+{
 	firebase.database().ref('users/').child(myId).update({user_name: name});
 	alert('you update your name');
-	reload_page(); 
+}
 	}
 function stop_conecting_with_rival(){
 	firebase.database().ref('users/').child(myId).update({rivai_id: "stop_connecting"});
