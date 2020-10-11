@@ -35,11 +35,14 @@
 <br>
 <h1 id="match_id"></h1>
 
-<table>
+<div class="ex3">
+<div  style="width: 50%; height:310px; float:left;" >
+  <!--start name table -->  
+	<table>
 
 	<tr>
 		<td>User Name: </td>
-		<td><input type="text" name="user_name" id="user_name" /></td>
+		<td><input type="text" name="user_name" placeholder="choose your Nickname" id="user_name" /></td>
 	 </tr>
 	 <tr>
 		 <td colspan="2">
@@ -52,8 +55,7 @@
 	   
 <table>
 	<tr>
-		<td>Choose user name to play with: </td>
-		<td><input type="text" name="rival" id="rival_name" /></td>
+<td><a>Choose player name to play with: </a><input type="text" name="rival" id="rival_name" placeholder="choose from PLAYER NAME" /></td>
 	 </tr>
 	 <tr>
 		 <td colspan="2">
@@ -66,18 +68,46 @@
 <div class="ex1">
 <table id="tb1_users_list">
 	<tr>
-		<td>NAME</td>
+    </tr>
+</table>
+</div>
+
+	<!--end name table -->	
+ </div>
+
+<div  style="width: 50%; height:310px; float:right;">
+    <!--start chat box -->	
+		   
+
+<div class="ex2">
+<table id="tb_chat">
+	<tr>
 	</tr>
 </table>
 </div>
+<!--end chat box -->	
+  <table>
+	<tr>
+		<td>Chat: </td>
+		<td><input type="text" style="background-color:#C71585" id="chatText_id" /></td>
+		 <td colspan="2">
+		  <input type="button" style="color:#C71585" value="send to chat" onclick="send_to_chat()" /> 
+		 </td>
+	 </tr>
+	 <tr>
+		
+	 </tr>
+ </table>
+</div>
 </div>
 
-if you want single player click here: <input type="button" value="single player" onclick="single_player();" />
+if you want single player mode click here: <input type="button" value="single player" onclick="single_player();" />
 <br>
-	הוראות משחק:
-בתורך לחץ על הכדור בצבע שנבחר לך, ואז שחרר את הלחיצה ודחוף לכיוון שברצונך לדחוף.
-	עליך להוציא ליריב 6 כדורים. יותר דוחף פחות ואפשר לדחוף עד 3 כדורים בצבע שלך. כלומר 3 דוחף 2 או 1 ו2 דוחף 1. בהצלחה
-	
+<div style="padding:5px; hight:10%;">
+Game Instructions:<br>
+In yor color turn, click on the ball in the color the gmae chose for you, and push in the direction you want to push.
+to win you need take out 6 balls for the opponent. More pushes less, and you can push up to 3 balls of your color. I.e. 3 pushes 2 or 1, and 2 pushes 1. Good luck
+<div>
 		<html>
 
 		<h1 id="yourColor_id" >waiting for new game </h1>
