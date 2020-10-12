@@ -4,7 +4,6 @@ var userEmail="";
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 var user = firebase.auth().currentUser;	 
-console.log("MY USER IS " + user);
 document.getElementById('datah1').innerHTML= "You're connected with: "+ user.email;
 userEmail=user.email;
     // User is signed in.
@@ -24,7 +23,6 @@ function update_userTable_data()
 {
 	var Table = document.getElementById("tb1_users_list");
 		   var rowCount = Table.rows.length;	
-console.log("rowCount= "+rowCount);	
 var rowIndex1 = 1; 
 databaseRef.once('value', function(snapshot) {
 	
@@ -491,11 +489,8 @@ function putAllBallFromUser(usrePlaces)
 		   {
 			if(usrePlaces[i][j]!=places[i][j])
 			   {
-				console.log("i isssssss: "+i+"j isssssss: "+j);
 				places[i][j]=usrePlaces[i][j];					
 				var BallId= document.getElementById(getIdBall(i,j));//////getIdBall()
-				console.log(places);
-				console.log("places"+i+" "+j+ "="+ places[i][j]);
 				if(usrePlaces[i][j]==0)
 				      {BallId.src="empty.png";}
 				if(usrePlaces[i][j]==1)
