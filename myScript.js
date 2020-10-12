@@ -58,7 +58,6 @@ var chatNoteArray = new Array();
 var databaseRefChat = firebase.database().ref('chat/'); 
 function update_chatTable_data()
 {
-console.log("get into update_chatTable_data");
 var Table = document.getElementById("tb_chat");
 var rowCount = Table.rows.length;
 var rowCount1 = Table.rows.length;
@@ -937,7 +936,6 @@ function ifNotEqualToStart(placesArrayToChack)
 		}
 		function mouseUp()
 		{
-				console.log("mousUp clickball= "+clickball);
 				hold=0;
 				flagWait=0;
 				topflag=-1;
@@ -947,7 +945,7 @@ function ifNotEqualToStart(placesArrayToChack)
 		}
 		
 		function onBall(e,id,row,column)
-		{console.log("myNumColor= "+myNumColor+" blackTurn= "+blackTurn);
+		{
 		if((blackWin==0)&&(whiteWin==0)&&(myNumColor==blackTurn))
 		{
 			id.style.cursor = "pointer";
@@ -2315,7 +2313,6 @@ function ifNotEqualToStart(placesArrayToChack)
 								if(color==2){id.src="whiteBall.jpg";}
 								else{id.src="newBlackBall.jpg";}
 								putAllBallInPlace();
-								console.log("abs(color-3)= "+abs(color-3));
 								flagWait=1;
 								return 1;		
 							}
@@ -2531,7 +2528,6 @@ function ifNotEqualToStart(placesArrayToChack)
 								if(color==2){id.src="whiteBall.jpg";}
 								else{id.src="newBlackBall.jpg";}
 								putAllBallInPlace();
-								console.log("abs(color-3)= "+abs(color-3));
 								flagWait=1;
 								return 1;		
 							}
