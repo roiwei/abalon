@@ -31,34 +31,25 @@ databaseRef.once('value', function(snapshot) {
        snapshot.forEach(function(childSnapshot) {
 	   		   var Table = document.getElementById("tb1_users_list");
 		   var rowCount = Table.rows.length;	
-console.log("rowCount= "+rowCount);		   
 	    var childKey = childSnapshot.key;
             IDarray[rowIndex1]=childKey;   
 	    var childData = childSnapshot.val();
 	    nameArray[rowIndex1]=childData.user_name;
-		  console.log(nameArray[rowIndex1]);
 		  if(rowIndex1 >= rowCount)
 		  {
 			var row = document.getElementById("tb1_users_list").insertRow(rowIndex1-1);
 			var cellName = row.insertCell(0);
 			cellName.appendChild(document.createTextNode(childData.user_name));
-			console.log("childData.user_name= "+childData.user_name);
 		  }
 		  else
 		  {
 			  rowCount = Table.rows.length;
-			  console.log("rowCount= "+rowCount);
 			  var s = document.getElementById("tb1_users_list").rows[rowIndex1-1];
-			  console.log("s= "+s);
 			  s.innerHTML = childData.user_name;
-			  console.log("childData.user_name without new node= "+childData.user_name);
 		  }
 		  ///
 		  rowCount = Table.rows.length;	
-console.log("rowCount= "+rowCount);
-console.log(Table);
 		  ///
-	    console.log("rowIndex after refresh is: " + rowIndex1);   
 	    rowIndex1 = rowIndex1 + 1;  
 		  	
 	  });
@@ -80,10 +71,8 @@ databaseRefChat.once('value', function(snapshot) {
 	   if(rowCount1 > maxPlaceForChat)
 			{
 				rowCount1=0;
-			console.log("!!!!!!!!!!!!!! "+rowIndex2+" rowCount= "+rowCount);
 			var childKey = childSnapshot.key;
-			var childData = childSnapshot.val();
-			
+			var childData = childSnapshot.val();	
 			var adaRef = firebase.database().ref('/chat/'+childKey);
 			adaRef.remove();
 			}
@@ -93,7 +82,6 @@ databaseRefChat.once('value', function(snapshot) {
             chatIdArray[rowIndex2]=childKey;   
 	    var childData = childSnapshot.val();
 	    chatNoteArray[rowIndex2]=childData;
-		  console.log(chatNoteArray[rowIndex2]);
 		  if(rowIndex2 >= rowCount)
 		  {
 			var row = document.getElementById("tb_chat").insertRow(rowIndex2-1);
@@ -103,12 +91,9 @@ databaseRefChat.once('value', function(snapshot) {
 		  else
 		  {
 			  rowCount = Table.rows.length;
-			  console.log("rowCount= "+rowCount);
 			  var s = document.getElementById("tb_chat").rows[rowIndex2-1];
-			  console.log("s= "+s);
 			  s.innerHTML = childData.name+": "+childData.NOTE;
 		  }
-	    console.log("rowIndex2 after refresh is: " + rowIndex2);   
 	    rowIndex2 = rowIndex2 + 1;  
 		  
 	   }
@@ -133,9 +118,8 @@ setInterval(frame, 5000);
 	           if(childData.user_Email==userEmail)
 			{//chack if rival did anithing
 			if(myId==null){myId=childData.user_id; myName=childData.user_name;}
-			console.log("get into my user, my name is: "+myName);
 			if(myRivalId=="" || childData.rivai_id=="stop_connecting")
-			{myRivalId=childData.rivai_id;console.log("get first time to update my rival ID ");
+			{myRivalId=childData.rivai_id;
 				if(childData.rivai_id=="stop_connecting")
 				{alert('You stop the connection with your rival, choos new one!');
 				tempId= childData.user_id;
@@ -151,8 +135,6 @@ setInterval(frame, 5000);
 			{
 			myRealColor=childData.my_color;
 			RealTurnColor=childData.turn_color;
-				console.log("myRealColor if if= "+myRealColor);
-				console.log(document.getElementById('yourColor_id').innerHTML);
 			document.getElementById('yourColor_id').innerHTML= "Your color is "+myRealColor+"";
 			if(myRealColor=="black"){myNumColor=1;}else{myNumColor=0;} 
 			if(RealTurnColor=="black"){blackTurn=1;}
@@ -161,17 +143,12 @@ setInterval(frame, 5000);
 				} 
 			}
 			var userRef = firebase.database().ref('/users/' + myRivalId);
-			console.log("myRivalId is: "+myRivalId);
 			userRef.once('value').then(function(snapshot) {
 			userData = snapshot.val();
-			
-			console.log("rival name= "+userData.user_name);
 			if(match_id.innerHTML!= "You have mach with "+userData.user_name+"! start play:)")
 			match_id.innerHTML= "You have mach with "+userData.user_name+"! start play:)";});
-				console.log("hold ="+hold);
-				console.log("childData.new_game ="+childData.new_game);
 				if (childData.new_game=="1")
-				{console.log("new game!");
+				{
 					var tempId=childData.user_id;
 				 	firebase.database().ref('users/').child(myId).update({placesAray: placesStart.toString()});
 					//putAllBallFromUser(placesStart);
@@ -184,13 +161,11 @@ setInterval(frame, 5000);
 					
 				}
 				else{
-					console.log("childData.turn_color ="+childData.turn_color); 
-					console.log("childData.my_color ="+childData.my_color);
 					if(childData.turn_color==childData.my_color)
-					{console.log("its my turn");
+					{
 				   		var dir = childData.direction;
 				   		if(dir=="DR")
-				   		{console.log("its DR!!!!!!!!!!!!!");
+				   		{
 						onRivalMove(parseInt(childData.row),parseInt(childData.column),0,0);
 						var tempId=childData.user_id;
 						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
@@ -198,7 +173,7 @@ setInterval(frame, 5000);
 						firebase.database().ref('users/').child(tempId).update({column: "wait"});
 				   		}
 					 	if(dir=="DL")
-				   		{console.log("its DR!!!!!!!!!!!!!");
+				   		{
 						onRivalMove(parseInt(childData.row),parseInt(childData.column),0,1);
 						var tempId=childData.user_id;
 						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
@@ -206,7 +181,7 @@ setInterval(frame, 5000);
 						firebase.database().ref('users/').child(tempId).update({column: "wait"});
 				   		}
 					 	if(dir=="UR")
-				   		{console.log("its DR!!!!!!!!!!!!!");
+				   		{
 						onRivalMove(parseInt(childData.row),parseInt(childData.column),1,0);
 						var tempId=childData.user_id;
 						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
@@ -214,7 +189,7 @@ setInterval(frame, 5000);
 						firebase.database().ref('users/').child(tempId).update({column: "wait"});
 				   		}
 					 	if(dir=="UL")
-				   		{console.log("its DR!!!!!!!!!!!!!");
+				   		{
 						onRivalMove(parseInt(childData.row),parseInt(childData.column),1,1);
 						var tempId=childData.user_id;
 						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
@@ -222,7 +197,7 @@ setInterval(frame, 5000);
 						firebase.database().ref('users/').child(tempId).update({column: "wait"});
 				   		}
 					 	if(dir=="R")
-				   		{console.log("its DR!!!!!!!!!!!!!");
+				   		{
 						onRivalMove(parseInt(childData.row),parseInt(childData.column),2,0);
 						var tempId=childData.user_id;
 						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
@@ -230,7 +205,7 @@ setInterval(frame, 5000);
 						firebase.database().ref('users/').child(tempId).update({column: "wait"});
 				   		}
 					 	if(dir=="L")
-				   		{console.log("its DR!!!!!!!!!!!!!");
+				   		{
 						onRivalMove(parseInt(childData.row),parseInt(childData.column),2,1); 
 						var tempId=childData.user_id;
 						firebase.database().ref('users/').child(tempId).update({direction: "wait"});
@@ -285,19 +260,11 @@ function send_to_chat()
 		}
 }
 ////////////
-//var chatRef = firebase.database().ref('chat/');
 firebase.database().ref('chat/').limitToLast(1).on('child_added', update_chatTable_data);
-/*
-var chatRef = firebase.database().ref('chat/');
-chatRef.on('value', function(snapshot) {
-  s=snapshot.val();
-  console.log(s);
-  update_chatTable_data();
-});*/
+
 //end chat
 databaseRef.on('value', function(snapshot) {
   s=snapshot.val();
-  console.log(s);
   update_userTable_data();
 });
 /////////////////////////////end user update
@@ -317,7 +284,6 @@ function craeteRival(){
 	    }
 	} 
 	if(flag){
-		console.log(rival_name + "id: " + myRivalId);
 		var userRef = firebase.database().ref('/users/' + myRivalId);
 		var myRef = firebase.database().ref('/users/' + myId);
 		userRef.once('value').then(function(snapshot) {
@@ -328,10 +294,7 @@ function craeteRival(){
 		if(userData.status)
 			{
 			myRivalId = userData.user_id;
-			console.log("my rival_id is " + myRivalId);
-			
-			console.log("userData.rivai_id is " + userData.rivai_id);
-			
+			console.log("my rival_id is " + myRivalId);			
 			console.log("my id is: " + myId);
 			firebase.database().ref('users/').child(myId).update({rivai_id: myRivalId});
 			firebase.database().ref('users/').child(myRivalId).update({rivai_id: myId});
@@ -361,23 +324,7 @@ function initUser(){
 			if(IDarray[i]===childKey)
 			{flag = 1;}
 		}
-	    if(flag==0)
-	    {
-	    console.log("rowIndex is: " + initrowIndex);    
-	   /* var row = document.getElementById('tb1_users_list').insertRow(initrowIndex);
-	    var cellId = row.insertCell(0);
-	    var cellName = row.insertCell(1);
-	    var user_name = document.getElementById('user_name').value; 
-	    if(childData.user_name === user_name){
-            cellId.appendChild(document.createTextNode(childKey));
-	    cellName.appendChild(document.createTextNode(childData.user_name));
-		    rowIndex = rowIndex+1;
-	    }*/
-	    }  
-	    
-	    //initrowIndex = initrowIndex + 1;
-	console.log("rowIndex after if is: " + rowIndex);
-		  flag=0;  
+			  flag=0;  
 		
 	  });
 	
@@ -400,7 +347,6 @@ function save_user(){
 	 	howManyUsers=howManyUsers+1;
 	           if(childData.user_Email==userEmail)
 			{
-			console.log("get into my user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			alert('you allraedy hav name');
 			return true;
 			}
@@ -418,7 +364,6 @@ function save_user1(){
 
 		var flag=0;
 		var user_name = document.getElementById('user_name').value; 
-		console.log(user_name);
 		for (var i = 0; i < nameArray.length; i++) 
 		{
 			if(nameArray[i]===user_name)
@@ -445,7 +390,6 @@ function save_user1(){
 		var updates = {};
 		updates['/users/' + uid] = data;
 		firebase.database().ref().update(updates);
-	console.log("rowIndex befor init is: " + rowIndex);
 		initUser();
 		//alert('the user is created successfuliy!');	
 		}
@@ -458,7 +402,6 @@ function save_user1(){
 function update_user(){
 	var Table = document.getElementById("tb1_users_list");
 	var name = document.getElementById('user_name').value; 
-	console.log("name= "+name);
 if((name!="") && (name!=null))
 {
 	firebase.database().ref('users/').child(myId).update({user_name: name});
@@ -536,7 +479,6 @@ function getData(){
 		{
 		   var childKey = childSnapshot.key;
 		   var childData = childSnapshot.val();	
-		   //document.getElementById("datah1").innerHTML = childData["name"] + ", "+ childData["age"] 
 		})
 	})
 	
@@ -593,11 +535,7 @@ function stringToArray(str)
 		    else {console.log("problem hepned in stringToArray in place:"+placeInArray+"that the char is: "+s[placeInArray]);}
 					
 		}
-		//console.log("next line:");
 	}
- //arr=myplaces;
- console.log("myplaces issssssssssssssssssssssssss:");
- console.log(myplaces);
  return myplaces;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -607,9 +545,7 @@ function stringToArray(str)
 		{
 		getData();
 		the_h1.innerHTML= "shalom";
-		putRealTopAndLeft();
-		console.log("realTop="+realTop);
-		
+		putRealTopAndLeft();		
 		}
 		var blackOut=6;
 		var whiteOut=6;
@@ -618,15 +554,11 @@ function stringToArray(str)
 		var whiteWin=0;
 		var blackWin=0;
 		function myMove(row,column,y,x,color) {
-			//var id=getIdBall(row,column);
-			//var elem = document.getElementById(id); 
-			//console.log(elem);
 			var posy = getBallTop(row,column);
 			var posx = getBallLeft(row,column);
-			console.log("posx= "+posx+" posy= "+posy);
 			var distance=((x-posx)*(x-posx))+((y-posy)*(y-posy));
 			var dx = ((x-posx)/distance)*8;
-			var dy = ((y-posy)/distance)*8;console.log("dy="+dy);
+			var dy = ((y-posy)/distance)*8;
 			elem=document.getElementById("id_1");
 			elem.style.top = posy + "%"; 
 			elem.style.left = posx + "%"; 
@@ -648,9 +580,6 @@ function stringToArray(str)
 			setInterval(frame, 5);
 			function frame() {
 			if (posx > x) {
-		    	//elem.src="empty.png";
-				//num.src=s;
-				//console.log("!!!!!!!!!");
 				clearInterval(elem);
 				clearInterval(num);
 			} else {
@@ -771,8 +700,6 @@ function stringToArray(str)
 			for (var j = 0; j < places.length; j++) 
 				placesStart[i][j]= places[i][j];
 		}	
-		console.log(places);
-		console.log(placesStart);
 function startNewGame()
 {
 	firebase.database().ref('users/').child(myId).update({direction: ""});
@@ -901,7 +828,6 @@ function ifNotEqualToStart(placesArrayToChack)
 				var dl=getBallLeft(row,column);
 				dl=dl+0.15;
 				var s= "document.getElementById(getIdBall(row,column)).style.left="+'"'+dl+"%"+'";';
-				//console.log(s);
 				eval(s.toString());
 			
 		}
@@ -911,7 +837,6 @@ function ifNotEqualToStart(placesArrayToChack)
 				var dl=getBallLeft(row,column);
 				dl=dl-0.15;
 				var s= "document.getElementById(getIdBall(row,column)).style.left="+'"'+dl+"%"+'";';
-				//console.log(s);
 				eval(s.toString());
 			
 		}
@@ -921,12 +846,10 @@ function ifNotEqualToStart(placesArrayToChack)
 			var d=getBallTop(row,column);
 				d=d+0.15;
 				var s= "document.getElementById(getIdBall(row,column)).style.top="+'"'+d+"%"+'";';
-				//console.log(s);
 				eval(s.toString());
 				var dl=getBallLeft(row,column);
 				dl=dl+0.09;
 				var s= "document.getElementById(getIdBall(row,column)).style.left="+'"'+dl+"%"+'";';
-				//console.log(s);
 				eval(s.toString());
 			
 		}
@@ -935,16 +858,12 @@ function ifNotEqualToStart(placesArrayToChack)
 		{
 			
 			var d=getBallTop(row,column);
-			//console.log("the top is"+d);
 				d=d-0.15;
 				var s= "document.getElementById(getIdBall(row,column)).style.top="+'"'+d+"%"+'";';
-				//console.log(s);
 				eval(s.toString());
 				var dl=getBallLeft(row,column);
-				//console.log("the left is"+dl);
 				dl=dl+0.09;
 				var s= "document.getElementById(getIdBall(row,column)).style.left="+'"'+dl+"%"+'";';
-				//console.log(s);
 				eval(s.toString());
 			
 		}
@@ -954,12 +873,10 @@ function ifNotEqualToStart(placesArrayToChack)
 			var d=getBallTop(row,column);
 				d=d+0.15;
 				var s= "document.getElementById(getIdBall(row,column)).style.top="+'"'+d+"%"+'";';
-				//console.log(s);
 				eval(s.toString());
 				var dl=getBallLeft(row,column);
 				dl=dl-0.09;
 				var s= "document.getElementById(getIdBall(row,column)).style.left="+'"'+dl+"%"+'";';
-				//console.log(s);
 				eval(s.toString());
 			
 		}
@@ -969,12 +886,10 @@ function ifNotEqualToStart(placesArrayToChack)
 			var d=getBallTop(row,column);
 				d=d-0.15;
 				var s= "document.getElementById(getIdBall(row,column)).style.top="+'"'+d+"%"+'";';
-				//console.log(s);
 				eval(s.toString());
 				var dl=getBallLeft(row,column);
 				dl=dl-0.09;
 				var s= "document.getElementById(getIdBall(row,column)).style.left="+'"'+dl+"%"+'";';
-				//console.log(s);
 				eval(s.toString());
 			
 		}
@@ -1389,17 +1304,16 @@ function ifNotEqualToStart(placesArrayToChack)
 						movBallDR(row,column);//1
 					var mor5=0;//the midle row
 						if(row+1<5){mor5=1;}
-					console.log(realTop[row][column+mor5-1]+ " - "+getBallTop(row,column));
 					if(((realTop[row][column+mor5-1])-(getBallTop(row,column)))>1)	
 					{
-					var column5=column;console.log("column= "+column5);
+					var column5=column;
 					if((row+1>5)&&(row>=5)){column5=column-1;}
 						if(ifBallTouchFromUp(row,column,row+1,column5+1))
 						{
-							movBallDR(row+1,column5+1);console.log("column5= "+column5);//2
+							movBallDR(row+1,column5+1);
 							if((ifBallTouchFromUp(row+1,column5+1,row+2,column5+1))&&(places[row+1][column5+1]!=0))
-							{if(row+2>5){column5=column5-1;}console.log("column521= "+column5);
-							movBallDR(row+2,column5+2);console.log("column52= "+column5);//3
+							{if(row+2>5){column5=column5-1;}
+							movBallDR(row+2,column5+2);
 								if((ifBallTouchFromUp(row+2,column5+2,row+3,column5+1))&&(places[row+2][column5+2]!=0))
 								{if(row+3>5){column5=column5-1;}
 								movBallDR(row+3,column5+3);//4
@@ -1486,10 +1400,9 @@ function ifNotEqualToStart(placesArrayToChack)
 						var moveTime = setInterval(frame, 10);
 			function frame() {
 						
-						movBallUR(row,column);console.log("leftflag= "+dirLeft);//1
+						movBallUR(row,column);
 						var mor5=0;
 						if(row-1>=5){mor5=1;}
-						console.log("row,column= "+row+" "+column);
 					if(((getBallTop(row,column))-(realTop[row-2][column+mor5-1]))>1)	
 					{
 					var column5=column;
@@ -1586,7 +1499,7 @@ function ifNotEqualToStart(placesArrayToChack)
 			function frame() {
 						if(((realLeft[row-1][column])-(getBallLeft(row,column)))>1)
 						{
-							movBallR(row,column);console.log("dirLeft= "+dirLeft);//1			
+							movBallR(row,column);		
 						if(ifBallTouchFromLeft(row,column,row,column+1))				
 						{movBallR(row,column+1);
 							if((ifBallTouchFromLeft(row,column+1,row,column+2))&&(places[row][column+1]!=0))//////////////////
@@ -1662,7 +1575,7 @@ function ifNotEqualToStart(placesArrayToChack)
 				}
 			}
 		
-		}console.log(places);
+		}
 		}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1676,11 +1589,7 @@ function ifNotEqualToStart(placesArrayToChack)
 			var userRef = firebase.database().ref('/users/' + myRivalId);
 		
 			userRef.once('value').then(function(snapshot) {
-			userData = snapshot.val();
-		
-			console.log("my rival_id is " + myRivalId);
-			
-			console.log("my id is: " + myId);
+			userData = snapshot.val();		
 			if(color==1)
 			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
 			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
@@ -1881,10 +1790,6 @@ function ifNotEqualToStart(placesArrayToChack)
 		
 			userRef.once('value').then(function(snapshot) {
 			userData = snapshot.val();
-		
-			console.log("my rival_id is " + myRivalId);
-			
-			console.log("my id is: " + myId);
 			if(color==1)
 			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
 			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
@@ -2090,10 +1995,6 @@ function ifNotEqualToStart(placesArrayToChack)
 		
 			userRef.once('value').then(function(snapshot) {
 			userData = snapshot.val();
-		
-			console.log("my rival_id is " + myRivalId);
-			
-			console.log("my id is: " + myId);
 			if(color==1)
 			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
 			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
@@ -2309,10 +2210,6 @@ function ifNotEqualToStart(placesArrayToChack)
 		
 			userRef.once('value').then(function(snapshot) {
 			userData = snapshot.val();
-		
-			console.log("my rival_id is " + myRivalId);
-			
-			console.log("my id is: " + myId);
 			if(color==1)
 			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
 			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
@@ -2529,10 +2426,6 @@ function ifNotEqualToStart(placesArrayToChack)
 		
 			userRef.once('value').then(function(snapshot) {
 			userData = snapshot.val();
-		
-			console.log("my rival_id is " + myRivalId);
-			
-			console.log("my id is: " + myId);
 			if(color==1)
 			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
 			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
@@ -2746,10 +2639,6 @@ function ifNotEqualToStart(placesArrayToChack)
 		
 			userRef.once('value').then(function(snapshot) {
 			userData = snapshot.val();
-		
-			console.log("my rival_id is " + myRivalId);
-			
-			console.log("my id is: " + myId);
 			if(color==1)
 			{firebase.database().ref('users/').child(myRivalId).update({turn_color: 'white'});
 			firebase.database().ref('users/').child(myId).update({turn_color: 'white'});
@@ -3014,21 +2903,10 @@ function ifNotEqualToStart(placesArrayToChack)
 						
 					}
 				}
-		console.log("places[firstClickRow][firstClickColumn]= "+places[firstClickRow][firstClickColumn]);
-		console.log("places[secondClickRow][secondClickColumn]= "+places[row][column]);
 				firstClickRow =-1;
-		        firstClickColumn=-1;	
-				console.log("scond row:"+row);
-				console.log("second column:"+column);
-			
+		        firstClickColumn=-1;				
 	
 			}
-
-			
-		
-			//id.style.top='10%';
-		//console.log(places);
-		
 		
 		}
 		
