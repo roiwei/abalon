@@ -566,11 +566,9 @@ function stringToArray(str)
 			else{
 				elem.src="whiteBall.jpg";
 				whiteNum++;
-				console.log("color is "+color);
 				num=document.getElementById("id_blackNum");
 				var s="number"+whiteNum+".jpg";
 				}
-			console.log("not get inside "+color);
 			setInterval(frame, 5);
 			function frame() {
 			if (posx > x) {
